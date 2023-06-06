@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
-    "vue": "^2.5.17"
+    "vue": "^2.5.17",
+    "vue-moveable": "^2.0.0-beta.76"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
