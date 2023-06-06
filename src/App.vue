@@ -1,17 +1,27 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <NavBar/>
+    <CanvasComponent :objectArray="data"  />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import NavBar from './components/NavBar/NavBar.vue'
+import CanvasComponent from './components/Canvas/CanvasComponent.vue';
 
 export default {
   name: 'App',
+  data(){
+    return {
+      data: [
+        {id: 1, type: "text", style: {position: "absolute", top: "5rem", padding: "0.5rem", left: "7rem", width: "5rem", height: "2rem"}, content: "This is awesome"},
+        {id: 2, type: "text", style: {position: "absolute", top: "10rem", padding: "0.5rem", left: "7rem", width: "10rem", height: "5rem"}, content: "This is awesome"}
+      ]
+    }
+  },
   components: {
-    HelloWorld
+    NavBar,
+    CanvasComponent
   }
 }
 </script>
