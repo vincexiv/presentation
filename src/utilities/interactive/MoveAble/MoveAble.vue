@@ -3,7 +3,7 @@
       <div :class="target" ref="target" :style="object.style">
         <div v-if="object.type == 'text'">{{ object.content }}</div>
       </div>
-      <!-- <Moveable
+      <Moveable
           className="moveable"
           v-bind:target=[targetClass]
           v-bind:draggable="true"
@@ -12,11 +12,11 @@
           @drag="onDrag"
           @scale="onScale"
           @rotate="onRotate"
-      /> -->
+      />
   </div>
 </template>
   <script>
-// import Moveable from "vue3-moveable";
+import Moveable from "vue-moveable";
   
   export default {
     name: "MoveAble",
@@ -24,9 +24,9 @@
       object: Object,
       target: String
     },
-    // components: {
-    //   Moveable,
-    // },
+    components: {
+      Moveable,
+    },
     methods: {
       onDrag({ transform }) {
           this.$refs.target.style.transform = transform;
