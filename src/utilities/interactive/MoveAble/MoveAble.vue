@@ -1,17 +1,16 @@
 <template>
-  <div class="container" :class="object.typeDetails?.category">
-      <div :class="target" class="canvas-object" ref="target" >
-        <div v-if="object.type == 'text'" class="text object" :class="object.typeDetails.category">
-          <div v-for="text in object.content" :key="text.id" class="object">
-            {{ text.content? text.content : object.defaultContent }}
-          </div>
-        </div>
-        <div v-else-if="object.type == 'chart'" class="object">
-          <vue2-highcharts :options="options" :id="target" class="object">
-              {{ options }}
-          </vue2-highcharts>
-        </div>
+  <div class="canvas-object-container" :class="object.typeDetails?.category">
+    <div v-if="object.type == 'text'"
+        class="text canvas-object" :class="object.typeDetails.category">
+      <div v-for="text in object.content" :key="text.id">
+        {{ text.content? text.content : object.defaultContent }}
       </div>
+    </div>
+    <div v-else-if="object.type == 'chart'"
+        class="chart canvas-object">
+      <vue2-highcharts :options="options" :id="target">
+      </vue2-highcharts>
+    </div>
   </div>
 </template>
   <script>
@@ -29,10 +28,22 @@ import makeResizableAndDraggable  from "../interact";
     },
     mounted: function(){
       makeResizableAndDraggable(".canvas-object")
+      makeResizableAndDraggable(".container")
+
     },
     computed: {
       targetClass(){
         return "." + this.target
+      }
+    },
+    methods: {
+      updateActiveObjects: function(event){
+        const canvasObjects = document.querySelectorAll(".canvas-object")
+        canvasObjects.forEach(object => {
+          object.classList.remove("active")
+        })
+
+        event.target.classList.add("active")
       }
     },
     data(){
@@ -44,24 +55,12 @@ import makeResizableAndDraggable  from "../interact";
 </script>
 
 <style>
-.container {
+.canvas-object-container {
   padding: 0.5rem;
   box-sizing: border-box;
-  background-color: yellow;
   position: relative;
-
 }
-.container.title {
+.canvas-object-container.title {
   font-size: 2rem;
-  display: flex;
-  align-items: center;
-}
-
-.canvas-object {
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* background-color: yellow; */
 }
 </style>
