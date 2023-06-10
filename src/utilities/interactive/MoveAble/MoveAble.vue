@@ -17,7 +17,8 @@
           v-bind:draggable="true"
           v-bind:scalable="true"
           v-bind:rotatable="true"
-          @drag="onDrag"
+          v-bind:stopPropagation="true"
+          v-bind:preventDefault="true"
           @scale="onScale"
           @rotate="onRotate"
       />
@@ -39,27 +40,23 @@ import Moveable from "vue-moveable";
       Moveable
     },
     mounted: function(){
-      makeResizableAndDraggable(".canvas-object")
+      makeResizableAndDraggable(".canvas-object-container")
+      makeResizableAndDraggable(".canvas-object-container .canvas-object")
 
     },
     computed: {
       targetClass(){
-        return "." + this.target
+        return ".canvas-object-container " + "#" + this.target
       }
     },
     methods: {
       onDrag({ transform }) {
-        console.log(this.$refs)
           this.$refs.target.style.transform = transform;
       },
       onScale({drag}) {
-        console.log(this.$refs)
-
         this.$refs.target.style.transform = drag.transform;
       },
       onRotate({ drag }) {
-        console.log(this.$refs)
-
         this.$refs.target.style.transform = drag.transform;
       }
     },
@@ -73,9 +70,9 @@ import Moveable from "vue-moveable";
 
 <style scoped>
 .canvas-object-container {
-  padding: 0.5rem;
   box-sizing: border-box;
   position: relative;
+  padding: 0.5rem;
 }
 .canvas-object-container.title {
   font-size: 2rem;
