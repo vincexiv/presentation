@@ -6,16 +6,26 @@
         {{ text.content? text.content : object.defaultContent }}
       </div>
     </div>
-    <div v-else-if="object.type == 'chart'"
-        class="chart canvas-object">
-      <vue2-highcharts :options="options" :id="target">
+    <div v-else-if="object.type == 'chart'">
+      <vue2-highcharts :options="options" :id="target" ref="target">
       </vue2-highcharts>
     </div>
+    <Moveable
+          className="moveable"
+          v-bind:target=[targetClass]
+          v-bind:draggable="true"
+          v-bind:scalable="true"
+          v-bind:rotatable="true"
+          @drag="onDrag"
+          @scale="onScale"
+          @rotate="onRotate"
+      />
   </div>
 </template>
   <script>
 import Vue2Highcharts from "vue2-highcharts"
 import makeResizableAndDraggable  from "../interact";
+import Moveable from "vue-moveable";
   
   export default {
     name: "MoveAble",
@@ -24,11 +34,11 @@ import makeResizableAndDraggable  from "../interact";
       target: String
     },
     components: {
-      Vue2Highcharts
+      Vue2Highcharts,
+      Moveable
     },
     mounted: function(){
       makeResizableAndDraggable(".canvas-object")
-      makeResizableAndDraggable(".container")
 
     },
     computed: {
@@ -37,13 +47,14 @@ import makeResizableAndDraggable  from "../interact";
       }
     },
     methods: {
-      updateActiveObjects: function(event){
-        const canvasObjects = document.querySelectorAll(".canvas-object")
-        canvasObjects.forEach(object => {
-          object.classList.remove("active")
-        })
-
-        event.target.classList.add("active")
+      onDrag({ transform }) {
+          this.$refs.target.style.transform = transform;
+      },
+      onScale({drag}) {
+        this.$refs.target.style.transform = drag.transform;
+      },
+      onRotate({ drag }) {
+        this.$refs.target.style.transform = drag.transform;
       }
     },
     data(){
