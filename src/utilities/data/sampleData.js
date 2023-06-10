@@ -101,7 +101,7 @@ const canvasArray = [
                     responsive: {
                         rules: [{
                             condition: {
-                                height: 500
+                                height: 10
                             },
                             chartOptions: {
                                 legend: {

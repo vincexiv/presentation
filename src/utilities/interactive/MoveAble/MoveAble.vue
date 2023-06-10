@@ -2,29 +2,21 @@
   <div class="container" :class="object.typeDetails?.category">
       <div :class="target" class="canvas-object" ref="target" >
         <div v-if="object.type == 'text'" class="text object" :class="object.typeDetails.category">
-          <div v-for="text in object.content" :key="text.id">
+          <div v-for="text in object.content" :key="text.id" class="object">
             {{ text.content? text.content : object.defaultContent }}
           </div>
         </div>
-        <vue2-highcharts div v-else-if="object.type == 'chart'" class="chart object" :options="options" :id="target">
-            {{ options }}
-        </vue2-highcharts>
+        <div v-else-if="object.type == 'chart'" class="object">
+          <vue2-highcharts :options="options" :id="target" class="object">
+              {{ options }}
+          </vue2-highcharts>
+        </div>
       </div>
-      <Moveable
-          className="moveable"
-          v-bind:target=[targetClass]
-          v-bind:draggable="true"
-          v-bind:scalable="true"
-          v-bind:rotatable="true"
-          @drag="onDrag"
-          @scale="onScale"
-          @rotate="onRotate"
-      />
   </div>
 </template>
   <script>
-import Moveable from "vue-moveable";
 import Vue2Highcharts from "vue2-highcharts"
+import makeResizableAndDraggable  from "../interact";
   
   export default {
     name: "MoveAble",
@@ -33,19 +25,10 @@ import Vue2Highcharts from "vue2-highcharts"
       target: String
     },
     components: {
-      Moveable,
       Vue2Highcharts
     },
-    methods: {
-      onDrag({ transform }) {
-          this.$refs.target.style.transform = transform;
-      },
-      onScale({drag}) {
-        this.$refs.target.style.transform = drag.transform;
-      },
-      onRotate({ drag }) {
-        this.$refs.target.style.transform = drag.transform;
-      }
+    mounted: function(){
+      makeResizableAndDraggable(".canvas-object")
     },
     computed: {
       targetClass(){
@@ -64,10 +47,21 @@ import Vue2Highcharts from "vue2-highcharts"
 .container {
   padding: 0.5rem;
   box-sizing: border-box;
+  background-color: yellow;
+  position: relative;
+
 }
 .container.title {
   font-size: 2rem;
   display: flex;
   align-items: center;
+}
+
+.canvas-object {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background-color: yellow; */
 }
 </style>
