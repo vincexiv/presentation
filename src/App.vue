@@ -34,4 +34,10 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
+* {
+  box-sizing: border-box;
+  margin-left: 0;
+  margin-right: 0;
+}
 </style>

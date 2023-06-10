@@ -1,16 +1,19 @@
 <template>
-    <div class="canvas-and-layout">
-        <CanvasLayoutList />
-        <div class="canvas-list">
-            <div class="canvas" v-for="objectArray in canvasArray" :key="objectArray.id">
-                <MoveAble
-                    class="canvas-object"
-                    v-for="object in objectArray.structure"
-                    :key="object.id"
-                    v-bind:object="object"
-                    v-bind:target="object.type+object.id"
-                    :style="object.style"
-                />
+    <div class="canvas-editor-layout">
+        <CanvasObjectEditor />
+        <div class="canvas-and-layout">
+            <CanvasLayoutList />
+            <div class="canvas-list">
+                <div class="canvas" v-for="objectArray in canvasArray" :key="objectArray.id">
+                    <MoveAble
+                        class="canvas-object"
+                        v-for="object in objectArray.structure"
+                        :key="object.id"
+                        v-bind:object="object"
+                        v-bind:target="object.type+object.id"
+                        :style="object.style"
+                    />
+                </div>
             </div>
         </div>
     </div>
@@ -19,6 +22,7 @@
 <script>
     import MoveAble from "../../utilities/interactive/MoveAble/MoveAble.vue";
     import CanvasLayoutList from "../CanvasLayoutList/CanvasLayoutList.vue";
+    import CanvasObjectEditor from "../CanvasObjectEditor/CanvasObjectEditor.vue";
 
     export default {
         name: 'CanvasObject',
@@ -27,14 +31,24 @@
         },
         components: {
             MoveAble,
-            CanvasLayoutList
+            CanvasLayoutList,
+            CanvasObjectEditor
         }
     }   
 </script>
 
 <style scoped>
+    .canvas-editor-layout {
+        margin-top: 4.2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100vw;
+        box-sizing: border-box;
+        margin-left: 0;
+        margin-right: 0;
+    }
     .canvas-and-layout {
-        margin-top: 6rem;
         display: flex;
         gap: 1rem;
         align-items: top;

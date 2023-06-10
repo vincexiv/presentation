@@ -16,7 +16,7 @@ export default {
     top: 0;
     left: 0;
     width: 100%;
-    height: var(--navbar-height);
+    height: 4rem;
     background-color: #d4d4d4;
     color: black;
     z-index: 1;
