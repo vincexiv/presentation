@@ -1,7 +1,17 @@
 <template>
     <div class="layout-list-container">
         <div v-for="layout in layoutList" :key="layout.id" class="layout-list-object">
-            <div v-for="layoutStructure in layout.structure" :key="layoutStructure.id" class="layout-object" :style="layoutStructure.style">
+            <div v-for="layoutStructure in layout.structure" :key="layoutStructure.id">
+                <div v-if="layoutStructure.type == 'chart'"
+                    :class="layoutStructure.type"
+                    :style="layoutStructure.style"
+                    class="layout-object">
+                </div>
+                <div v-else-if="layoutStructure.type == 'text'"
+                    :class="layoutStructure.type"
+                    :style="layoutStructure.style"
+                    class="layout-object">
+                </div>
             </div>
         </div>
     </div>
@@ -49,5 +59,13 @@ export default {
 .layout-list-object .layout-object {
     position: absolute;
     outline: solid #d4d4d4 0.05rem;
+}
+
+.layout-object.text {
+    opacity: 0.8;
+    font-size: 0.6rem;
+    display: flex;
+    align-items: center;
+    /* padding: 0.2rem; */
 }
 </style>
