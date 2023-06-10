@@ -1,4 +1,6 @@
-const canvasObjects = [
+// Each object in this array shows the how objects should be arranged in a particular
+// canvas. In this example, there is only one object in the canvas, but it could be more
+const canvasArray = [
     {
         id: 1,
         structure: [
@@ -117,4 +119,4 @@ const canvasObjects = [
     }
 ]
 
-export default canvasObjects;
+export default canvasArray;

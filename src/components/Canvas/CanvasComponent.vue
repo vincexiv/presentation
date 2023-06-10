@@ -40,6 +40,11 @@
         align-items: top;
         justify-content: center;
     }
+    .canvas-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
     .canvas {
         width: max(50vw, 50rem);
         height: max(30vw, 30rem);
