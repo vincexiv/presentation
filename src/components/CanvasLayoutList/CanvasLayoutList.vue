@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import layoutList from './layoutList'
+import layoutList from "../../utilities/data/layoutlist"
 
 export default
 
