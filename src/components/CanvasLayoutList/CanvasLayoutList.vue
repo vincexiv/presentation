@@ -60,12 +60,4 @@ export default {
     position: absolute;
     outline: solid #d4d4d4 0.05rem;
 }
-
-.layout-object.text {
-    opacity: 0.8;
-    font-size: 0.6rem;
-    display: flex;
-    align-items: center;
-    /* padding: 0.2rem; */
-}
 </style>
