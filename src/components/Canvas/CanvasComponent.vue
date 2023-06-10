@@ -17,7 +17,7 @@
 </template>
 
 <script>
-    import MoveAble from "../../utilities/interactive/MoveAble/MoveAble.vue";
+    import MoveAble from "../../utilities/interactive/MoveAble.vue";
     import CanvasLayoutList from "../CanvasLayoutList/CanvasLayoutList.vue";
 
     export default {
