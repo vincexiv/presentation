@@ -2,7 +2,6 @@
   <div>
     <NavBar/>
     <div class="main-area">
-      <CanvasLayoutList />
       <CanvasComponent :objectArray="data"  />
     </div>
   </div>
@@ -11,7 +10,6 @@
 <script>
 import NavBar from './components/NavBar/NavBar.vue'
 import CanvasComponent from './components/Canvas/CanvasComponent.vue';
-import CanvasLayoutList from './components/CanvasLayoutList/CanvasLayoutList.vue';
 
 export default {
   name: 'App',
@@ -106,8 +104,7 @@ responsive: {
   },
   components: {
     NavBar,
-    CanvasComponent,
-    CanvasLayoutList
+    CanvasComponent
   }
 }
 </script>
@@ -119,12 +116,5 @@ responsive: {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-.main-area {
-  margin-top: 6rem;
-  display: flex;
-  gap: 0.5rem;
-  align-items: baseline;
 }
 </style>
