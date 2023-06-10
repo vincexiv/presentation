@@ -6,8 +6,7 @@
             {{ text.content? text.content : object.defaultContent }}
           </div>
         </div>
-        <vue2-highcharts div v-else-if="object.type == 'chart'" class="chart object" :options="options" :id="target">
-            {{ options }}
+        <vue2-highcharts v-else-if="object.type == 'chart'" :options="options" :id="target">
         </vue2-highcharts>
       </div>
       <Moveable
