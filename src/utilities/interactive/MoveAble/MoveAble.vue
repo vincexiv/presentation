@@ -1,8 +1,12 @@
 <template>
-  <div class="container">
-      <div :class="target" class="canvas-object" ref="target" :style="object.style">
-        <div v-if="object.type == 'text'">{{ object.content }}</div>
-        <vue2-highcharts div v-else-if="object.type == 'chart'" :options="options" ref="target" :id="target">
+  <div class="container" :class="object.typeDetails?.category">
+      <div :class="target" class="canvas-object" ref="target" >
+        <div v-if="object.type == 'text'" class="text object" :class="object.typeDetails.category">
+          <div v-for="text in object.content" :key="text.id">
+            {{ text.content? text.content : object.defaultContent }}
+          </div>
+        </div>
+        <vue2-highcharts div v-else-if="object.type == 'chart'" class="chart object" :options="options" :id="target">
             {{ options }}
         </vue2-highcharts>
       </div>
@@ -57,5 +61,13 @@ import Vue2Highcharts from "vue2-highcharts"
 </script>
 
 <style>
-
+.container {
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+.container.title {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+}
 </style>

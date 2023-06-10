@@ -1,9 +1,16 @@
 <template>
     <div class="canvas-and-layout">
         <CanvasLayoutList />
-        <div class="canvas">
-            <div class="canvas-object" v-for="object in objectArray" :key="object.id">
-                <MoveAble  v-bind:object="object" v-bind:target="object.type+object.id"/>
+        <div class="canvas-list">
+            <div class="canvas" v-for="objectArray in canvasArray" :key="objectArray.id">
+                <MoveAble
+                    class="canvas-object"
+                    v-for="object in objectArray.structure"
+                    :key="object.id"
+                    v-bind:object="object"
+                    v-bind:target="object.type+object.id"
+                    :style="object.style"
+                />
             </div>
         </div>
     </div>
@@ -16,7 +23,7 @@
     export default {
         name: 'CanvasObject',
         props: {
-            objectArray: Array
+            canvasArray: Array
         },
         components: {
             MoveAble,
@@ -37,9 +44,10 @@
         width: max(50vw, 50rem);
         height: max(30vw, 30rem);
         background-color: #d4d4d4;
-    }
-
-    .canvas-object {
         position: relative;
+    }
+    .canvas-object {
+        position: absolute;
+        outline: solid 0.1rem white;
     }
 </style>
