@@ -53,9 +53,13 @@ import Moveable from "vue-moveable";
           this.$refs.target.style.transform = transform;
       },
       onScale({drag}) {
+        console.log(this.$refs)
+
         this.$refs.target.style.transform = drag.transform;
       },
       onRotate({ drag }) {
+        console.log(this.$refs)
+
         this.$refs.target.style.transform = drag.transform;
       }
     },
