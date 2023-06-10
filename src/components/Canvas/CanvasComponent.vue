@@ -32,7 +32,7 @@
     }   
 </script>
 
-<style>
+<style scoped>
     .canvas-and-layout {
         margin-top: 6rem;
         display: flex;

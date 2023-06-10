@@ -1,13 +1,14 @@
 <template>
-  <div class="canvas-object-container" :class="object.typeDetails?.category">
+  <div class="canvas-object-container" :class="object.typeDetails?.category" ref="target">
     <div v-if="object.type == 'text'"
-        class="text canvas-object" :class="object.typeDetails.category">
+        class="text canvas-object"
+        :class="object.typeDetails.category">
       <div v-for="text in object.content" :key="text.id">
         {{ text.content? text.content : object.defaultContent }}
       </div>
     </div>
     <div v-else-if="object.type == 'chart'">
-      <vue2-highcharts :options="options" :id="target" ref="target">
+      <vue2-highcharts :options="options" :id="target">
       </vue2-highcharts>
     </div>
     <Moveable
@@ -48,6 +49,7 @@ import Moveable from "vue-moveable";
     },
     methods: {
       onDrag({ transform }) {
+        console.log(this.$refs)
           this.$refs.target.style.transform = transform;
       },
       onScale({drag}) {
@@ -65,7 +67,7 @@ import Moveable from "vue-moveable";
   }
 </script>
 
-<style>
+<style scoped>
 .canvas-object-container {
   padding: 0.5rem;
   box-sizing: border-box;
@@ -73,5 +75,10 @@ import Moveable from "vue-moveable";
 }
 .canvas-object-container.title {
   font-size: 2rem;
+}
+
+.canvas-object-container .canvas-object {
+  outline: 0.1rem white dashed;
+  width: max-content;
 }
 </style>
