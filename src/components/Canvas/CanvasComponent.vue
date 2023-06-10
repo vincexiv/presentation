@@ -26,7 +26,6 @@
         height: 30rem;
         background-color: #d4d4d4;
         margin: auto;
-        margin-top: 6rem;
         margin-right: 5rem
     }
 
