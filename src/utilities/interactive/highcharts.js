@@ -5,9 +5,10 @@ function createChart(cssSelector, options){
     options = {...options, exporting: {
         allowHTML: true
       }}
-    console.log(cssSelector, options)
+    console.log("#" +cssSelector, options)
     
-    Highcharts.chart(cssSelector, options)
+    const chart = Highcharts.chart(cssSelector, options)
+    console.log(chart)
 }
 
 export default createChart;
