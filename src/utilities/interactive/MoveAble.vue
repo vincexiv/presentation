@@ -57,7 +57,6 @@ import createChart from "./highcharts"
 
 .canvas-object-container .canvas-object {
   position: relative;
-  outline: 0.1rem white dashed;
   width: 100%;
   height: 100%;
 }
@@ -71,5 +70,6 @@ import createChart from "./highcharts"
   left: 0;
   width: 100%;
   height: 100%;
+  outline: 0.1rem white dashed;
 }
 </style>
