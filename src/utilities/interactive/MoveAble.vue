@@ -1,13 +1,18 @@
 <template>
-  <div class="canvas-object-container" :class="object.typeDetails?.category" ref="target">
+  <div class="canvas-object-container"
+      :class="object.typeDetails?.category"
+      ref="target"
+      :style="object.style">
     <div v-if="object.type == 'text'"
         class="text canvas-object"
         :class="object.typeDetails.category">
-      <div v-for="text in object.content" :key="text.id">
+      <div v-for="text in object.content" :key="text.id" class="the-object">
         {{ text.content? text.content : object.defaultContent }}
       </div>
     </div>
-    <div v-else-if="object.type == 'chart'" id="highcharts" >
+    <div v-else-if="object.type == 'chart'" class="canvas-object">
+      <div id="highcharts" class="the-object">
+      </div>
     </div>
   </div>
 </template>
@@ -38,19 +43,26 @@ import createChart from "./highcharts"
 <style scoped>
 .canvas-object-container {
   box-sizing: border-box;
-  position: relative;
+  position: absolute;
+  outline: solid 0.1rem white;
   padding: 0.5rem;
+}
+
+.canvas-object-container .canvas-object {
+  position: relative;
+  outline: 0.1rem white dashed;
+  width: 100%;
+  height: 100%;
 }
 .canvas-object-container.title {
   font-size: 2rem;
 }
 
-.canvas-object-container .canvas-object {
-  outline: 0.1rem white dashed;
-  width: max-content;
-}
-
-.display-none {
-  display: none;
+.canvas-object .the-object {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 </style>

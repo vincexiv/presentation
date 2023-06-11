@@ -6,12 +6,10 @@
             <div class="canvas-list">
                 <div class="canvas" v-for="objectArray in canvasArray" :key="objectArray.id">
                     <MoveAble
-                        class="canvas-object"
                         v-for="object in objectArray.structure"
                         :key="object.id"
                         v-bind:object="object"
                         v-bind:target="object.type+object.id"
-                        :style="object.style"
                     />
                 </div>
             </div>
@@ -64,9 +62,5 @@
         height: max(30vw, 30rem);
         background-color: #d4d4d4;
         position: relative;
-    }
-    .canvas-object {
-        position: absolute;
-        outline: solid 0.1rem white;
     }
 </style>
