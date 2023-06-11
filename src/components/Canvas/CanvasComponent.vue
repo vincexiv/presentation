@@ -20,9 +20,9 @@
 </template>
 
 <script>
-    import MoveAble from "../../utilities/interactive/MoveAble/MoveAble.vue";
     import CanvasLayoutList from "../CanvasLayoutList/CanvasLayoutList.vue";
     import CanvasObjectEditor from "../CanvasObjectEditor/CanvasObjectEditor.vue";
+    import MoveAble from "../../utilities/interactive/MoveAble.vue";
 
     export default {
         name: 'CanvasObject',

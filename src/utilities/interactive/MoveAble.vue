@@ -15,7 +15,7 @@
 </template>
   <script>
 import Vue2Highcharts from "vue2-highcharts"
-import makeResizableAndDraggable  from "../interact";
+import makeResizableAndDraggable from './interact'
   
   export default {
     name: "MoveAble",
