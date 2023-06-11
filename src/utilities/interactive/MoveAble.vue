@@ -30,9 +30,9 @@ import createChart from "./highcharts"
     mounted: function(){
       makeResizableAndDraggable(".canvas-object-container")
       makeResizableAndDraggable(".canvas-object-container .canvas-object")
-      makeResizableAndDraggable(".canvas-object-container #highcharts")
+      makeResizableAndDraggable(`.canvas-object-container #${this.higchartObjectId}`)
 
-      createChart(this.higchartObjectId, this.options)
+      createChart(`${this.higchartObjectId}`, this.options)
     },
     data(){
       return {
