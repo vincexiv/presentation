@@ -7,15 +7,13 @@
         {{ text.content? text.content : object.defaultContent }}
       </div>
     </div>
-    <div v-else-if="object.type == 'chart'">
-      <vue2-highcharts :options="options">
-      </vue2-highcharts>
+    <div v-else-if="object.type == 'chart'" id="highcharts" >
     </div>
   </div>
 </template>
   <script>
-import Vue2Highcharts from "vue2-highcharts"
 import makeResizableAndDraggable from './interact'
+import createChart from "./highcharts"
   
   export default {
     name: "MoveAble",
@@ -23,12 +21,11 @@ import makeResizableAndDraggable from './interact'
       object: Object,
       target: String
     },
-    components: {
-      Vue2Highcharts,
-    },
+
     mounted: function(){
       makeResizableAndDraggable(".canvas-object-container")
       makeResizableAndDraggable(".canvas-object-container .canvas-object")
+      createChart("highcharts", this.options)
     },
     data(){
       return {
@@ -51,5 +48,9 @@ import makeResizableAndDraggable from './interact'
 .canvas-object-container .canvas-object {
   outline: 0.1rem white dashed;
   width: max-content;
+}
+
+.display-none {
+  display: none;
 }
 </style>
