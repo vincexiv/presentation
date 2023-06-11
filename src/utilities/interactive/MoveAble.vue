@@ -11,7 +11,7 @@
       </div>
     </div>
     <div v-else-if="object.type == 'chart'" class="canvas-object">
-      <div id="highcharts" class="the-object">
+      <div :id="higchartObjectId" class="the-object">
       </div>
     </div>
   </div>
@@ -30,11 +30,18 @@ import createChart from "./highcharts"
     mounted: function(){
       makeResizableAndDraggable(".canvas-object-container")
       makeResizableAndDraggable(".canvas-object-container .canvas-object")
-      createChart("highcharts", this.options)
+      makeResizableAndDraggable(".canvas-object-container #highcharts")
+
+      createChart(this.higchartObjectId, this.options)
     },
     data(){
       return {
         options: this.object.content
+      }
+    },
+    computed: {
+      higchartObjectId: function(){
+        return `highcharts-${this.object.id}`
       }
     }
   }
