@@ -23,7 +23,7 @@ const canvasArray = [
                 type: "text",
                 typeDetails: { category: "content" }, //category can be title or content
                 defaultContent: "Click to add text",
-                style: { top: "30%", left: "5%", width: "44%", height: "65%" },
+                style: { top: "30%", left: "5%", width: "24%", height: "65%" },
                 content: [
                     {
                         id: "paragraph-1",
@@ -36,7 +36,7 @@ const canvasArray = [
                 id: "chart-1",
                 type: "chart",
                 defaultContent: "Click to add text",
-                style: { top: "30%", left: "51%", width: "44%", height: "65%" },
+                style: { top: "30%", left: "31%", width: "64%", height: "65%" },
                 content: {
                     title: {
                         text: 'U.S Solar Employment Growth by Job Category, 2010-2020',
