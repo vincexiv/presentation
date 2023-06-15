@@ -25,7 +25,10 @@ export default ({
 }
 
 .canvas-options button {
-    padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+    padding: 0.2rem 0.6rem 0.2rem 0.6rem;
     cursor: pointer;
+    border-radius: 0.5rem;
+    outline: none;
+    border: none;
 }
 </style>
