@@ -13,6 +13,7 @@
                         :class="layoutStructure.type"
                         :style="layoutStructure.style"
                         class="layout-object">
+                        <i class="fa-sharp fa-3x fa-solid fa-chart-simple"></i>
                     </div>
                     <div v-else-if="layoutStructure.type == 'text'"
                         :class="layoutStructure.type"
@@ -113,5 +114,11 @@ export default {
 .layout-list-object .layout-object {
     position: absolute;
     outline: solid #d4d4d4 0.05rem;
+}
+
+.layout-list-container .chart {
+    display: grid;
+    place-items: center;
+    color: #d4d4d4;
 }
 </style>
