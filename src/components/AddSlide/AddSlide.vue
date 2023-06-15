@@ -48,6 +48,6 @@ export default ({
 }
 
 .horizontal-rule {
-    width: 10rem;
+    width: calc(max(25vw, 25rem) - 7rem);
 }
 </style>
