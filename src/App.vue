@@ -24,7 +24,7 @@ export default {
     return {
       data: canvasObjects,
       layoutList: layoutList,
-      activeLayout: layoutList[-1]
+      activeLayout: layoutList[layoutList.length-1]
     }
   },
   components: {
