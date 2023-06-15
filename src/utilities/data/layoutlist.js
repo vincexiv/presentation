@@ -70,7 +70,7 @@ const layoutList = [
         ]
     },
     {
-        id: 3,
+        id: 4,
         structure: [
             { 
                 id: "content-3", 
