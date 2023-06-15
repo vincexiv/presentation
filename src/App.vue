@@ -6,7 +6,8 @@
         :canvasArray="data"
         :layoutList="layoutList"
         :activeLayout="activeLayout"
-        @update-active-layout="(layout)=>updateActiveLayout(layout)"/>
+        @update-active-layout="(layout)=>updateActiveLayout(layout)"
+        @add-slide="addSlide()"/>
     </div>
   </div>
 </template>
@@ -33,6 +34,9 @@ export default {
   methods: {
     updateActiveLayout: function(layout){
       this.activeLayout = layout
+    },
+    addSlide(){
+      this.data = [...this.data, this.activeLayout]
     }
   }
 }

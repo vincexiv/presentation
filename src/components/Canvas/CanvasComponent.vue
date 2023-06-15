@@ -41,8 +41,11 @@
         },
         methods: {
             addSlide: function(){
-                console.log("what")
+                this.$emit('add-slide')
             },
+            // removeSlide: function(slide){
+            //     this.$emit('remove-slide', slide)
+            // },
             updateActiveLayout: function(layout){
                 this.$emit('update-active-layout', layout)
             }
