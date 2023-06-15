@@ -3,7 +3,7 @@
         <div class="horizontal-rule">
             <hr width="100%" height="0.1rem"/>
         </div>
-        <p class="title">Add Slide</p>
+        <p class="title" @click="addSlide">Add Slide</p>
         <div class="horizontal-rule">
             <hr width="100%" height="0.1rem"/>
         </div>
@@ -12,7 +12,15 @@
 
 <script>
 export default ({
-    name: "AddSlide"
+    name: "AddSlide",
+    props: {
+        addSlide: {
+            type: Function,
+            default(){
+                return
+            }
+        }
+    }
 })
 </script>
 

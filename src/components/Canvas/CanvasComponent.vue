@@ -14,7 +14,7 @@
                         />
                     </div>
                 </div>
-                <AddSlide />
+                <AddSlide :addSlide="addSlide"/>
             </div>
         </div>
     </div>
@@ -36,6 +36,11 @@
             CanvasLayoutList,
             CanvasObjectEditor,
             AddSlide
+        },
+        methods: {
+            addSlide: function(){
+                console.log("what")
+            }
         }
     }   
 </script>
