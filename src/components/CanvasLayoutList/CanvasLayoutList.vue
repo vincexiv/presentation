@@ -45,6 +45,9 @@ export default {
             layoutList: layoutList
         }
     },
+    mounted: function(){
+        this.updateLayout(this.activeLayout)
+    },
     methods: {
         getStyle: function(structure){
             return {
