@@ -3,15 +3,18 @@
         <CanvasObjectEditor />
         <div class="canvas-and-layout">
             <CanvasLayoutList />
-            <div class="canvas-list">
-                <div class="canvas" v-for="objectArray in canvasArray" :key="objectArray.id">
-                    <MoveAble
-                        v-for="object in objectArray.structure"
-                        :key="object.id"
-                        v-bind:object="object"
-                        v-bind:target="object.type+object.id"
-                    />
+            <div>
+                <div class="canvas-list">
+                    <div class="canvas" v-for="objectArray in canvasArray" :key="objectArray.id">
+                        <MoveAble
+                            v-for="object in objectArray.structure"
+                            :key="object.id"
+                            v-bind:object="object"
+                            v-bind:target="object.type+object.id"
+                        />
+                    </div>
                 </div>
+                <AddSlide />
             </div>
         </div>
     </div>
@@ -21,6 +24,7 @@
     import CanvasLayoutList from "../CanvasLayoutList/CanvasLayoutList.vue";
     import CanvasObjectEditor from "../CanvasObjectEditor/CanvasObjectEditor.vue";
     import MoveAble from "../../utilities/interactive/MoveAble.vue";
+    import AddSlide from "../AddSlide/AddSlide.vue";
 
     export default {
         name: 'CanvasObject',
@@ -30,7 +34,8 @@
         components: {
             MoveAble,
             CanvasLayoutList,
-            CanvasObjectEditor
+            CanvasObjectEditor,
+            AddSlide
         }
     }   
 </script>
