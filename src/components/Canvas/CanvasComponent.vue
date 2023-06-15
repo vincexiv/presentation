@@ -55,7 +55,7 @@
         },
         data(){
             return {
-                options: ["layouts", "elements"]
+                options: ["layouts", "texts", "charts"]
             }
         }
     }   

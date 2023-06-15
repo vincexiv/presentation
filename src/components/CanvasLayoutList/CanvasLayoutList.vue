@@ -51,7 +51,7 @@ export default {
                 position: "absolute",
                 top: structure.top,
                 left: structure.left,
-                width: structure.right,
+                width: structure.width,
                 height: structure.height,
                 backgroundColor: "yellow"
             }
@@ -85,7 +85,7 @@ export default {
 <style scoped>
 .layout-list-object {
     position: relative;
-    width: 10rem;
+    width: 11rem;
     height: 7rem;
     outline: solid #d4d4d4 0.15rem;
     cursor: pointer;
