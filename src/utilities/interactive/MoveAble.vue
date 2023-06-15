@@ -3,6 +3,7 @@
       :class="object.typeDetails?.category"
       ref="target"
       :style="object.style">
+
     <div v-if="object.type == 'text'"
         class="text canvas-object"
         :class="object.typeDetails.category">
@@ -10,10 +11,12 @@
         {{ text.content? text.content : object.defaultContent }}
       </div>
     </div>
+
     <div v-else-if="object.type == 'chart'" class="canvas-object">
       <div :id="higchartObjectId" class="the-object">
       </div>
     </div>
+
   </div>
 </template>
   <script>
@@ -32,7 +35,10 @@ import createChart from "./highcharts"
       makeResizableAndDraggable(".canvas-object-container .canvas-object")
       makeResizableAndDraggable(`.canvas-object-container #${this.higchartObjectId}`)
 
-      createChart(`${this.higchartObjectId}`, this.options)
+      // It's not just an empty canvas
+      if(this.options){
+        createChart(`${this.higchartObjectId}`, this.options)
+      }
     },
     data(){
       return {
