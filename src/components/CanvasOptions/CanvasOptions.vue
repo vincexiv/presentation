@@ -30,5 +30,8 @@ export default ({
     border-radius: 0.5rem;
     outline: none;
     border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>
