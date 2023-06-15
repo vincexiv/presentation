@@ -4,7 +4,8 @@
         <div class="canvas-and-layout">
             <CanvasLayoutList
                 :updateActiveLayout="updateActiveLayout"
-                :activeLayout="activeLayout"/>
+                :activeLayout="activeLayout"
+                :options="options"/>
             <div>
                 <div class="canvas-list">
                     <div class="canvas" v-for="objectArray in canvasArray" :key="objectArray.id">
@@ -50,6 +51,11 @@
             // },
             updateActiveLayout: function(layout){
                 this.$emit('update-active-layout', layout)
+            }
+        },
+        data(){
+            return {
+                options: ["layouts", "elements"]
             }
         }
     }   

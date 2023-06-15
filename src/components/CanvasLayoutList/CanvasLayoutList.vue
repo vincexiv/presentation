@@ -1,6 +1,7 @@
 <template>
     <div class="layout-list-container">
         <div class="sticky" ref="layouts">
+            <CanvasOptions :options="options"/>
             <div v-for="layout in layoutList"
                 :key="layout.id"
                 class="layout-list-object"
@@ -27,12 +28,17 @@
 
 <script>
 import layoutList from "../../utilities/data/layoutlist"
+import CanvasOptions from "../CanvasOptions/CanvasOptions.vue"
 
 export default {
     name: "CanvasLayoutList",
     props: {
         updateActiveLayout: Function,
-        activeLayout: Object
+        activeLayout: Object,
+        options: Array
+    },
+    components: {
+        CanvasOptions
     },
     data(){
         return {
