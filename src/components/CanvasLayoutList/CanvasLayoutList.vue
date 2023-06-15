@@ -1,6 +1,6 @@
 <template>
     <div class="layout-list-container">
-        <div v-for="layout in layoutList" :key="layout.id" class="layout-list-object">
+        <div v-for="layout in layoutList" :key="layout.id" class="layout-list-object" @click="updateLayout(layout)">
             <div v-for="layoutStructure in layout.structure" :key="layoutStructure.id">
                 <div v-if="layoutStructure.type == 'chart'"
                     :class="layoutStructure.type"
@@ -22,6 +22,9 @@ import layoutList from "../../utilities/data/layoutlist"
 
 export default {
     name: "CanvasLayoutList",
+    props: {
+        updateActiveLayout: Function
+    },
     data(){
         return {
             layoutList: layoutList
@@ -38,6 +41,9 @@ export default {
                 height: structure.height,
                 backgroundColor: "yellow"
             }
+        },
+        updateLayout(layout){
+            this.updateActiveLayout(layout)
         }
     }
 }

@@ -2,7 +2,7 @@
     <div class="canvas-editor-layout">
         <CanvasObjectEditor />
         <div class="canvas-and-layout">
-            <CanvasLayoutList />
+            <CanvasLayoutList :updateActiveLayout="updateActiveLayout"/>
             <div>
                 <div class="canvas-list">
                     <div class="canvas" v-for="objectArray in canvasArray" :key="objectArray.id">
@@ -29,7 +29,9 @@
     export default {
         name: 'CanvasObject',
         props: {
-            canvasArray: Array
+            canvasArray: Array,
+            layoutList: Array,
+            activeLayout: Object
         },
         components: {
             MoveAble,
@@ -40,6 +42,9 @@
         methods: {
             addSlide: function(){
                 console.log("what")
+            },
+            updateActiveLayout: function(layout){
+                this.$emit('update-active-layout', layout)
             }
         }
     }   
