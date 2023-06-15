@@ -2,7 +2,9 @@
     <div class="canvas-editor-layout">
         <CanvasObjectEditor />
         <div class="canvas-and-layout">
-            <CanvasLayoutList :updateActiveLayout="updateActiveLayout"/>
+            <CanvasLayoutList
+                :updateActiveLayout="updateActiveLayout"
+                :activeLayout="activeLayout"/>
             <div>
                 <div class="canvas-list">
                     <div class="canvas" v-for="objectArray in canvasArray" :key="objectArray.id">

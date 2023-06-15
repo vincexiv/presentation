@@ -1,7 +1,12 @@
 <template>
     <div class="layout-list-container">
-        <div class="sticky">
-            <div v-for="layout in layoutList" :key="layout.id" class="layout-list-object" @click="updateLayout(layout)">
+        <div class="sticky" ref="layouts">
+            <div v-for="layout in layoutList"
+                :key="layout.id"
+                class="layout-list-object"
+                @click="updateLayout(layout)"
+                :id="`layout-${layout.id}`">
+
                 <div v-for="layoutStructure in layout.structure" :key="layoutStructure.id">
                     <div v-if="layoutStructure.type == 'chart'"
                         :class="layoutStructure.type"
@@ -14,6 +19,7 @@
                         class="layout-object">
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -25,7 +31,8 @@ import layoutList from "../../utilities/data/layoutlist"
 export default {
     name: "CanvasLayoutList",
     props: {
-        updateActiveLayout: Function
+        updateActiveLayout: Function,
+        activeLayout: Object
     },
     data(){
         return {
@@ -34,7 +41,6 @@ export default {
     },
     methods: {
         getStyle: function(structure){
-            console.log("here is the structure: ", structure)
             return {
                 position: "absolute",
                 top: structure.top,
@@ -45,18 +51,46 @@ export default {
             }
         },
         updateLayout(layout){
+            const layoutId = layout.id
+
+            const availableLayouts = this.$refs.layouts.querySelectorAll('.layout-list-object')
+            availableLayouts.forEach(layout => {
+                layout.classList.remove('active')
+            })
+
+            const layoutObject = this.$refs.layouts.querySelector(`#layout-${layoutId}`)
+            layoutObject.classList.add("active")
+
             this.updateActiveLayout(layout)
+        }
+    },
+    computed: {
+        layoutActiveClass: function(layout){
+            if(this.activeLayout.id == layout.id){
+                return "active"
+            }else {
+                return ""
+            }
         }
     }
 }
 </script>
 
-<style>
+<style scoped>
 .layout-list-object {
     position: relative;
     width: 10rem;
     height: 7rem;
     outline: solid #d4d4d4 0.15rem;
+    cursor: pointer;
+}
+
+.layout-list-object.active {
+    outline: solid #8f8e8e 0.15rem;
+}
+
+.layout-list-object:hover {
+    outline: solid #8f8e8e 0.15rem;
 }
 
 .layout-list-container .sticky {
