@@ -8,7 +8,8 @@ function createChart(cssSelector, options){
     console.log("#" +cssSelector, options)
     
     const chart = Highcharts.chart(cssSelector, options)
-    console.log(chart)
+
+    return chart
 }
 
 export default createChart;

@@ -1,6 +1,6 @@
 import interact from 'interactjs'
 
-function makeResizableAndDraggable(cssSelector){
+function makeResizableAndDraggable(cssSelector, chart){
     interact(cssSelector)
       .resizable({
         // resize from all edges and corners
@@ -25,6 +25,13 @@ function makeResizableAndDraggable(cssSelector){
             target.setAttribute('data-x', x)
             target.setAttribute('data-y', y)
             // target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height)
+
+            // Resize the chart when the
+            // the container is resized
+            if(chart){
+              chart.reflow()
+              console.log(chart)
+            }
           }
         },
         modifiers: [

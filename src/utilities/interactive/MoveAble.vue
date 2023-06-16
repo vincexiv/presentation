@@ -37,19 +37,22 @@ import createChart from "./highcharts"
       target: String
     },
 
+
     mounted: function(){
       makeResizableAndDraggable(".canvas-object-container")
       makeResizableAndDraggable(".canvas-object-container .canvas-object")
-      makeResizableAndDraggable(`.canvas-object-container #${this.higchartObjectId}`)
 
       // It's not just an empty canvas
       if(this.options){
-        createChart(`${this.higchartObjectId}`, this.options)
+        const chart = createChart(`${this.higchartObjectId}`, this.options)
+        makeResizableAndDraggable(`.canvas-object-container #${this.higchartObjectId}`, chart)
+
+        this.chart = chart
       }
     },
     data(){
       return {
-        options: this.object.content
+        options: this.object.content,
       }
     },
     computed: {
