@@ -57,7 +57,7 @@ const layoutList = [
             { 
                 id: "content-4", 
                 type: "chart", 
-                defaultContent: "Click to add text", 
+                defaultContent: "Click to add chart", 
                 style: {top: "30%", left: "5%", width: "44%", height: "65%" }
             },
             { 
@@ -89,7 +89,7 @@ const layoutList = [
             { 
                 id: "content-5", 
                 type: "chart", 
-                defaultContent: "Click to add text", 
+                defaultContent: "Click to add chart", 
                 style: {top: "30%", left: "51%", width: "44%", height: "65%" }
             }
         ]
