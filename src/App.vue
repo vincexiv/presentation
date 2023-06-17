@@ -31,7 +31,8 @@ export default {
         canvasId: null,
         objectId: null,
         objectContent: {}
-      }
+      },
+      idCount: canvasObjects.length // will be used to ensure ids of new slides dont clash
     }
   },
   components: {
@@ -43,7 +44,10 @@ export default {
       this.activeLayout = layout
     },
     addSlide(){
-      this.data = [...this.data, this.activeLayout]
+      this.idCount += 1
+      const newId = this.activeLayout.id + `-${this.idCount}`
+      const newSlide = {...this.activeLayout, id: newId}
+      this.data = [...this.data, newSlide]
     },
     updateCanvas: function(newContent){
       const targetCanvasId = this.activeObjectInfo.canvasId
