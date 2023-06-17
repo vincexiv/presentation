@@ -1,9 +1,18 @@
 <template>
-    <div class="chart-modal-container" @click="handleModalClick">
-        <div class="chart-modal" @click="handleModalClick">
-            <div class="chart-container" v-for="object in highchartObjectArray" :key="object.id">
-                <vue-2-highcharts :options="object" class="modal-highchart">
-                </vue-2-highcharts>
+    <div class="chart-modal-outer-container" @click="handleModalClick">
+        <div class="chart-modal-inner-container" @click="handleModalClick">
+            <div class="chart-modal">
+                <div v-for="chartArray in highchartObjectArray" :key="`chart-array-${chartArray.id}`" class="chart-array">
+                    <div class="chart-title">
+                        <p>{{ chartArray.title }}</p>
+                    </div>
+                    <div class="chart-list">
+                        <div class="chart-container" v-for="object in chartArray.charts" :key="`highchart-object-${object.id}`">
+                            <vue-2-highcharts :options="object" class="modal-highchart">
+                            </vue-2-highcharts>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -31,7 +40,7 @@ export default({
             const classList = Array.from(e.target.classList)
 
             // Close modal only if the outer side has been clicked
-            if(classList.find(domItemClass => domItemClass === 'chart-modal-container')){
+            if(classList.find(domItemClass => domItemClass === 'chart-modal-outer-container')){
                 this.closeModal()
             }
         }
@@ -40,7 +49,7 @@ export default({
 </script>
 
 <style scoped>
-.chart-modal-container {
+.chart-modal-outer-container {
     position: fixed;
     top: 4rem;
     left: 0;
@@ -50,7 +59,7 @@ export default({
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-.chart-modal-container .chart-modal {
+.chart-modal-outer-container .chart-modal-inner-container {
     position: relative;
     width: max(45rem, 45vw);
     top: 1rem;
@@ -60,17 +69,32 @@ export default({
     border-radius: 1rem;
     background-color: #d4d4d4;
     display: flex;
+    flex-direction: column;
     gap: 0.5rem;
     padding: 2rem;
-    display: flex;
     justify-content: center;
+    /* overflow-y: scroll; */
 }
 
-.chart-modal .chart-container {
+.chart-modal-outer-container .chart-modal {
+    overflow-y: scroll;
+    height: 85vh;
+}
+
+.chart-modal-outer-container .chart-array {
+    width: 100%;
+}
+
+.chart-modal-outer-container .chart-list {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.chart-modal-inner-container .chart-container {
     width: 19rem;
     height: 12.7rem;
     padding: 0.1rem;
-    outline: solid 0.1rem green;
 }
 
 .chart-container .modal-highchart {
