@@ -1,5 +1,6 @@
 const highchartObjectArray = [
     {
+        id: 1,
         title: {
             text: 'U.S Solar Employment Growth by Job Category, 2010-2020',
             align: 'left'
@@ -77,6 +78,7 @@ const highchartObjectArray = [
                        
     },
     {
+        id: 2,
         title: {
             text: 'U.S Solar Employment Growth by Job Category, 2010-2020',
             align: 'left'

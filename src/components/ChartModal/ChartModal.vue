@@ -1,12 +1,8 @@
 <template>
     <div class="chart-modal-container" @click="handleModalClick">
         <div class="chart-modal" @click="handleModalClick">
-            <div class="chart-container">
-                <vue-2-highcharts 
-                    v-for="object in highchartObjectArray"
-                    :options="object"
-                    :key="object.id"
-                    class="modal-highchart">
+            <div class="chart-container" v-for="object in highchartObjectArray" :key="object.id">
+                <vue-2-highcharts :options="object" class="modal-highchart">
                 </vue-2-highcharts>
             </div>
         </div>
@@ -56,12 +52,30 @@ export default({
 
 .chart-modal-container .chart-modal {
     position: relative;
-    width: max(40rem, 40vw);
+    width: max(45rem, 45vw);
     top: 1rem;
     left: 50%;
     transform: translate(calc(-50% + 6rem), 0);
     height: 80vh;
     border-radius: 1rem;
     background-color: #d4d4d4;
+    display: flex;
+    gap: 0.5rem;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.chart-modal .chart-container {
+    width: 19rem;
+    height: 12.7rem;
+    padding: 0.1rem;
+    outline: solid 0.1rem green;
+}
+
+.chart-container .modal-highchart {
+    height: 0;
+    width: 0;
+    transform: scale(0.5);
 }
 </style>
