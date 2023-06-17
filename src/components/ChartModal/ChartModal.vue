@@ -54,6 +54,7 @@ export default({
         updateCanvasChart: function(){
             if(this.activeChart){
                 this.updateCanvas(this.activeChart)
+                this.closeModal()
             }
         },
         handleModalClick: function(e){
