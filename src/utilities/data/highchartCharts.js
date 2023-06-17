@@ -1,7 +1,6 @@
 import Highcharts from 'highcharts'
 
 const employment = {
-    id: 1,
     title: {
         text: 'U.S Solar Employment Growth by Job Category, 2010-2020',
         align: 'left'

@@ -21,7 +21,7 @@ const highchartObjectArray = [
         ]
     },
     {
-        id: 1,
+        id: 2,
         title: "Chart Group 2",
         charts: [ 
             {id: 1, ...employment}, 
@@ -30,7 +30,7 @@ const highchartObjectArray = [
         ]
     },
     {
-        id: 1,
+        id: 3,
         title: "Chart Group 3",
         charts: [ 
             {id: 1, ...tourDeFrance},
