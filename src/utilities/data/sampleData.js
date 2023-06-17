@@ -12,13 +12,10 @@ const canvasArray = [
                 typeDetails: { category: "title" }, //category can be title or content
                 defaultContent: "Click to add title",
                 style: { top: "5%", left: "5%", width: "90%", height: "20%"}, // position and size where this text will be on the canvas
-                content: [
-                    {
-                        id: "title-1",
-                        content: "My awesome title",
+                content: {
+                        text: "My awesome title",
                         style: {} // the style of particular content. e.g the the text can be bold, red, etc.
                     }
-                ]
             },
             {
                 id: "text-2",
@@ -26,13 +23,10 @@ const canvasArray = [
                 typeDetails: { category: "content" }, //category can be title or content
                 defaultContent: "Click to add text",
                 style: { top: "30%", left: "5%", width: "24%", height: "65%" },
-                content: [
-                    {
-                        id: "paragraph-1",
-                        content: "My awesome paragraph",
+                content: {
+                        text: "My awesome paragraph",
                         style: {}
                     }
-                ]
             },
             {
                 id: "chart-1",

@@ -7,8 +7,8 @@
     <div v-if="object.type == 'text' && !!object.content"
         class="text canvas-object"
         :class="object.typeDetails.category">
-      <div v-for="text in object.content" :key="text.id" class="the-object">
-        {{ text.content }}
+      <div class="the-object">
+        {{ object.content.text }}
       </div>
     </div>
     <div v-else-if="object.type == 'text' && !object.content"
