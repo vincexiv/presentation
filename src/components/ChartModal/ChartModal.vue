@@ -1,7 +1,7 @@
 <template>
     <div class="chart-modal-outer-container" @click="handleModalClick">
-        <div class="chart-modal-inner-container" @click="handleModalClick">
-            <div class="chart-modal" ref="chartModal">
+        <div class="chart-modal-inner-container" @click="handleModalClick" ref="chartModal">
+            <div class="chart-modal" >
                 <div v-for="chartArray in highchartObjectArray" :key="`chart-array-${chartArray.id}`" class="chart-array">
                     <div class="chart-title">
                         <p>{{ chartArray.title }}</p>
@@ -11,12 +11,18 @@
                             v-for="object in chartArray.charts"
                             :id="getChartId(chartArray, object)"
                             :key="`highchart-object-${chartArray.id}-${object.id}`"
-                            @click="(e)=>makeActive(e, getChartId(chartArray, object))">
+                            @click="(e)=>makeActive(e, chartArray, object)">
                             <vue-2-highcharts :options="object" class="modal-highchart">
                             </vue-2-highcharts>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="use-chart">
+                <div class="horizontal-rule">
+                    <hr />
+                </div>
+                <p class="clickable"> Use Chart </p>
             </div>
         </div>
     </div>
@@ -36,7 +42,8 @@ export default({
     },
     data(){
         return {
-            highchartObjectArray: this.disableMouseTracking(highchartObjectArray)
+            highchartObjectArray: this.disableMouseTracking(highchartObjectArray),
+            activeChart: null,
         }
     },
     methods: {
@@ -51,8 +58,16 @@ export default({
                 this.closeModal()
             }
         },
-        makeActive: function(e, targetChartId){
+        makeActive: function(e, chartArray, chartObject){
             e.preventDefault()
+            const targetChartId = this.getChartId(chartArray, chartObject)
+            
+            // Update active chart
+            this.activeChart = chartObject
+
+            // Update clickable (make it look active)
+            const clickable = this.$refs.chartModal.querySelector('.use-chart .clickable')
+            clickable.classList.add('active')
 
             // Make all charts inactive
             const chartContainers = this.$refs.chartModal.querySelectorAll('.chart-list .chart-container')
@@ -155,7 +170,41 @@ export default({
 
 .chart-modal-outer-container .chart-modal {
     overflow-y: scroll;
-    height: 85vh;
+    height: 84vh;
+    position: relative;
+}
+
+.chart-modal-inner-container .use-chart {
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    width: calc(100% - 4rem);
+    display: flex;
+    justify-content: right;
+    padding-left: 2rem;
+    background-color: #d4d4d4;
+    /* border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem; */
+    align-items: center;
+    gap: 1rem;
+}
+
+.chart-modal-inner-container .use-chart .clickable {
+    padding: 0.5rem;
+    border-radius: 0.9rem;
+    width: 7rem;
+    display: grid;
+    place-items: center;
+    background-color: #a1a1a1;
+}
+
+.chart-modal-inner-container .use-chart .clickable.active {
+    background-color: green;
+    cursor: pointer;
+}
+
+.chart-modal-inner-container .horizontal-rule {
+    width: 100%;
 }
 
 .chart-modal-outer-container .chart-array {
