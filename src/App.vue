@@ -56,10 +56,10 @@ export default {
       const targetCanvas = this.data.find(canvas => canvas.id === targetCanvasId)
       const targetObject = targetCanvas.find(object => object.id === targetObjectId)
 
-      targetObject.content = {...targetObject, ...newContent}
+      targetObject.content = {...newContent, ...targetObject}
     },
     updateActiveObjectInfo: function(newInfo){
-      this.activeObjectInfo = {...newInfo, ...this.activeObjectInfo}
+      this.activeObjectInfo = {...this.activeObjectInfo, ...newInfo}
     }
   }
 }
