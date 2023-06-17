@@ -22,7 +22,7 @@
                 <div class="horizontal-rule">
                     <hr />
                 </div>
-                <p class="clickable"> Use Chart </p>
+                <p class="clickable" @click="updateCanvasChart"> Use Chart </p>
             </div>
         </div>
     </div>
@@ -35,7 +35,8 @@ import Vue2Highcharts from 'vue2-highcharts'
 export default({
     name: "ChartModal",
     props: {
-        closeModal: Function
+        closeModal: Function,
+        updateCanvas: Function
     },
     components: {
         Vue2Highcharts
@@ -49,6 +50,11 @@ export default({
     methods: {
         getChartId: function(chartArray, object){
             return `highchart-object-${chartArray.id}-${object.id}`
+        },
+        updateCanvasChart: function(){
+            if(this.activeChart){
+                this.updateCanvas(this.activeChart)
+            }
         },
         handleModalClick: function(e){
             const classList = Array.from(e.target.classList)

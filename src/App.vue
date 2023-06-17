@@ -30,7 +30,7 @@ export default {
       activeObjectInfo: {
         canvasId: null,
         objectId: null,
-        objectContent: {}
+        objectContent: null
       },
       idCount: canvasObjects.length // will be used to ensure ids of new slides dont clash
     }
@@ -50,13 +50,42 @@ export default {
       this.data = [...this.data, newSlide]
     },
     updateCanvas: function(newContent){
+      console.log({...newContent})
+      console.log("old data: ", [...this.data])
+
       const targetCanvasId = this.activeObjectInfo.canvasId
       const targetObjectId = this.activeObjectInfo.objectId
 
-      const targetCanvas = this.data.find(canvas => canvas.id === targetCanvasId)
-      const targetObject = targetCanvas.find(object => object.id === targetObjectId)
+      console.log("target canvas id: ", targetCanvasId)
+      console.log("target object id: ", targetObjectId)
 
-      targetObject.content = {...newContent, ...targetObject}
+      const newData = this.data.map(canvas => {
+        if(canvas.id !== targetCanvasId){
+          return canvas
+        }else{
+          return {
+            ...canvas,
+            structure: canvas.structure.map(object => {
+              if(object.id !== targetObjectId){
+                return object
+              }else {
+                return {...object, ...newContent }
+              }
+          })
+          }
+        }
+      })
+
+      console.log("new data: ", [...newData])
+
+      // const targetCanvas = this.data.find(canvas => canvas.id === targetCanvasId)
+      // const targetObject = targetCanvas.structure.find(object => object.id === targetObjectId)
+
+      // console.log("target canvas: ", {...targetCanvas})
+      // console.log("target object: ", {...targetObject})
+
+      // targetObject.content = {...targetObject, ...newContent}
+      // console.log("updated target content: ", {...targetObject.content})
     },
     updateActiveObjectInfo: function(newInfo){
       this.activeObjectInfo = {...this.activeObjectInfo, ...newInfo}
