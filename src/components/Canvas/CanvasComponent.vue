@@ -10,7 +10,7 @@
             <div>
                 <div class="canvas-list">
                     <div class="canvas" v-for="objectArray in canvasArray" :key="objectArray.id">
-                        <ChartModal v-if="modalOpen" :closeModal="closeModal"/>
+                        <ChartModal :class="modalState" :closeModal="closeModal"/>
                         <MoveAble
                             v-for="object in objectArray.structure"
                             :key="object.id"
@@ -46,6 +46,15 @@
             CanvasObjectEditor,
             AddSlide,
             ChartModal
+        },
+        computed: {
+            modalState: function(){
+                if(!this.modalOpen){
+                    return 'display-none'
+                }else{
+                    return ''
+                }
+            }
         },
         methods: {
             addSlide: function(){
@@ -100,5 +109,9 @@
         height: max(30vw, 30rem);
         background-color: #d4d4d4;
         position: relative;
+    }
+
+    .display-none {
+        display: none;
     }
 </style>
