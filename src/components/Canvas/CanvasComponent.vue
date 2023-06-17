@@ -14,6 +14,7 @@
                         <MoveAble
                             v-for="object in objectArray.structure"
                             :key="object.id"
+                            :openModal="openModal"
                             v-bind:object="object"
                             v-bind:target="object.type+object.id"
                         />
@@ -58,12 +59,15 @@
             },
             closeModal: function(){
                 this.modalOpen = false
+            },
+            openModal: function(){
+                return this.modalOpen = true
             }
         },
         data(){
             return {
                 options: ["layouts", "texts", "charts"],
-                modalOpen: true
+                modalOpen: false
             }
         }
     }   

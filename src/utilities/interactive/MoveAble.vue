@@ -19,8 +19,14 @@
       </div>
     </div>
 
-    <div v-else-if="object.type == 'chart'" class="canvas-object">
+    <div v-else-if="object.type == 'chart' && !!object.content" class="canvas-object">
       <div :id="higchartObjectId" class="the-object">
+      </div>
+    </div>
+
+    <div v-else-if="object.type == 'chart' && !object.content" class="canvas-object">
+      <div class="the-object" @click="openModal">
+        {{ object.defaultContent }}
       </div>
     </div>
 
@@ -34,7 +40,8 @@ import createChart from "./highcharts"
     name: "MoveAble",
     props: {
       object: Object,
-      target: String
+      target: String,
+      openModal: Function
     },
 
 
