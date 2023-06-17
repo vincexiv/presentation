@@ -25,8 +25,8 @@
     </div>
 
     <div v-else-if="object.type == 'chart' && !object.content" class="canvas-object">
-      <div class="the-object" @click="openModal">
-        {{ object.defaultContent }}
+      <div class="the-object empty-chart" >
+        <i class="fa-sharp fa-3x fa-solid fa-chart-simple" @click="openModal"></i>
       </div>
     </div>
 
@@ -94,5 +94,29 @@ import createChart from "./highcharts"
   width: 100%;
   height: 100%;
   outline: 0.1rem white dashed;
+}
+
+.the-object.empty-chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.the-object.empty-chart i {
+  position: relative;
+  cursor: pointer;
+}
+
+.the-object.empty-chart i:after {
+  font-size: 0.5rem;
+  content: "add chart";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 120%;
+  transform: translate(-10%, 0);
 }
 </style>
