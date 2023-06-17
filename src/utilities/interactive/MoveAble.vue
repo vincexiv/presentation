@@ -53,8 +53,6 @@ import createChart from "./highcharts"
       if(this.options){
         const chart = createChart(`${this.higchartObjectId}`, this.options)
         makeResizableAndDraggable(`.canvas-object-container #${this.higchartObjectId}`, chart)
-
-        this.chart = chart
       }
     },
     data(){
