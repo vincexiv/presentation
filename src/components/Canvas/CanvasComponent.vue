@@ -6,9 +6,11 @@
                 :updateActiveLayout="updateActiveLayout"
                 :activeLayout="activeLayout"
                 :options="options"/>
+
             <div>
                 <div class="canvas-list">
                     <div class="canvas" v-for="objectArray in canvasArray" :key="objectArray.id">
+                        <ChartModal v-if="modalOpen" :closeModal="closeModal"/>
                         <MoveAble
                             v-for="object in objectArray.structure"
                             :key="object.id"
@@ -28,6 +30,7 @@
     import CanvasObjectEditor from "../CanvasObjectEditor/CanvasObjectEditor.vue";
     import MoveAble from "../../utilities/interactive/MoveAble.vue";
     import AddSlide from "../AddSlide/AddSlide.vue";
+    import ChartModal from "../ChartModal/ChartModal.vue";
 
     export default {
         name: 'CanvasObject',
@@ -40,7 +43,8 @@
             MoveAble,
             CanvasLayoutList,
             CanvasObjectEditor,
-            AddSlide
+            AddSlide,
+            ChartModal
         },
         methods: {
             addSlide: function(){
@@ -51,11 +55,15 @@
             // },
             updateActiveLayout: function(layout){
                 this.$emit('update-active-layout', layout)
+            },
+            closeModal: function(){
+                this.modalOpen = false
             }
         },
         data(){
             return {
-                options: ["layouts", "texts", "charts"]
+                options: ["layouts", "texts", "charts"],
+                modalOpen: true
             }
         }
     }   
