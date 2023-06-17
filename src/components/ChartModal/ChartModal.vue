@@ -9,8 +9,9 @@
                     <div class="chart-list">
                         <div class="chart-container"
                             v-for="object in chartArray.charts"
+                            :id="getChartId(chartArray, object)"
                             :key="`highchart-object-${chartArray.id}-${object.id}`"
-                            @click="makeActive">
+                            @click="(e)=>makeActive(e, getChartId(chartArray, object))">
                             <vue-2-highcharts :options="object" class="modal-highchart">
                             </vue-2-highcharts>
                         </div>
@@ -39,6 +40,9 @@ export default({
         }
     },
     methods: {
+        getChartId: function(chartArray, object){
+            return `highchart-object-${chartArray.id}-${object.id}`
+        },
         handleModalClick: function(e){
             const classList = Array.from(e.target.classList)
 
@@ -47,15 +51,18 @@ export default({
                 this.closeModal()
             }
         },
-        makeActive: function(e){
+        makeActive: function(e, targetChartId){
             e.preventDefault()
+
+            // Make all charts inactive
             const chartContainers = this.$refs.chartModal.querySelectorAll('.chart-list .chart-container')
             chartContainers.forEach(container => {
                 container.classList.remove('active')
             })
-            console.log("chart containers: ", chartContainers)
-            e.target.classList.add('active')
-            console.log("e.target: ", e.target)
+
+            // Make target chart active
+            const targetChart = this.$refs.chartModal.querySelector(`#${targetChartId}`)
+            targetChart.classList.add('active')
         },
         disableMouseTracking: function(highchartObjectArray){
             // return the chart options (object) as is but
