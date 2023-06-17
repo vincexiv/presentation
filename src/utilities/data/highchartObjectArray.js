@@ -25,17 +25,17 @@ const highchartObjectArray = [
         title: "Chart Group 2",
         charts: [ 
             {id: 1, ...employment}, 
-            {id: 2, ...monthlyAverageTemperature},
-            {id: 3, ...tourDeFrance}
+            {id: 2, ...tourDeFrance},
+            {id: 3, ...monthlyAverageTemperature}
         ]
     },
     {
         id: 1,
         title: "Chart Group 3",
         charts: [ 
-            {id: 1, ...employment}, 
-            {id: 2, ...monthlyAverageTemperature},
-            {id: 3, ...tourDeFrance}
+            {id: 1, ...tourDeFrance},
+            {id: 2, ...employment}, 
+            {id: 3, ...monthlyAverageTemperature}
         ]
     }
 ]
