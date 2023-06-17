@@ -10,11 +10,16 @@
             <div>
                 <div class="canvas-list">
                     <div class="canvas" v-for="objectArray in canvasArray" :key="objectArray.id">
-                        <ChartModal :class="modalState" :closeModal="closeModal"/>
+                        <ChartModal 
+                            :class="modalState"
+                            :closeModal="closeModal"
+                            :updateCanvas="updateCanvas"/>
                         <MoveAble
                             v-for="object in objectArray.structure"
                             :key="object.id"
                             :openModal="openModal"
+                            :activeCanvas="objectArray"
+                            :updateActiveObjectInfo="updateActiveObjectInfo"
                             v-bind:object="object"
                             v-bind:target="object.type+object.id"
                         />
@@ -38,7 +43,9 @@
         props: {
             canvasArray: Array,
             layoutList: Array,
-            activeLayout: Object
+            activeLayout: Object,
+            updateCanvas: Function,
+            updateActiveObjectInfo: Function
         },
         components: {
             MoveAble,

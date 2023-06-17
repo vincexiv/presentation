@@ -4,6 +4,8 @@
     <div class="main-area">
       <CanvasComponent
         :canvasArray="data"
+        :updateCanvas="updateCanvas"
+        :updateActiveObjectInfo="updateActiveObjectInfo"
         :layoutList="layoutList"
         :activeLayout="activeLayout"
         @update-active-layout="(layout)=>updateActiveLayout(layout)"
@@ -24,7 +26,12 @@ export default {
     return {
       data: canvasObjects,
       layoutList: layoutList,
-      activeLayout: layoutList[layoutList.length-1]
+      activeLayout: layoutList[layoutList.length-1],
+      activeObjectInfo: {
+        canvasId: null,
+        objectId: null,
+        objectContent: {}
+      }
     }
   },
   components: {
@@ -37,6 +44,18 @@ export default {
     },
     addSlide(){
       this.data = [...this.data, this.activeLayout]
+    },
+    updateCanvas: function(newContent){
+      const targetCanvasId = this.activeObjectInfo.canvasId
+      const targetObjectId = this.activeObjectInfo.objectId
+
+      const targetCanvas = this.data.find(canvas => canvas.id === targetCanvasId)
+      const targetObject = targetCanvas.find(object => object.id === targetObjectId)
+
+      targetObject.content = {...targetObject, ...newContent}
+    },
+    updateActiveObjectInfo: function(newInfo){
+      this.activeObjectInfo = {...newInfo, ...this.activeObjectInfo}
     }
   }
 }

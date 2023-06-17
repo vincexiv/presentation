@@ -6,25 +6,31 @@
 
     <div v-if="object.type == 'text' && !!object.content"
         class="text canvas-object"
-        :class="object.typeDetails.category">
+        :class="object.typeDetails.category"
+        @click="updateActiveObject(object)">
       <div class="the-object">
         {{ object.content.text }}
       </div>
     </div>
     <div v-else-if="object.type == 'text' && !object.content"
         class="text canvas-object"
-        :class="object.typeDetails.category">
+        :class="object.typeDetails.category"
+        @click="updateActiveObject(object)">
       <div class="the-object">
         {{ object.defaultContent }}
       </div>
     </div>
 
-    <div v-else-if="object.type == 'chart' && !!object.content" class="canvas-object">
+    <div v-else-if="object.type == 'chart' && !!object.content"
+        class="canvas-object"
+        @click="updateActiveObject(object)">
       <div :id="higchartObjectId" class="the-object">
       </div>
     </div>
 
-    <div v-else-if="object.type == 'chart' && !object.content" class="canvas-object">
+    <div v-else-if="object.type == 'chart' && !object.content"
+        class="canvas-object"
+        @click="updateActiveObject(object)">
       <div class="the-object empty-chart" >
         <i class="fa-sharp fa-3x fa-solid fa-chart-simple" @click="openModal"></i>
       </div>
@@ -41,10 +47,10 @@ import createChart from "./highcharts"
     props: {
       object: Object,
       target: String,
-      openModal: Function
+      openModal: Function,
+      updateActiveObjectInfo: Function,
+      activeCanvas: Object
     },
-
-
     mounted: function(){
       makeResizableAndDraggable(".canvas-object-container")
       makeResizableAndDraggable(".canvas-object-container .canvas-object")
@@ -53,6 +59,14 @@ import createChart from "./highcharts"
       if(this.options){
         const chart = createChart(`${this.higchartObjectId}`, this.options)
         makeResizableAndDraggable(`.canvas-object-container #${this.higchartObjectId}`, chart)
+      }
+    },
+    methods: {
+      updateActiveObject: function(object){
+        this.updateActiveObjectInfo({
+          objectId: object.id,
+          canvasId: this.activeCanvas.id
+        })
       }
     },
     data(){
