@@ -8,7 +8,7 @@
         class="text canvas-object"
         :class="object.typeDetails.category"
         @click="updateActiveObjectInfo({ objectId: object.id, canvasId: activeCanvas.id})">
-      <textarea v-model="text" :placeholder="object.content.text" class="the-object" />
+      <textarea v-model="text" :placeholder="object.content.text" :style="object.content.style" class="the-object" />
     </div>
     <div v-else-if="object.type == 'text' && !object.content"
         class="text canvas-object"
