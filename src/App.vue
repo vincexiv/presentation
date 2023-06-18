@@ -1,7 +1,7 @@
 <template>
   <div>
     <NavBar/>
-    <div class="main-area">
+    <div class="main-area" :style="textStyle">
       <CanvasComponent
         :canvasArray="data"
         :updateCanvas="updateCanvas"
@@ -19,6 +19,7 @@ import NavBar from './components/NavBar/NavBar.vue'
 import CanvasComponent from './components/Canvas/CanvasComponent.vue';
 import canvasObjects from './utilities/data/sampleData';
 import layoutList from './utilities/data/layoutlist';
+import '@fortawesome/fontawesome-free/css/all.css';
 
 export default {
   name: 'App',
