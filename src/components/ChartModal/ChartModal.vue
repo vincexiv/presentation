@@ -199,7 +199,7 @@ export default({
 .chart-modal-inner-container .use-chart .clickable {
     padding: 0.5rem;
     border-radius: 0.9rem;
-    width: 7rem;
+    width: 9rem;
     display: grid;
     place-items: center;
     background-color: #a1a1a1;
