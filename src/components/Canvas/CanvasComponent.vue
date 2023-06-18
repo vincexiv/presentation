@@ -7,7 +7,7 @@
                 :activeLayout="activeLayout"
                 :options="options"/>
 
-            <div>
+            <div class="layout-list-and-add-slide">
                 <div class="canvas-list">
                     <div class="canvas" v-for="objectArray in canvasArray" :key="objectArray.id">
                         <ChartModal 
@@ -105,6 +105,9 @@
         gap: 1rem;
         align-items: top;
         justify-content: center;
+    }
+    .layout-list-and-add-slide {
+        margin-bottom: max(15vw, 15rem);
     }
     .canvas-list {
         display: flex;
