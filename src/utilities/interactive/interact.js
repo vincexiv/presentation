@@ -30,7 +30,6 @@ function makeResizableAndDraggable(cssSelector, chart){
             // the container is resized
             if(chart){
               chart.reflow()
-              console.log(chart)
             }
           }
         },
