@@ -1,5 +1,24 @@
 const layoutList = [
     {
+        id: 0,
+        structure: [
+            { 
+                id: 1, 
+                type: "text", 
+                typeDetails: { category: "title" },
+                defaultContent: "Click to add title", 
+                style: {top: "20%", left: "5%", width: "90%", height: "20%" }
+            },
+            { 
+                id: 2, 
+                type: "text", 
+                typeDetails: { category: "content" },
+                defaultContent: "Click to add text", 
+                style: {top: "45%", left: "5%", width: "90%", height: "40%" }
+            }
+        ]
+    },
+    {
         id: 1,
         structure: [
             { 
