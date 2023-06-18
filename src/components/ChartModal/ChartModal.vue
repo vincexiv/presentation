@@ -155,7 +155,7 @@ export default({
     width: 100%;
     height: 100%;
     z-index: 1;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .chart-modal-outer-container .chart-modal-inner-container {
