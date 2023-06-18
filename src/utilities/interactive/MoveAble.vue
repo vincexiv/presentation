@@ -21,13 +21,6 @@
       </div>
     </div>
 
-    <div v-else-if="object.type == 'chart' && !!object.content"
-        class="canvas-object"
-        @click="updateActiveObjectInfo({ objectId: object.id, canvasId: activeCanvas.id})">
-      <div :id="higchartObjectId" class="the-object">
-      </div>
-    </div>
-
     <div v-else-if="object.type == 'chart' && !object.content"
         class="canvas-object"
         @click="updateActiveObjectInfo({ objectId: object.id, canvasId: activeCanvas.id})">
@@ -35,6 +28,14 @@
         <i class="fa-sharp fa-3x fa-solid fa-chart-simple" @click="openModal"></i>
       </div>
     </div>
+
+    <div :class="activeObject"
+        class="canvas-object"
+        @click="updateActiveObjectInfo({ objectId: object.id, canvasId: activeCanvas.id})">
+      <div :id="higchartObjectId" class="the-object" :key="activeObject">
+      </div>
+    </div>
+
 
   </div>
 </template>
@@ -51,13 +52,21 @@ import createChart from "./highcharts"
       updateActiveObjectInfo: Function,
       activeCanvas: Object
     },
+    updated: function(){
+      makeResizableAndDraggable(".canvas-object-container")
+      makeResizableAndDraggable(".canvas-object-container .canvas-object")
+      if(this.object.content){
+        const chart = createChart(`${this.higchartObjectId}`, this.object.content)
+        makeResizableAndDraggable(`.canvas-object-container #${this.higchartObjectId}`, chart)
+      }
+    },
     mounted: function(){
       makeResizableAndDraggable(".canvas-object-container")
       makeResizableAndDraggable(".canvas-object-container .canvas-object")
 
       // It's not just an empty canvas
-      if(this.options){
-        const chart = createChart(`${this.higchartObjectId}`, this.options)
+      if(this.object.content){
+        const chart = createChart(`${this.higchartObjectId}`, this.object.content)
         makeResizableAndDraggable(`.canvas-object-container #${this.higchartObjectId}`, chart)
       }
     },
@@ -68,8 +77,14 @@ import createChart from "./highcharts"
     },
     computed: {
       higchartObjectId: function(){
-        console.log("object: ", JSON.parse(JSON.stringify(this.object)))
         return `highcharts-${this.activeCanvas.id}-${this.object.id}`
+      },
+      activeObject: function(){
+        if(this.object.type == 'chart' && !!this.object.content){
+          return ''
+        }else{
+          return 'display-none'
+        }
       }
     }
   }
@@ -123,5 +138,9 @@ import createChart from "./highcharts"
   left: 0;
   width: 120%;
   transform: translate(-10%, 0);
+}
+
+.display-none {
+  display: none;
 }
 </style>
