@@ -8,17 +8,13 @@
         class="text canvas-object"
         :class="object.typeDetails.category"
         @click="updateActiveObjectInfo({ objectId: object.id, canvasId: activeCanvas.id})">
-      <div class="the-object">
-        {{ object.content.text }}
-      </div>
+      <textarea v-model="text" :placeholder="object.content.text" class="the-object" />
     </div>
     <div v-else-if="object.type == 'text' && !object.content"
         class="text canvas-object"
         :class="object.typeDetails.category"
         @click="updateActiveObjectInfo({ objectId: object.id, canvasId: activeCanvas.id})">
-      <div class="the-object">
-        {{ object.defaultContent }}
-      </div>
+        <textarea v-model="text" :placeholder="object.defaultContent" class="the-object" />
     </div>
 
     <div v-else-if="object.type == 'chart' && !object.content"
@@ -39,7 +35,9 @@
 
   </div>
 </template>
-  <script>
+
+
+<script>
 import makeResizableAndDraggable from './interact'
 import createChart from "./highcharts"
   
@@ -73,6 +71,7 @@ import createChart from "./highcharts"
     data(){
       return {
         options: this.object.content,
+        text: this.object.content.text
       }
     },
     computed: {
@@ -98,12 +97,18 @@ import createChart from "./highcharts"
   padding: 0.5rem;
 }
 
+.canvas-object-container textarea {
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
 .canvas-object-container .canvas-object {
   position: relative;
   width: 100%;
   height: 100%;
 }
-.canvas-object-container.title {
+.canvas-object-container.title textarea {
   font-size: 2rem;
 }
 
