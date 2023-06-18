@@ -7,7 +7,7 @@
     <div v-if="object.type == 'text' && !!object.content"
         class="text canvas-object"
         :class="object.typeDetails.category"
-        @click="updateActiveObject(object)">
+        @click="updateActiveObjectInfo({ objectId: object.id, canvasId: activeCanvas.id})">
       <div class="the-object">
         {{ object.content.text }}
       </div>
@@ -15,7 +15,7 @@
     <div v-else-if="object.type == 'text' && !object.content"
         class="text canvas-object"
         :class="object.typeDetails.category"
-        @click="updateActiveObject(object)">
+        @click="updateActiveObjectInfo({ objectId: object.id, canvasId: activeCanvas.id})">
       <div class="the-object">
         {{ object.defaultContent }}
       </div>
@@ -23,14 +23,14 @@
 
     <div v-else-if="object.type == 'chart' && !!object.content"
         class="canvas-object"
-        @click="updateActiveObject(object)">
+        @click="updateActiveObjectInfo({ objectId: object.id, canvasId: activeCanvas.id})">
       <div :id="higchartObjectId" class="the-object">
       </div>
     </div>
 
     <div v-else-if="object.type == 'chart' && !object.content"
         class="canvas-object"
-        @click="updateActiveObject(object)">
+        @click="updateActiveObjectInfo({ objectId: object.id, canvasId: activeCanvas.id})">
       <div class="the-object empty-chart" >
         <i class="fa-sharp fa-3x fa-solid fa-chart-simple" @click="openModal"></i>
       </div>
@@ -61,14 +61,6 @@ import createChart from "./highcharts"
         makeResizableAndDraggable(`.canvas-object-container #${this.higchartObjectId}`, chart)
       }
     },
-    methods: {
-      updateActiveObject: function(object){
-        this.updateActiveObjectInfo({
-          objectId: object.id,
-          canvasId: this.activeCanvas.id
-        })
-      }
-    },
     data(){
       return {
         options: this.object.content,
@@ -76,7 +68,8 @@ import createChart from "./highcharts"
     },
     computed: {
       higchartObjectId: function(){
-        return `highcharts-${this.object.id}`
+        console.log("object: ", JSON.parse(JSON.stringify(this.object)))
+        return `highcharts-${this.activeCanvas.id}-${this.object.id}`
       }
     }
   }

@@ -45,9 +45,9 @@ export default {
     },
     addSlide(){
       this.idCount += 1
-      const newId = this.activeLayout.id + `-${this.idCount}`
+      const newId = this.idCount
       const newSlide = {...this.activeLayout, id: newId}
-      this.data = [...this.data, newSlide]
+      this.data.push(newSlide)
     },
     updateCanvas: function(newContent){
  
@@ -55,15 +55,15 @@ export default {
       const targetObjectId = this.activeObjectInfo.objectId
 
 
-      const newData = this.data.map(canvas => {
+      let newData = this.data.map(canvas => {
         if(canvas.id !== targetCanvasId){
-          return {...canvas }
+          return canvas
         }else{
           const updatedCanvas = {
               ...canvas,
               structure: canvas.structure.map(object => {
                 if(object.id !== targetObjectId){
-                  return {...object}
+                  return object
                 }else {
                   return {...object, content: newContent }
                 }
@@ -76,7 +76,6 @@ export default {
       })
 
       this.data = newData
-
     },
     updateActiveObjectInfo: function(newInfo){
       this.activeObjectInfo = {...this.activeObjectInfo, ...newInfo}
