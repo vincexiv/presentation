@@ -94,6 +94,8 @@ export default {
 }
 
 * {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+
   box-sizing: border-box;
   margin-left: 0;
   margin-right: 0;
