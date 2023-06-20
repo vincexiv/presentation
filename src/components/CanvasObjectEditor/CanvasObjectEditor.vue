@@ -1,8 +1,5 @@
 <template>
-    <div class="canvas-object-editor">
-        <i class="fas fa-bold" @click="toggleBold">old</i> <br>
-        <i class="fas fa-italic" @click="toggleItalic">talic</i> <br>
-        <i class="fas fa-underline" @click="toggleUnderline">nderline</i>
+    <div class="canvas-object-editor-container">
 
         <div>
             <textarea v-model="text" :style="textStyle"></textarea>
@@ -47,14 +44,15 @@
 </script>
 
 <style scoped>
-.canvas-object-editor {
+.canvas-object-editor-container {
     width: 100%;
-    height: 6rem;
-    background-color: #d4d4d4;
+    height: 7rem;
+    background-color: #0077be;
     opacity: 0.8;
-    justify-content: space-between;
-}
-.fas{
-    justify-content: space-evenly;
+    position: fixed;
+    z-index: 2;
+    /* box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.1); */
+    backdrop-filter: blur(0.5rem);
+    -webkit-backdrop-filter: blur(5px)
 }
 </style>

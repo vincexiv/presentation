@@ -93,6 +93,7 @@ export default {
     height: 7rem;
     outline: solid #d4d4d4 0.15rem;
     cursor: pointer;
+    background-color: white;
 }
 
 .layout-list-object.active {
@@ -108,17 +109,22 @@ export default {
     flex-direction: column;
     gap: 1rem;
     position: sticky;
-    top: 5rem;
+    top: 12rem;
 }
 
 .layout-list-object .layout-object {
     position: absolute;
     outline: solid #d4d4d4 0.05rem;
+    background-color: white;
 }
 
 .layout-list-container .chart {
     display: grid;
     place-items: center;
     color: #d4d4d4;
+}
+
+.layout-list-container .chart i {
+    background-color: transparent;
 }
 </style>

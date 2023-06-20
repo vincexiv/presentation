@@ -105,6 +105,7 @@
         gap: 1rem;
         align-items: top;
         justify-content: center;
+        margin-top: 8rem;
     }
     .layout-list-and-add-slide {
         margin-bottom: max(15vw, 15rem);
@@ -117,8 +118,9 @@
     .canvas {
         width: max(50vw, 50rem);
         height: max(30vw, 30rem);
-        background-color: #d4d4d4;
+        background-color: white;
         position: relative;
+        outline: 0.1rem solid #d4d4d4;
     }
 
     .display-none {

@@ -26,7 +26,7 @@ export default {
   name: 'App',
   data(){
     return {
-      data: canvasObjects,
+      data: [layoutList[0]],
       layoutList: layoutList,
       activeLayout: layoutList[layoutList.length-1],
       activeObjectInfo: {
@@ -103,5 +103,6 @@ export default {
   box-sizing: border-box;
   margin-left: 0;
   margin-right: 0;
+  background-color: #f7f7ff;
 }
 </style>

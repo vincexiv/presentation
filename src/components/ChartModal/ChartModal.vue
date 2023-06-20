@@ -154,7 +154,7 @@ export default({
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 3;
     background-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -166,13 +166,11 @@ export default({
     transform: translate(calc(-50% + 6rem), 0);
     height: 84vh;
     border-radius: 1rem;
-    background-color: #d4d4d4;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     padding: 2rem;
     justify-content: center;
-    /* overflow-y: scroll; */
 }
 
 .chart-modal-outer-container .chart-modal {
@@ -189,9 +187,6 @@ export default({
     display: flex;
     justify-content: right;
     padding-left: 2rem;
-    background-color: #d4d4d4;
-    /* border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem; */
     align-items: center;
     gap: 1rem;
 }
@@ -239,6 +234,6 @@ export default({
 }
 
 .chart-list .active {
-    outline: 0.1rem solid blue;
+    outline: 0.1rem dashed #0077be;
 }
 </style>
