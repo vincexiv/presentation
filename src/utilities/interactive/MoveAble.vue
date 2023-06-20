@@ -148,8 +148,4 @@ import createChart from "./highcharts"
 .display-none {
   display: none;
 }
-
-textarea {
-  resize: none;
-}
 </style>
