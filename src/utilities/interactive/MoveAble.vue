@@ -111,6 +111,10 @@ import createChart from "./highcharts"
   justify-content: center;
 }
 
+.canvas-object.text.title {
+  font-size: 2rem;
+}
+
 .canvas-object.chart i {
   cursor: pointer;
 }
