@@ -25,7 +25,7 @@ export default {
   name: 'App',
   data(){
     return {
-      data: [layoutList[0]],
+      data: canvasObjects,
       layoutList: layoutList,
       activeLayout: layoutList[layoutList.length-1],
       activeObjectInfo: {
