@@ -82,7 +82,7 @@
         },
         data(){
             return {
-                options: ["layouts", "texts", "charts"],
+                options: ["layouts", "charts"],
                 modalOpen: false
             }
         }

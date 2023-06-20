@@ -22,4 +22,9 @@
     backdrop-filter: blur(0.5rem);
     -webkit-backdrop-filter: blur(5px)
 }
+
+.canvas-object-editor {
+    background-color: #0077be;
+    outline: solid white 0.1rem;
+}
 </style>

@@ -47,7 +47,8 @@ export default ({
 }
 
 .canvas-options button {
-    padding: 0.2rem 0.6rem 0.2rem 0.6rem;
+    padding: 0.2rem;
+    width: 5rem;
     cursor: pointer;
     border-radius: 0.5rem;
     outline: none;
@@ -55,9 +56,12 @@ export default ({
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: rgba(220, 53, 69, 0.6);
+    color: white;
 }
 
 .canvas-options button.active {
-    background-color: #949393;
+    color: white;
+    background-color: rgba(220, 53, 69, 0.8);
 }
 </style>
