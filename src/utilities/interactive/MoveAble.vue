@@ -5,7 +5,7 @@
       :placeholder="object.defaultContent"
       :style="objectStyle"
       :class="`${object.type} ${object.typeDetails.category} canvas-object`"
-      @click="updateActiveObjectInfo({ objectId: object.id, canvasId: activeCanvas.id})"/>
+      @click="makeActive"/>
       
     <textarea v-else-if="object.type == 'text' && !object.content"
       :id="objectId"
@@ -13,13 +13,13 @@
       :placeholder="object.defaultContent"
       :style="objectStyle"
       :class="`${object.type} ${object.typeDetails.category} canvas-object`"
-      @click="updateActiveObjectInfo({ objectId: object.id, canvasId: activeCanvas.id})"/>
+      @click="makeActive"/>
 
     <div v-else-if="object.type == 'chart' && !object.content"
         :id="objectId"
         :style="objectStyle"
         :class="`${object.type} canvas-object`"
-        @click="updateActiveObjectInfo({ objectId: object.id, canvasId: activeCanvas.id})">
+        @click="makeActive">
       <i class="fa-sharp fa-3x fa-solid fa-chart-simple" @click="openModal"></i>
     </div>
 
@@ -28,7 +28,7 @@
         ref="highchart"
         :style="objectStyle"
         :class="`${object.type} canvas-object`"
-        @click="updateActiveObjectInfo({ objectId: object.id, canvasId: activeCanvas.id})">
+        @click="makeActive">
       </div>
 </template>
 
@@ -95,6 +95,22 @@ import createChart from "./highcharts"
           return this.object.style
         }
       }
+    },
+    methods: {
+      makeActive(e){
+        const allCanvasObjects = document.querySelectorAll('.canvas-object')
+        allCanvasObjects.forEach(object => {
+          object.classList.remove('active')
+        })
+
+        if(this.$refs?.highchart){
+          this.$refs.highchart.classList.add('active')
+        }else {
+          e.target.classList.add('active')
+        }
+        
+        this.updateActiveObjectInfo({ objectId: this.object.id, canvasId: this.activeCanvas.id})
+      }
     }
   }
 </script>
@@ -109,6 +125,10 @@ import createChart from "./highcharts"
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.canvas-object.active {
+  outline: dashed black 0.1rem;
 }
 
 .canvas-object.text.title {
