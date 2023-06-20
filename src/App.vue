@@ -97,5 +97,6 @@ export default {
   box-sizing: border-box;
   margin-left: 0;
   margin-right: 0;
+  background-color: #f7f7ff;
 }
 </style>

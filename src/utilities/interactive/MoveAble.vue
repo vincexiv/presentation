@@ -103,7 +103,7 @@ import createChart from "./highcharts"
 .canvas-object {
   position: absolute;
   border: none;
-  outline: dashed white 0.1rem;
+  outline: dashed #d4d4d4 0.1rem;
   background-color: transparent;
   padding: 0.1rem;
   display: flex;
@@ -118,6 +118,8 @@ import createChart from "./highcharts"
 .canvas-object.chart i {
   cursor: pointer;
   position: relative;
+  color: #0077be;
+  background-color: transparent;
 }
 
 .canvas-object.chart i:after {
