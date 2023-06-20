@@ -50,14 +50,14 @@
 .canvas-object-editor-container {
     width: 100%;
     height: 7rem;
-    background-color: #0077be;
+    background-color: transparent;
     position: fixed;
     z-index: 2;
-    backdrop-filter: blur(1rem);
-    -webkit-backdrop-filter: blur(1rem);
     display: flex;
     justify-content: center;
     align-items: center;
+    backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: blur(1rem);
 }
 
 .object-editor {
@@ -74,20 +74,22 @@
     color: white;
     border-bottom: solid 0.1rem rgba(255, 255, 255, 0.3);
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 
 .option {
     font-size: 0.8rem;
-    background-color: #f7f7f7;
     padding: 0.2em;
-    border-radius: 0.5em;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
-    width: 4rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #0077be;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.option.active {
+    border-bottom: solid 0.1rem rgba(255, 255, 255, 0.7) ;
 }
 </style>
