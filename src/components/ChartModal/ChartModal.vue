@@ -234,6 +234,6 @@ export default({
 }
 
 .chart-list .active {
-    outline: 0.1rem solid blue;
+    outline: 0.1rem dashed #0077be;
 }
 </style>
