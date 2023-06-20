@@ -198,10 +198,12 @@ export default({
     display: grid;
     place-items: center;
     background-color: #a1a1a1;
+    color: #f7f7f7;
 }
 
 .chart-modal-inner-container .use-chart .clickable.active {
-    background-color: green;
+    background-color: #0077be;
+    color: #f7f7f7;
     cursor: pointer;
 }
 
