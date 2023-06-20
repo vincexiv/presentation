@@ -20,7 +20,7 @@
         :style="objectStyle"
         :class="`${object.type} canvas-object`"
         @click="makeActive">
-      <i class="fa-sharp fa-3x fa-solid fa-chart-simple" @click="openModal"></i>
+      <i class="fa-sharp fa-3x fa-solid fa-chart-simple open-modal" @click="openModal"></i>
     </div>
 
     <div v-else
@@ -135,14 +135,14 @@ import createChart from "./highcharts"
   font-size: 2rem;
 }
 
-.canvas-object.chart i {
+.canvas-object.chart i.open-modal {
   cursor: pointer;
   position: relative;
   color: #0077be;
   background-color: transparent;
 }
 
-.canvas-object.chart i:after {
+.canvas-object.chart i.open-modal:after {
   content: "Add Chart";
   display: block;
   position: absolute;
