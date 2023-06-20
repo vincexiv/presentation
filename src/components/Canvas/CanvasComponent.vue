@@ -1,6 +1,9 @@
 <template>
     <div class="canvas-editor-layout">
-        <CanvasObjectEditor />
+        <CanvasObjectEditor
+            :activeEditOption="activeEditOption"
+            :updateActiveEditOption="updateActiveEditOption" />
+
         <div class="canvas-and-layout">
             <CanvasLayoutList
                 :updateActiveLayout="updateActiveLayout"
@@ -78,12 +81,16 @@
             },
             openModal: function(){
                 return this.modalOpen = true
+            },
+            updateActiveEditOption(activeOption){
+                this.activeEditOption = activeOption
             }
         },
         data(){
             return {
                 options: ["layouts", "charts"],
-                modalOpen: false
+                modalOpen: false,
+                activeEditOption: "canvas"
             }
         }
     }   

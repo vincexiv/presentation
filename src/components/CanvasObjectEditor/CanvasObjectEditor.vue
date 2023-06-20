@@ -2,9 +2,21 @@
     <div class="canvas-object-editor-container">
         <div class="object-editor">
             <div class="switchers">
-                <div class="option">Canvas</div>
-                <div class="option">Text</div>
-                <div class="option">Chart</div>
+                <div class="option" 
+                    :class="editOptionClass('canvas')"
+                    @click="updateActiveEditOption('canvas')">
+                    Canvas
+                </div>
+                <div class="option" 
+                    :class="editOptionClass('text')"
+                    @click="updateActiveEditOption('text')">
+                    Text
+                </div>
+                <div class="option" 
+                    :class="editOptionClass('chart')"
+                    @click="updateActiveEditOption('chart')">
+                    Chart
+                </div>
             </div>
             <div class="details">
 
@@ -15,7 +27,22 @@
 
 <script>
     export default ({
-        name: "CanvasObjectEditor"
+        name: "CanvasObjectEditor",
+        props: {
+            activeEditOption: String,
+            updateActiveEditOption: Function
+        },
+        methods: {
+            editOptionClass: function (editOption){
+                console.log(editOption)
+                console.log(this.activeEditOption)
+                if(this.activeEditOption == editOption){
+                    return 'active'
+                }else {
+                    return ''
+                }
+            }
+        }
     })
 </script>
 
