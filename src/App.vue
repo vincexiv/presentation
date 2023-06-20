@@ -20,6 +20,7 @@ import CanvasComponent from './components/Canvas/CanvasComponent.vue';
 import canvasObjects from './utilities/data/sampleData';
 import layoutList from './utilities/data/layoutlist';
 import '@fortawesome/fontawesome-free/css/all.css';
+import { updateStyle } from "./utilities/SampleData";
 
 export default {
   name: 'App',
@@ -80,6 +81,10 @@ export default {
     },
     updateActiveObjectInfo: function(newInfo){
       this.activeObjectInfo = {...this.activeObjectInfo, ...newInfo}
+    },
+    updateStyle(objectId, style) {
+      // Call the imported updateStyle method from SampleData.js
+      updateStyle(objectId, style);
     }
   }
 }

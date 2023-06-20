@@ -38,5 +38,15 @@ const canvasArray = [
         ]
     }
 ]
-
+export function updateStyle(objectId, style) {
+    // Find the corresponding object in canvasArray and update its style
+    for (const canvas of canvasArray) {
+      for (const obj of canvas.structure) {
+        if (obj.id === objectId) {
+          obj.style = { ...obj.style, ...style };
+          break;
+        }
+      }
+    }
+  }
 export default canvasArray;
