@@ -74,8 +74,7 @@ import createChart from "./highcharts"
     },
     data(){
       return {
-        options: this.object.content,
-        text: this.object.content? this.object.content.text : this.object.defaultContent
+        text: this.object.content?.text
       }
     },
     computed: {
