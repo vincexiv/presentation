@@ -117,6 +117,17 @@ import createChart from "./highcharts"
 
 .canvas-object.chart i {
   cursor: pointer;
+  position: relative;
+}
+
+.canvas-object.chart i:after {
+  content: "Add Chart";
+  display: block;
+  position: absolute;
+  top: 100%;
+  width: 120%;
+  font-size: 0.5rem;
+  transform: translate(-10%, 0);
 }
 
 textarea {
