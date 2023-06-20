@@ -1,39 +1,35 @@
 <template>
-  <div class="canvas-object-container"
-      :class="object.typeDetails?.category"
-      ref="target"
-      :style="object.style">
-
-    <div v-if="object.type == 'text' && !!object.content"
-        class="text canvas-object"
-        :class="object.typeDetails.category"
-        @click="updateActiveObjectInfo({ objectId: object.id, canvasId: activeCanvas.id})">
-      <textarea v-model="text" :placeholder="object.content.text" :style="object.content.style" class="the-object" />
-    </div>
-    <div v-else-if="object.type == 'text' && !object.content"
-        class="text canvas-object"
-        :class="object.typeDetails.category"
-        @click="updateActiveObjectInfo({ objectId: object.id, canvasId: activeCanvas.id})">
-        <textarea v-model="text" :placeholder="object.defaultContent" class="the-object" />
-    </div>
+    <textarea v-if="object.type == 'text' && !!object.content"
+      :id="objectId"
+      v-model="text"
+      :placeholder="object.defaultContent"
+      :style="objectStyle"
+      :class="`${object.type} ${object.typeDetails.category} canvas-object`"
+      @click="updateActiveObjectInfo({ objectId: object.id, canvasId: activeCanvas.id})"/>
+      
+    <textarea v-else-if="object.type == 'text' && !object.content"
+      :id="objectId"
+      v-model="text"
+      :placeholder="object.defaultContent"
+      :style="objectStyle"
+      :class="`${object.type} ${object.typeDetails.category} canvas-object`"
+      @click="updateActiveObjectInfo({ objectId: object.id, canvasId: activeCanvas.id})"/>
 
     <div v-else-if="object.type == 'chart' && !object.content"
-        class="canvas-object"
+        :id="objectId"
+        :style="objectStyle"
+        :class="`${object.type} canvas-object`"
         @click="updateActiveObjectInfo({ objectId: object.id, canvasId: activeCanvas.id})">
-      <div class="the-object empty-chart" >
-        <i class="fa-sharp fa-3x fa-solid fa-chart-simple" @click="openModal"></i>
-      </div>
+      <i class="fa-sharp fa-3x fa-solid fa-chart-simple" @click="openModal"></i>
     </div>
 
-    <div :class="activeObject"
-        class="canvas-object"
+    <div v-else
+        :id="`${objectId}`"
+        ref="highchart"
+        :style="objectStyle"
+        :class="`${object.type} canvas-object`"
         @click="updateActiveObjectInfo({ objectId: object.id, canvasId: activeCanvas.id})">
-      <div :id="higchartObjectId" class="the-object" :key="activeObject">
       </div>
-    </div>
-
-
-  </div>
 </template>
 
 
@@ -51,38 +47,53 @@ import createChart from "./highcharts"
       activeCanvas: Object
     },
     updated: function(){
-      makeResizableAndDraggable(".canvas-object-container")
-      makeResizableAndDraggable(".canvas-object-container .canvas-object")
-      if(this.object.content){
-        const chart = createChart(`${this.higchartObjectId}`, this.object.content)
-        makeResizableAndDraggable(`.canvas-object-container #${this.higchartObjectId}`, chart)
+      // console.log("updated", JSON.parse(JSON.stringify(this.object)))
+
+      const objectId = `#object-${this.activeCanvas.id}-${this.object.id}`
+      
+      if(this.object.type === 'chart' && !!this.$refs.highchart){
+        const chart = createChart(this.$refs.highchart.id, this.object.content)
+        console.log("updated chart: ", chart)
+        makeResizableAndDraggable(objectId, chart)
+      }else {
+        makeResizableAndDraggable(objectId)
       }
     },
     mounted: function(){
-      makeResizableAndDraggable(".canvas-object-container")
-      makeResizableAndDraggable(".canvas-object-container .canvas-object")
+      // console.log("mounted", JSON.parse(JSON.stringify(this.object)))
 
-      // It's not just an empty canvas
-      if(this.object.content){
-        const chart = createChart(`${this.higchartObjectId}`, this.object.content)
-        makeResizableAndDraggable(`.canvas-object-container #${this.higchartObjectId}`, chart)
+      const objectId = `#object-${this.activeCanvas.id}-${this.object.id}`
+      
+      if(this.object.type === 'chart' && !!this.$refs.highchart){
+        const chart = createChart(this.$refs.highchart.id, this.object.content)
+        // console.log("chart: ", chart)
+        makeResizableAndDraggable(objectId, chart)
+      }else {
+        makeResizableAndDraggable(objectId)
       }
     },
     data(){
       return {
         options: this.object.content,
-        text: this.object.content.text
+        text: this.object.content? this.object.content.text : this.object.defaultContent
       }
     },
     computed: {
-      higchartObjectId: function(){
-        return `highcharts-${this.activeCanvas.id}-${this.object.id}`
+      objectId: function(){
+        return `object-${this.activeCanvas.id}-${this.object.id}`
       },
-      activeObject: function(){
-        if(this.object.type == 'chart' && !!this.object.content){
-          return ''
-        }else{
+      activeIcon: function(){
+        if(this.$refs.highchart && Object.keys(this.$refs.highchart).length > 0){
           return 'display-none'
+        }else {
+          return ''
+        }
+      },
+      objectStyle: function(){
+        if(this.object.content){
+          return {...this.object.content.style, ...this.object.style}
+        }else{
+          return this.object.style
         }
       }
     }
@@ -90,62 +101,27 @@ import createChart from "./highcharts"
 </script>
 
 <style scoped>
-.canvas-object-container {
-  box-sizing: border-box;
+.canvas-object {
   position: absolute;
-  outline: solid 0.1rem white;
-  padding: 0.5rem;
-}
-
-.canvas-object-container textarea {
-  background-color: transparent;
-  outline: none;
   border: none;
-}
-
-.canvas-object-container .canvas-object {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-.canvas-object-container.title textarea {
-  font-size: 2rem;
-}
-
-.canvas-object .the-object {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  outline: 0.1rem white dashed;
-}
-
-.the-object.empty-chart {
+  outline: dashed white 0.1rem;
+  background-color: transparent;
+  padding: 0.1rem;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
-.the-object.empty-chart i {
-  position: relative;
+.canvas-object.chart i {
   cursor: pointer;
 }
 
-.the-object.empty-chart i:after {
-  font-size: 0.5rem;
-  content: "add chart";
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 120%;
-  transform: translate(-10%, 0);
+textarea {
+  resize: none;
 }
 
-.display-none {
-  display: none;
+.highchart-object {
+  width: 100%;
+  height: 100%;
 }
 </style>
