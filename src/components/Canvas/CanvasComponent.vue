@@ -95,7 +95,6 @@
         display: flex;
         flex-direction: column;
         gap: 1rem;
-        width: 100vw;
         box-sizing: border-box;
         margin-left: 0;
         margin-right: 0;
