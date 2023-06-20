@@ -24,7 +24,6 @@
     width: 100%;
     height: 7rem;
     background-color: #0077be;
-    opacity: 0.9;
     position: fixed;
     z-index: 2;
     backdrop-filter: blur(1rem);
