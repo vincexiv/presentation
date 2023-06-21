@@ -94,7 +94,7 @@
             return {
                 options: ["layouts", "charts"],
                 modalOpen: false,
-                activeEditOption: "canvas"
+                activeEditOption: "file"
             }
         }
     }   
