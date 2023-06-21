@@ -3,7 +3,8 @@
         <CanvasObjectEditor
             :activeEditOption="activeEditOption"
             :updateActiveEditOption="updateActiveEditOption"
-            :saveData="saveData" />
+            :saveData="saveData"
+            :exportToPowerPoint="exportToPowerPoint" />
 
         <div class="canvas-and-layout">
             <CanvasLayoutList
@@ -50,7 +51,8 @@
             activeLayout: Object,
             updateCanvas: Function,
             updateActiveObjectInfo: Function,
-            saveData: Function
+            saveData: Function,
+            exportToPowerPoint: Function
         },
         components: {
             MoveAble,

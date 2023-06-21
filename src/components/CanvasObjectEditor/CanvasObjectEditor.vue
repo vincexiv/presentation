@@ -20,6 +20,7 @@
             </div>
             <div class="details">
                 <p class="action" @click="saveData()">Save</p>
+                <p class="action" @click="exportToPowerPoint()">export to powerpoint</p>
             </div>
         </div>
     </div>
@@ -32,7 +33,8 @@ export default ({
         props: {
             activeEditOption: String,
             updateActiveEditOption: Function,
-            saveData: Function
+            saveData: Function,
+            exportToPowerPoint: Function
         },
         methods: {
             editOptionClass: function (editOption){
@@ -95,6 +97,8 @@ export default ({
 
 .details {
     background-color: transparent;
+    display: flex;
+    gap: 1rem;
 }
 
 .action {

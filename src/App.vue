@@ -7,6 +7,7 @@
         :updateCanvas="updateCanvas"
         :saveData="saveData"
         :updateActiveObjectInfo="updateActiveObjectInfo"
+        :exportToPowerPoint="exportToPowerPoint"
         :layoutList="newCopy(layoutList)"
         :activeLayout="activeLayout"
         @update-active-layout="(layout)=>updateActiveLayout(layout)"
@@ -46,7 +47,12 @@ export default {
       // Since we have been moving things around, resizing, etc
       // update the information we have first
       this.updateCanvasLayouts(getLayouts())
-      // console.log(JSON.stringify(this.data))
+
+
+      // WRITE CODE FOR SENDING THE DATA TO THE BACKEND HERE
+    },
+    exportToPowerPoint(){
+
     },
     updateActiveLayout: function(layout){
       this.activeLayout = this.newCopy(layout)
