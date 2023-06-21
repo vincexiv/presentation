@@ -10,6 +10,7 @@
         :exportToPowerPoint="exportToPowerPoint"
         :layoutList="newCopy(layoutList)"
         :activeLayout="activeLayout"
+        :updateRenderedCharts="updateRenderedCharts"
         @update-active-layout="(layout)=>updateActiveLayout(layout)"
         @add-slide="addSlide()"/>
     </div>
@@ -38,6 +39,7 @@ export default {
         objectContent: null
       },
       idCount: canvasObjects.length, // will be used to ensure ids of new slides dont clash
+      renderedCharts: []
     }
   },
   components: {
@@ -55,6 +57,12 @@ export default {
     },
     exportToPowerPoint(){
       createPPT(this.data[0])
+    },
+    updateRenderedCharts(newChart){
+      this.renderedCharts.push({canvasId: this.canvasId, objectId: this.objectId, chart: newChart })
+      // const availableFunctions = Object.getOwnPropertyNames(newChart)
+      // Object.getOwnPropertyNames(newChart).filter(item => typeof newChart[item] === 'function')
+      // console.log(JSON.parse(JSON.stringify(availableFunctions)))
     },
     updateActiveLayout: function(layout){
       this.activeLayout = this.newCopy(layout)

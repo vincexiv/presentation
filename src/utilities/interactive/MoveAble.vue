@@ -44,30 +44,28 @@ import createChart from "./highcharts"
       target: String,
       openModal: Function,
       updateActiveObjectInfo: Function,
-      activeCanvas: Object
+      activeCanvas: Object,
+      updateRenderedCharts: Function
     },
     updated: function(){
-      // console.log("updated", JSON.parse(JSON.stringify(this.object)))
-
       const objectId = `#object-${this.activeCanvas.id}-${this.object.id}`
       
       if(this.object.type === 'chart' && !!this.$refs.highchart){
         const chart = createChart(this.$refs.highchart.id, this.object.content)
-        console.log("updated chart: ", chart)
         makeResizableAndDraggable(objectId, chart)
+        this.updateRenderedCharts(chart)
       }else {
         makeResizableAndDraggable(objectId)
       }
     },
     mounted: function(){
-      // console.log("mounted", JSON.parse(JSON.stringify(this.object)))
-
       const objectId = `#object-${this.activeCanvas.id}-${this.object.id}`
       
       if(this.object.type === 'chart' && !!this.$refs.highchart){
         const chart = createChart(this.$refs.highchart.id, this.object.content)
-        // console.log("chart: ", chart)
+
         makeResizableAndDraggable(objectId, chart)
+        this.updateRenderedCharts(chart)
       }else {
         makeResizableAndDraggable(objectId)
       }
