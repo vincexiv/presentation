@@ -10,6 +10,7 @@
   "dependencies": {
     "core-js": "^3.8.3",
     "interactjs": "^1.10.17",
+    "pptxgenjs": "^3.12.0",
     "vue": "^2.5.17",
     "vue-moveable": "^2.0.0-beta.76",
     "vue2-highcharts": "^1.2.5"
