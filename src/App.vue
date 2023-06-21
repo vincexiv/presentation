@@ -7,7 +7,7 @@
         :updateCanvas="updateCanvas"
         :updateCanvasLayouts="updateCanvasLayouts"
         :updateActiveObjectInfo="updateActiveObjectInfo"
-        :layoutList="layoutList"
+        :layoutList="newCopy(layoutList)"
         :activeLayout="activeLayout"
         @update-active-layout="(layout)=>updateActiveLayout(layout)"
         @add-slide="addSlide()"/>
@@ -25,7 +25,7 @@ export default {
   name: 'App',
   data(){
     return {
-      data: [layoutList[0]],
+      data: [this.newCopy(layoutList[0])],
       layoutList: layoutList,
       activeLayout: layoutList[layoutList.length-1],
       activeObjectInfo: {
@@ -42,7 +42,10 @@ export default {
   },
   methods: {
     updateActiveLayout: function(layout){
-      this.activeLayout = layout
+      this.activeLayout = this.newCopy(layout)
+    },
+    newCopy: function(object){
+      return JSON.parse(JSON.stringify(object))
     },
     addSlide(){
       this.idCount += 1
