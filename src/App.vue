@@ -5,7 +5,7 @@
       <CanvasComponent
         :canvasArray="data"
         :updateCanvas="updateCanvas"
-        :updateCanvasLayouts="updateCanvasLayouts"
+        :saveData="saveData"
         :updateActiveObjectInfo="updateActiveObjectInfo"
         :layoutList="newCopy(layoutList)"
         :activeLayout="activeLayout"
@@ -20,6 +20,7 @@ import NavBar from './components/NavBar/NavBar.vue'
 import CanvasComponent from './components/Canvas/CanvasComponent.vue';
 import canvasObjects from './utilities/data/sampleData';
 import layoutList from './utilities/data/layoutlist';
+import getLayouts from './utilities/functions/getlayouts';
 
 export default {
   name: 'App',
@@ -41,6 +42,12 @@ export default {
     CanvasComponent
   },
   methods: {
+    saveData: function(){
+      // Since we have been moving things around, resizing, etc
+      // update the information we have first
+      this.updateCanvasLayouts(getLayouts())
+      // console.log(JSON.stringify(this.data))
+    },
     updateActiveLayout: function(layout){
       this.activeLayout = this.newCopy(layout)
     },

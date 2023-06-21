@@ -3,7 +3,7 @@
         <CanvasObjectEditor
             :activeEditOption="activeEditOption"
             :updateActiveEditOption="updateActiveEditOption"
-            :updateCanvasLayouts="updateCanvasLayouts" />
+            :saveData="saveData" />
 
         <div class="canvas-and-layout">
             <CanvasLayoutList
@@ -50,7 +50,7 @@
             activeLayout: Object,
             updateCanvas: Function,
             updateActiveObjectInfo: Function,
-            updateCanvasLayouts: Function
+            saveData: Function
         },
         components: {
             MoveAble,

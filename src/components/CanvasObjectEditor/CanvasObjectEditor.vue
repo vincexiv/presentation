@@ -19,20 +19,20 @@
                 </div>
             </div>
             <div class="details">
-                <p class="action" @click="updateLayouts()">Save</p>
+                <p class="action" @click="saveData()">Save</p>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import getLayouts from "../../utilities/functions/getlayouts"
-    export default ({
+
+export default ({
         name: "CanvasObjectEditor",
         props: {
             activeEditOption: String,
             updateActiveEditOption: Function,
-            updateCanvasLayouts: Function
+            saveData: Function
         },
         methods: {
             editOptionClass: function (editOption){
@@ -41,9 +41,6 @@ import getLayouts from "../../utilities/functions/getlayouts"
                 }else {
                     return ''
                 }
-            },
-            updateLayouts: function(){
-                this.updateCanvasLayouts(getLayouts())
             }
         }
     })
