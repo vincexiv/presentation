@@ -12,7 +12,7 @@
 
             <div class="layout-list-and-add-slide">
                 <div class="canvas-list">
-                    <div class="canvas" v-for="objectArray in canvasArray" :key="objectArray.id">
+                    <div :id="`canvas-${objectArray.id}`" class="canvas" v-for="objectArray in canvasArray" :key="objectArray.id">
                         <ChartModal 
                             :class="modalState"
                             :closeModal="closeModal"
