@@ -19,13 +19,14 @@
                 </div>
             </div>
             <div class="details">
-                <p class="action">Save</p>
+                <p class="action" @click="getData()">Save</p>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import getLayouts from "../../utilities/functions/getlayouts"
     export default ({
         name: "CanvasObjectEditor",
         props: {
@@ -39,6 +40,9 @@
                 }else {
                     return ''
                 }
+            },
+            getData: function(){
+                getLayouts()
             }
         }
     })
