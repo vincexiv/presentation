@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="details">
-
+                <p class="action">Save</p>
             </div>
         </div>
     </div>
@@ -34,8 +34,6 @@
         },
         methods: {
             editOptionClass: function (editOption){
-                console.log(editOption)
-                console.log(this.activeEditOption)
                 if(this.activeEditOption == editOption){
                     return 'active'
                 }else {
@@ -91,5 +89,27 @@
 
 .option.active {
     border-bottom: solid 0.1rem rgba(255, 255, 255, 0.7) ;
+}
+
+.details {
+    background-color: transparent;
+}
+
+.action {
+    width: max-content;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7rem;
+    background-color: #f7f7f7;
+    padding: 0.2rem 0.7rem 0.2rem 0.7rem;
+    border-radius: 0.5em;
+    cursor: pointer;
+    color: rgba(0, 119, 190, 1);
+}
+
+.action:hover {
+    opacity: 0.8;
 }
 </style>
