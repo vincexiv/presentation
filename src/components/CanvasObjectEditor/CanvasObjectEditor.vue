@@ -3,6 +3,11 @@
         <div class="object-editor">
             <div class="switchers">
                 <div class="option" 
+                    :class="editOptionClass('file')"
+                    @click="updateActiveEditOption('file')">
+                    File
+                </div>
+                <div class="option" 
                     :class="editOptionClass('canvas')"
                     @click="updateActiveEditOption('canvas')">
                     Canvas
@@ -19,8 +24,10 @@
                 </div>
             </div>
             <div class="details">
-                <p class="action" @click="saveData()">Save</p>
-                <p class="action" @click="exportToPowerPoint()">export to powerpoint</p>
+                <div v-if="activeEditOption==='file'" class="file-option-details actions">
+                    <p class="action" @click="saveData()">Save</p>
+                    <p class="action" @click="exportToPowerPoint()">export to powerpoint</p>
+                </div>
             </div>
         </div>
     </div>
@@ -95,7 +102,7 @@ export default ({
     border-bottom: solid 0.1rem rgba(255, 255, 255, 0.7) ;
 }
 
-.details {
+.actions, .details {
     background-color: transparent;
     display: flex;
     gap: 1rem;
