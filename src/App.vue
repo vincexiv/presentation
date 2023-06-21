@@ -22,6 +22,8 @@ import CanvasComponent from './components/Canvas/CanvasComponent.vue';
 import canvasObjects from './utilities/data/sampleData';
 import layoutList from './utilities/data/layoutlist';
 import getLayouts from './utilities/functions/getlayouts';
+// import pptxgen from "pptxgenjs";
+import createPPT from './utilities/functions/createppt';
 
 export default {
   name: 'App',
@@ -35,7 +37,7 @@ export default {
         objectId: null,
         objectContent: null
       },
-      idCount: canvasObjects.length // will be used to ensure ids of new slides dont clash
+      idCount: canvasObjects.length, // will be used to ensure ids of new slides dont clash
     }
   },
   components: {
@@ -52,7 +54,7 @@ export default {
       // WRITE CODE FOR SENDING THE DATA TO THE BACKEND HERE
     },
     exportToPowerPoint(){
-
+      createPPT(this.data[0])
     },
     updateActiveLayout: function(layout){
       this.activeLayout = this.newCopy(layout)
