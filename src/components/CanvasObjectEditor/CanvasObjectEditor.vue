@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="details">
-                <p class="action" @click="getData()">Save</p>
+                <p class="action" @click="updateLayouts()">Save</p>
             </div>
         </div>
     </div>
@@ -31,7 +31,8 @@ import getLayouts from "../../utilities/functions/getlayouts"
         name: "CanvasObjectEditor",
         props: {
             activeEditOption: String,
-            updateActiveEditOption: Function
+            updateActiveEditOption: Function,
+            updateCanvasLayouts: Function
         },
         methods: {
             editOptionClass: function (editOption){
@@ -41,8 +42,8 @@ import getLayouts from "../../utilities/functions/getlayouts"
                     return ''
                 }
             },
-            getData: function(){
-                getLayouts()
+            updateLayouts: function(){
+                this.updateCanvasLayouts(getLayouts())
             }
         }
     })

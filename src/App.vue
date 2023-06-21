@@ -5,6 +5,7 @@
       <CanvasComponent
         :canvasArray="data"
         :updateCanvas="updateCanvas"
+        :updateCanvasLayouts="updateCanvasLayouts"
         :updateActiveObjectInfo="updateActiveObjectInfo"
         :layoutList="layoutList"
         :activeLayout="activeLayout"
@@ -73,6 +74,25 @@ export default {
           return updatedCanvas
   
         }
+      })
+
+      this.data = newData
+    },
+    updateCanvasLayouts: function(newLayouts){
+      let newData = []
+      newLayouts.forEach(layout => {
+        const targetId = layout.id
+        const targetCanvas = this.data.find(canvas => {
+          return canvas.id === targetId
+        })
+
+        layout.structure.forEach(s => {
+          const targetObjectId = s.id
+          const targetObject = targetCanvas.structure.find(object => object.id === targetObjectId)
+          targetObject.style = s.style
+        })
+
+        newData.push(targetCanvas)
       })
 
       this.data = newData

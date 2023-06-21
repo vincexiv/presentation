@@ -44,7 +44,7 @@ function getLayouts(){
 
         layouts.push(currentCanvasData)
     })
-console.log("layouts: ", layouts)
+console.log("layouts: ", JSON.parse(JSON.stringify(layouts)))
     return layouts
 }
 
