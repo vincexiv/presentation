@@ -28,10 +28,10 @@ function getLayouts(){
             const objectHeight = object.getBoundingClientRect().height
 
             const style = {
-                top: `${parseInt((objectY - canvasY)/canvasHeight * 100)}%`,
-                left: `${parseInt((objectX - canvasX)/canvasWidth * 100)}%`,
-                width: `${parseInt(objectWidth/canvasWidth * 100)}%`,
-                height: `${parseInt(objectHeight/canvasHeight * 100)}%`
+                top: `${(objectY - canvasY)/canvasHeight * 100}%`,
+                left: `${(objectX - canvasX)/canvasWidth * 100}%`,
+                width: `${objectWidth/canvasWidth * 100}%`,
+                height: `${objectHeight/canvasHeight * 100}%`
             }
 
             const objectData = {
@@ -44,7 +44,7 @@ function getLayouts(){
 
         layouts.push(currentCanvasData)
     })
-
+console.log("layouts: ", layouts)
     return layouts
 }
 
