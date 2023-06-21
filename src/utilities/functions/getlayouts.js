@@ -7,13 +7,9 @@
 function getLayouts(){
 
     const layouts = []
-
     const allSlides = document.querySelectorAll(".canvas")
+
     allSlides.forEach(slide => {
-        const canvasX = slide.getBoundingClientRect().x
-        const canvasY = slide.getBoundingClientRect().y
-        const canvasWidth = slide.getBoundingClientRect().width
-        const canvasHeight = slide.getBoundingClientRect().height
 
         const currentCanvasData = {
             id: parseInt(slide.id.split("-")[1]),
@@ -22,29 +18,22 @@ function getLayouts(){
 
         const objects = slide.querySelectorAll('.canvas-object')
         objects.forEach(object => {
-            const objectX = object.getBoundingClientRect().x
-            const objectY = object.getBoundingClientRect().y
-            const objectWidth = object.getBoundingClientRect().width
-            const objectHeight = object.getBoundingClientRect().height
-
-            const style = {
-                top: `${(objectY - canvasY)/canvasHeight * 100}%`,
-                left: `${(objectX - canvasX)/canvasWidth * 100}%`,
-                width: `${objectWidth/canvasWidth * 100}%`,
-                height: `${objectHeight/canvasHeight * 100}%`
-            }
-
             const objectData = {
                 id: parseInt(object.id.split("-")[2]),
-                style: style
+                style: {
+                    top: object['style'].top,
+                    left: object['style'].left,
+                    width: object['style'].width,
+                    height: object['style'].height,
+                    transform: object['style'].transform
+                }
             }
-
             currentCanvasData.structure.push(objectData)
         })
 
         layouts.push(currentCanvasData)
     })
-console.log("layouts: ", JSON.parse(JSON.stringify(layouts)))
+
     return layouts
 }
 

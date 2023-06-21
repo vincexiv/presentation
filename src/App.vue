@@ -82,6 +82,9 @@ export default {
       this.data = newData
     },
     updateCanvasLayouts: function(newLayouts){
+      // Gets updated canvas layouts (since we probably have
+      // moved around and resized the objects)
+      
       let newData = []
       newLayouts.forEach(layout => {
         const targetId = layout.id
