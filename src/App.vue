@@ -67,7 +67,7 @@ export default {
         // this.data == canvas/slide. The positions and contents
         // here are the position and contents in that canvas/slide
         let positions = getPositions(this.data[i])
-        let contents = getContents(this.data[i])
+        let contents = getContents(this.data[i], this.renderedCharts)
 
         console.log("positions: ", positions)
         console.log("contents: ", contents)
@@ -81,7 +81,7 @@ export default {
             console.log("the text: ", position)
             slide.addText(content.content, position )
           } else if(content.type === 'chart'){
-
+            console.log()
             // Export the highcart objects content to b64 image first
             const response = await fetch("https://export.highcharts.com/", {
               "headers": {
@@ -95,8 +95,11 @@ export default {
               "mode": "cors"
             })
 
-            const highchartB64 = await response.text()
+            let highchartB64 = await response.text()
+            highchartB64 += "data:image/png;base64," 
+            
             slide.addImage({data: highchartB64, options: position})
+            console.log("higchart b64: ", highchartB64)
           }
         }
       }
