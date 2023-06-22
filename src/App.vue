@@ -6,6 +6,7 @@
         :canvasArray="data"
         :updateCanvas="updateCanvas"
         :saveData="saveData"
+        :updateText="updateText"
         :updateActiveObjectInfo="updateActiveObjectInfo"
         :exportToPowerPoint="exportToPowerPoint"
         :layoutList="newCopy(layoutList)"
@@ -36,7 +37,7 @@ export default {
       activeObjectInfo: {
         canvasId: null,
         objectId: null,
-        objectContent: null
+        objectContent: {}
       },
       idCount: canvasObjects.length, // will be used to ensure ids of new slides dont clash
       renderedCharts: []
@@ -63,6 +64,18 @@ export default {
       // const availableFunctions = Object.getOwnPropertyNames(newChart)
       // Object.getOwnPropertyNames(newChart).filter(item => typeof newChart[item] === 'function')
       // console.log(JSON.parse(JSON.stringify(availableFunctions)))
+    },
+    updateText(canvasId, objectId, newText){
+      const targetCanvas = this.data.find(canvas => canvasId === canvas.id)
+      const targetObject = targetCanvas.structure.find(object => objectId === object.id)
+      
+      // update the text content
+      if(targetObject?.content){
+        targetObject.content.text = newText
+      }else {
+        const oldContent = targetObject.content
+        targetObject.content = {...oldContent, text: newText}
+      }
     },
     updateActiveLayout: function(layout){
       this.activeLayout = this.newCopy(layout)

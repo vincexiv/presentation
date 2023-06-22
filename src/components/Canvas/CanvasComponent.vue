@@ -26,6 +26,7 @@
                             :activeCanvas="objectArray"
                             :updateActiveObjectInfo="updateActiveObjectInfo"
                             :updateRenderedCharts="updateRenderedCharts"
+                            :updateText="updateText"
                             v-bind:object="object"
                             v-bind:target="object.type+object.id"
                         />
@@ -54,7 +55,8 @@
             updateActiveObjectInfo: Function,
             saveData: Function,
             exportToPowerPoint: Function,
-            updateRenderedCharts: Function
+            updateRenderedCharts: Function,
+            updateText: Function
         },
         components: {
             MoveAble,

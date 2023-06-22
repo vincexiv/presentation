@@ -5,7 +5,8 @@
       :placeholder="object.defaultContent"
       :style="objectStyle"
       :class="`${object.type} ${object.typeDetails.category} canvas-object`"
-      @click="makeActive"/>
+      @click="makeActive"
+      @change="updateText(activeCanvas.id, object.id, text)"/>
       
     <textarea v-else-if="object.type == 'text' && !object.content"
       :id="objectId"
@@ -13,7 +14,8 @@
       :placeholder="object.defaultContent"
       :style="objectStyle"
       :class="`${object.type} ${object.typeDetails.category} canvas-object`"
-      @click="makeActive"/>
+      @click="makeActive"
+      @change="updateText(activeCanvas.id, object.id, text)"/>
 
     <div v-else-if="object.type == 'chart' && !object.content"
         :id="objectId"
@@ -45,7 +47,8 @@ import createChart from "./highcharts"
       openModal: Function,
       updateActiveObjectInfo: Function,
       activeCanvas: Object,
-      updateRenderedCharts: Function
+      updateRenderedCharts: Function,
+      updateText: Function
     },
     updated: function(){
       const objectId = `#object-${this.activeCanvas.id}-${this.object.id}`
