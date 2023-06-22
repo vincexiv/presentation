@@ -29,8 +29,8 @@
                     <button class="action" @click="exportToPowerPoint()">export to powerpoint</button>
                 </div>
                 <div v-else-if="activeEditOption==='text'" class="file-option-details actions">
-                    <label for="text-color" >Color
-                        <input type="color" class="action" ref="colorValue" @change="updateStyle"/>
+                    <label for="text-color" class="action">Color
+                        <input type="color" ref="colorValue" @change="updateStyle"/>
                     </label>
                 </div>
                 <div v-else-if="activeEditOption==='chart'" class="file-option-details actions">
@@ -147,5 +147,13 @@ export default ({
 button {
     outline: none;
     border: none;
+}
+
+.action input {
+    width: 1rem;
+    height: 1rem;
+    /* outline: none; */
+    border: none;
+    margin-left: 0.5rem;
 }
 </style>
