@@ -4,7 +4,8 @@
             :activeEditOption="activeEditOption"
             :updateActiveEditOption="updateActiveEditOption"
             :saveData="saveData"
-            :exportToPowerPoint="exportToPowerPoint" />
+            :exportToPowerPoint="exportToPowerPoint"
+            :updateTextStyle="updateTextStyle" />
 
         <div class="canvas-and-layout">
             <CanvasLayoutList
@@ -56,7 +57,8 @@
             saveData: Function,
             exportToPowerPoint: Function,
             updateRenderedCharts: Function,
-            updateText: Function
+            updateText: Function,
+            updateTextStyle: Function
         },
         components: {
             MoveAble,

@@ -12,6 +12,7 @@
         :layoutList="newCopy(layoutList)"
         :activeLayout="activeLayout"
         :updateRenderedCharts="updateRenderedCharts"
+        :updateTextStyle="updateTextStyle"
         @update-active-layout="(layout)=>updateActiveLayout(layout)"
         @add-slide="addSlide()"/>
     </div>
@@ -48,6 +49,34 @@ export default {
     CanvasComponent
   },
   methods: {
+    updateTextStyle: function(newStyle){
+      console.log("new style: ", newStyle)
+
+      const targetCanvasId = this.activeObjectInfo.canvasId
+      const targetObjectId = this.activeObjectInfo.objectId
+
+
+      let newData = this.data.map(canvas => {
+        if(canvas.id !== targetCanvasId){
+          return canvas
+        }else{
+          const updatedCanvas = {
+              ...canvas,
+              structure: canvas.structure.map(object => {
+                if(object.id !== targetObjectId){
+                  return object
+                }else {
+                  return {...object, content: {...object.content, style: newStyle} }
+                }
+            })
+          }
+
+          return updatedCanvas
+        }
+      })
+
+      this.data = newData
+    },
     saveData: function(){
       // Since we have been moving things around, resizing, etc
       // update the information we have first

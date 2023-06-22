@@ -28,6 +28,11 @@
                     <p class="action" @click="saveData()">Save</p>
                     <p class="action" @click="exportToPowerPoint()">export to powerpoint</p>
                 </div>
+                <div v-if="activeEditOption==='text'" class="file-option-details actions">
+                    <label for="text-color" >Color
+                        <input type="color" class="action" ref="colorValue" @change="updateStyle"/>
+                    </label>
+                </div>
             </div>
         </div>
     </div>
@@ -41,7 +46,8 @@ export default ({
             activeEditOption: String,
             updateActiveEditOption: Function,
             saveData: Function,
-            exportToPowerPoint: Function
+            exportToPowerPoint: Function,
+            updateTextStyle: Function
         },
         methods: {
             editOptionClass: function (editOption){
@@ -50,6 +56,10 @@ export default ({
                 }else {
                     return ''
                 }
+            },
+            updateStyle: function(){
+                const newColor= this.$refs.colorValue.value
+                this.updateTextStyle({ color: newColor })
             }
         }
     })
