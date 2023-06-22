@@ -75,6 +75,7 @@ export default {
         }
       })
 
+      console.log(JSON.parse(JSON.stringify(newData)))
       this.data = newData
     },
     saveData: function(){

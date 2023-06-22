@@ -28,7 +28,7 @@
                     <p class="action" @click="saveData()">Save</p>
                     <p class="action" @click="exportToPowerPoint()">export to powerpoint</p>
                 </div>
-                <div v-if="activeEditOption==='text'" class="file-option-details actions">
+                <div v-else-if="activeEditOption==='text'" class="file-option-details actions">
                     <label for="text-color" >Color
                         <input type="color" class="action" ref="colorValue" @change="updateStyle"/>
                     </label>
