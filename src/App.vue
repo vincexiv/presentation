@@ -24,8 +24,8 @@ import CanvasComponent from './components/Canvas/CanvasComponent.vue';
 import canvasObjects from './utilities/data/sampleData';
 import layoutList from './utilities/data/layoutlist';
 import getLayouts from './utilities/functions/getlayouts';
-// import pptxgen from "pptxgenjs";
-import {getContents} from './utilities/functions/createppt';
+import pptxgen from "pptxgenjs";
+import {getContents, getPositions} from './utilities/functions/createppt';
 
 export default {
   name: 'App',
@@ -56,34 +56,60 @@ export default {
 
       // WRITE CODE FOR SENDING THE DATA TO THE BACKEND HERE
     },
-    exportToPowerPoint(){
-      this.data.forEach(canvas => {
-        console.log(getContents(canvas, this.renderedCharts))
-      })
-    },
-    updateRenderedCharts: async function (highchartOptions, canvasId, objectId){
-      // This method gets exports the highcharts objects that have been
-      // rendered to png which we will use later when exporting to other
-      // formats such as power point
-      const response = await fetch("https://export.highcharts.com/", {
-        "headers": {
-          "content-type": "application/json",
-        },
-        "body": JSON.stringify({
-                    "infile": highchartOptions,
-                    "png": true
-                  }),
-        "method": "POST",
-        "mode": "cors"
-      })
+    exportToPowerPoint: async function(){
+      // 1. Create a Presentation
+      let pres = new pptxgen();
+ 
+      for(let i = 0; i < this.data.length; i++){
+        // 2. Add a Slide to the presentation
+        let slide = pres.addSlide();
 
-      const higchartPng = await response.text()
+        // this.data == canvas/slide. The positions and contents
+        // here are the position and contents in that canvas/slide
+        let positions = getPositions(this.data[i])
+        let contents = getContents(this.data[i])
+
+        console.log("positions: ", positions)
+        console.log("contents: ", contents)
+
+        for(let j = 0; j < this.data[i].structure.length; j++){
+          const content = contents[`object-${this.data[i].structure[j].id}`]
+          const position = positions[`object-${this.data[i].structure[j].id}`]
+          console.log("what the fuckc ontents: ", JSON.stringify(contents))
+          if(content.type === "text"){
+          
+            console.log("the text: ", position)
+            slide.addText(content.content, position )
+          } else if(content.type === 'chart'){
+
+            // Export the highcart objects content to b64 image first
+            const response = await fetch("https://export.highcharts.com/", {
+              "headers": {
+                "content-type": "application/json",
+              },
+              "body": JSON.stringify({
+                          "infile": content.content,
+                          "b64": true
+                        }),
+              "method": "POST",
+              "mode": "cors"
+            })
+
+            const highchartB64 = await response.text()
+            slide.addImage({data: highchartB64, options: position})
+          }
+        }
+      }
+
+      pres.writeFile({fileName: "what"})
+    },
+    updateRenderedCharts: function (chart, canvasId, objectId){
       
       this.renderedCharts.push(
         {
           canvasId: canvasId,
           objectId: objectId,
-          chart: higchartPng // png image for the chart 
+          chart: chart,
         }
       )
 

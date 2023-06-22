@@ -57,7 +57,7 @@ import createChart from "./highcharts"
         const chart = createChart(this.$refs.highchart.id, this.object.content)
         makeResizableAndDraggable(objectId, chart)
 
-        this.updateRenderedCharts(this.object.content, this.activeCanvas.id, this.object.id)
+        this.updateRenderedCharts(chart, this.activeCanvas.id, this.object.id)
       }else {
         makeResizableAndDraggable(objectId)
       }
@@ -70,7 +70,7 @@ import createChart from "./highcharts"
 
         makeResizableAndDraggable(objectId, chart)
         
-        this.updateRenderedCharts(this.object.content, this.activeCanvas.id, this.object.id)
+        this.updateRenderedCharts(chart, this.activeCanvas.id, this.object.id)
       }else {
         makeResizableAndDraggable(objectId)
       }
