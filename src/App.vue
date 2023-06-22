@@ -57,15 +57,36 @@ export default {
       // WRITE CODE FOR SENDING THE DATA TO THE BACKEND HERE
     },
     exportToPowerPoint(){
-      this.data.forEach(canvas => {
-        createPPT(canvas)
+      this.renderedCharts.forEach(chart => {
+        createPPT(chart)
       })
     },
-    updateRenderedCharts(newChart){
-      this.renderedCharts.push({canvasId: this.canvasId, objectId: this.objectId, chart: newChart })
-      // const availableFunctions = Object.getOwnPropertyNames(newChart)
-      // Object.getOwnPropertyNames(newChart).filter(item => typeof newChart[item] === 'function')
-      // console.log(JSON.parse(JSON.stringify(availableFunctions)))
+    updateRenderedCharts: async function (highchartOptions){
+      // This method gets exports the highcharts objects that have been
+      // rendered to png which we will use later when exporting to other
+      // formats such as power point
+      const response = await fetch("https://export.highcharts.com/", {
+        "headers": {
+          "content-type": "application/json",
+        },
+        "body": JSON.stringify({
+                    "infile": highchartOptions,
+                    "png": true
+                  }),
+        "method": "POST",
+        "mode": "cors"
+      })
+
+      const higchartPng = await response.text()
+      
+      this.renderedCharts.push(
+        {
+          canvasId: this.canvasId,
+          objectId: this.objectId,
+          chart: higchartPng // png image for the chart 
+        }
+      )
+
     },
     updateText(canvasId, objectId, newText){
       const targetCanvas = this.data.find(canvas => canvasId === canvas.id)
