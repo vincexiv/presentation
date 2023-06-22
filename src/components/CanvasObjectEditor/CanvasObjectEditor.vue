@@ -25,13 +25,16 @@
             </div>
             <div class="details">
                 <div v-if="activeEditOption==='file'" class="file-option-details actions">
-                    <p class="action" @click="saveData()">Save</p>
-                    <p class="action" @click="exportToPowerPoint()">export to powerpoint</p>
+                    <button class="action" @click="saveData()">Save</button>
+                    <button class="action" @click="exportToPowerPoint()">export to powerpoint</button>
                 </div>
                 <div v-else-if="activeEditOption==='text'" class="file-option-details actions">
                     <label for="text-color" >Color
                         <input type="color" class="action" ref="colorValue" @change="updateStyle"/>
                     </label>
+                </div>
+                <div v-else-if="activeEditOption==='chart'" class="file-option-details actions">
+                    <button class="action" @click="saveData()">Remove Chart</button>
                 </div>
             </div>
         </div>
@@ -116,6 +119,11 @@ export default ({
     background-color: transparent;
     display: flex;
     gap: 1rem;
+    align-items: center;
+}
+
+.details {
+    height: 50%;
 }
 
 .action {
@@ -134,5 +142,10 @@ export default ({
 
 .action:hover {
     opacity: 0.8;
+}
+
+button {
+    outline: none;
+    border: none;
 }
 </style>
