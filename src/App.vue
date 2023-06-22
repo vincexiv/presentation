@@ -25,7 +25,7 @@ import canvasObjects from './utilities/data/sampleData';
 import layoutList from './utilities/data/layoutlist';
 import getLayouts from './utilities/functions/getlayouts';
 // import pptxgen from "pptxgenjs";
-import createPPT from './utilities/functions/createppt';
+import {getContents} from './utilities/functions/createppt';
 
 export default {
   name: 'App',
@@ -57,11 +57,11 @@ export default {
       // WRITE CODE FOR SENDING THE DATA TO THE BACKEND HERE
     },
     exportToPowerPoint(){
-      this.renderedCharts.forEach(chart => {
-        createPPT(chart)
+      this.data.forEach(canvas => {
+        console.log(getContents(canvas, this.renderedCharts))
       })
     },
-    updateRenderedCharts: async function (highchartOptions){
+    updateRenderedCharts: async function (highchartOptions, canvasId, objectId){
       // This method gets exports the highcharts objects that have been
       // rendered to png which we will use later when exporting to other
       // formats such as power point
@@ -81,8 +81,8 @@ export default {
       
       this.renderedCharts.push(
         {
-          canvasId: this.canvasId,
-          objectId: this.objectId,
+          canvasId: canvasId,
+          objectId: objectId,
           chart: higchartPng // png image for the chart 
         }
       )
