@@ -57,7 +57,9 @@ export default {
       // WRITE CODE FOR SENDING THE DATA TO THE BACKEND HERE
     },
     exportToPowerPoint(){
-      createPPT(this.data[0])
+      this.data.forEach(canvas => {
+        createPPT(canvas)
+      })
     },
     updateRenderedCharts(newChart){
       this.renderedCharts.push({canvasId: this.canvasId, objectId: this.objectId, chart: newChart })

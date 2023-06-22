@@ -18,13 +18,28 @@ function createPPT(slideInfo){
         // const domObject = document.querySelector(`#object-${slideInfo.id}-${object.id}`)
         // const {top, left, width, height} = domObject.getBoundingClientRect()
 
-        let content
-
         if(object.type === 'text'){
-            content = object?.content?.text
+            console.log("text: ", object?.content?.text)
+        }else if(object.type === 'chart'){
+            fetch("https://export.highcharts.com/", {
+                "headers": {
+                  "content-type": "application/json",
+                },
+                "body": JSON.stringify({
+                    "infile": object.content,
+                    "b64": true
+                  }),
+                "method": "POST",
+                "mode": "cors"
+              }).then(function(response) {
+                // The response is a Response instance.
+                return response.text();
+              }).then(function(data) {
+                console.log("chart: ", data); //  base64 data
+              }).catch(function(err) {
+                console.log(err);
+              })            
         }
-        console.log(content)
-
     })
 
     console.log(width, height)
