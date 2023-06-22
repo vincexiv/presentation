@@ -2,7 +2,7 @@ import { monthlyAverageTemperature } from "./highchartCharts";
 
 // Each object in this array shows the how objects should be arranged in a particular
 // canvas. In this example, there is only one object in the canvas, but it could be more
-const canvasArray = [
+const sampleData = [
     {
         id: 1,
         structure: [
@@ -39,4 +39,4 @@ const canvasArray = [
     }
 ]
 
-export default canvasArray;
+export default sampleData;
