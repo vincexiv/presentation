@@ -48,7 +48,6 @@ function replaceHighchartObjectWithB64(b64Image, canvasContents){
 function getPositions(canvas){
   const result = {}
 
-  console.log(canvas.id)
   // We gave each canvas an id in the form; 'canvas-<canvas-object-id>'
   // so we can easily retrieve it from the dom using id in that form
   const domCanvas = document.querySelector(`#canvas-${canvas.id}`)

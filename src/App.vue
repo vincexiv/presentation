@@ -50,11 +50,9 @@ export default {
   },
   methods: {
     updateTextStyle: function(newStyle){
-      console.log("new style: ", newStyle)
 
       const targetCanvasId = this.activeObjectInfo.canvasId
       const targetObjectId = this.activeObjectInfo.objectId
-
 
       let newData = this.data.map(canvas => {
         if(canvas.id !== targetCanvasId){
@@ -98,9 +96,6 @@ export default {
         let positions = getPositions(this.data[i])
         let contents = getContents(this.data[i], this.renderedCharts)
 
-        console.log("positions: ", positions)
-        console.log("contents: ", contents)
-
         for(let j = 0; j < this.data[i].structure.length; j++){
           const content = contents[`object-${this.data[i].structure[j].id}`]
           const position = positions[`object-${this.data[i].structure[j].id}`]
@@ -109,7 +104,6 @@ export default {
             slide.addText(content.content, position )
 
           } else if(content.type === 'chart' && content.content){
-            console.log("my chart options: ", content.content)
             // Export the highcart objects content to b64 image first
             const response = await fetch("https://export.highcharts.com/", {
               "headers": {
