@@ -47,10 +47,40 @@ function replaceHighchartObjectWithB64(b64Image, canvasContents){
 // their corresponding pptxjs style so slides maintain the same
 // look when exported to powerpoint
 function getPptxCompatibleStyle(cssStyles){
-  console.log("css stles")
-  console.log(JSON.stringify(cssStyles))
+  const style = {
+    color: convertColor(cssStyles?.color),// We expect all colors to be hexadecimal. i.e. like #fff
+    fill: convertColor(cssStyles?.backgroundColor), // Also expect hexadecimal values
+    fontSize: convertFontSize(cssStyles?.fontSize)
+  }
 
-  return cssStyles
+  console.log(style)
+  return style
+}
+
+// Text styles supported by pptxgen are not exactly similar to
+// CSS. For instance, font-size should be a digit ranging between
+// 1 - 256 in pptxgen, but we could use "rem", "em", etc in css
+// find more here; https://gitbrent.github.io/PptxGenJS/docs/api-text/
+function convertFontSize(fontSize){
+  if(fontSize){
+    if(fontSize.match(/rem/g).length){// if the font size is in rem. e.g 2rem
+      return parseFloat(fontSize.replace("rem", "")) * 12
+    }else if(fontSize.match(/px/g).length){// if the font size is in px. e.g 12px
+      return parseFloat(fontSize.replace("px", ""))
+    }else {
+      throw "Unexpected font measurement units. Expected 'rem' or 'px'"
+    }
+  }else {
+    return 12
+  }
+}
+
+function convertColor(cssColor){
+  if(cssColor){
+    return cssColor.replace("#", "")
+  }else {
+    return
+  }
 }
 
 

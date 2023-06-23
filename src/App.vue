@@ -106,6 +106,7 @@ export default {
             // Text styles supported by pptxgen are not exactly similar to
             // CSS. For instance, font-size should be a digit ranging between
             // 1 - 256 in pptxgen, but we could use "rem", "em", etc in css
+            // find more here; https://gitbrent.github.io/PptxGenJS/docs/api-text/
             const textStyles = getPptxCompatibleStyle(content.style)  
             
             slide.addText(content.content, {...position, ...textStyles})
