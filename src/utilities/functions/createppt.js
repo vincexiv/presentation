@@ -50,11 +50,36 @@ function getPptxCompatibleStyle(cssStyles){
   const style = {
     color: convertColor(cssStyles?.color),// We expect all colors to be hexadecimal. i.e. like #fff
     fill: convertColor(cssStyles?.backgroundColor), // Also expect hexadecimal values
-    fontSize: convertFontSize(cssStyles?.fontSize)
+    fontSize: convertFontSize(cssStyles?.fontSize),
+    valign: getVerticalAlignment(cssStyles)
   }
 
   console.log(style)
   return style
+}
+
+
+// NOT COMPLETE
+function getVerticalAlignment(cssStyles){
+  if(!cssStyles?.display){
+    return "top"
+  }else if(cssStyles.display === 'flex' && cssStyles.flexDirection === "row"){
+    if(cssStyles.alignItems === "center"){
+      return "middle"
+    }else if(cssStyles.alignItems === "top"){
+      return "top"
+    }else if(cssStyles.alignItems === "bottom"){
+      return "bottom"
+    }
+  }else if(cssStyles.display === 'flex' && cssStyles.flexDirection === "column"){
+    if(cssStyles.justifyContent === "center"){
+      return "middle"
+    }else if(cssStyles.justifyContent === "top"){
+      return "top"
+    }else if(cssStyles.justifyContent === "bottom"){
+      return "bottom"
+    }   
+  }
 }
 
 // Text styles supported by pptxgen are not exactly similar to
