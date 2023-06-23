@@ -1,14 +1,5 @@
 <template>
-    <textarea v-if="object.type == 'text' && !!object.content"
-      :id="objectId"
-      v-model="text"
-      :placeholder="placeholder"
-      :style="objectStyle"
-      :class="`${object.type} ${object.typeDetails.category} ${mode} canvas-object`"
-      @click="makeActive"
-      @change="updateText(activeCanvas.id, object.id, text)"/>
-      
-    <textarea v-else-if="object.type == 'text' && !object.content"
+    <textarea v-if="object.type == 'text' && !!object.content && mode == 'edit'"
       :id="objectId"
       v-model="text"
       :placeholder="placeholder"
@@ -17,21 +8,46 @@
       @click="makeActive"
       @change="updateText(activeCanvas.id, object.id, text)"/>
 
-    <div v-else-if="object.type == 'chart' && !object.content"
+    <div v-else-if="object.type == 'text' && !!object.content && mode == 'preview'"
+      :id="objectId"
+      :placeholder="placeholder"
+      :style="objectStyle"
+      :class="`${object.type} ${object.typeDetails.category} ${mode} canvas-object`">
+      {{ text }}
+    </div>
+      
+    <textarea v-else-if="object.type == 'text' && !object.content && mode == 'edit'"
+      :id="objectId"
+      v-model="text"
+      :placeholder="placeholder"
+      :style="objectStyle"
+      :class="`${object.type} ${object.typeDetails.category} ${mode} canvas-object`"
+      @click="makeActive"
+      @change="updateText(activeCanvas.id, object.id, text)"/>
+
+    <div v-else-if="object.type == 'text' && !object.content && mode == 'preview'"
+      :id="objectId"
+      :placeholder="placeholder"
+      :style="objectStyle"
+      :class="`${object.type} ${object.typeDetails.category} ${mode} canvas-object`">
+      {{ text }}
+    </div>
+
+    <div v-else-if="object.type == 'chart' && !!object.content"
+        :id="`${objectId}`"
+        ref="highchart"
+        :style="objectStyle"
+        :class="`${object.type} ${mode} canvas-object`"
+        @click="makeActive">
+    </div>
+
+    <div v-else-if="object.type == 'chart' && !object.content && mode == 'edit'"
         :id="objectId"
         :style="objectStyle"
         :class="`${object.type} ${mode} canvas-object`"
         @click="makeActive">
       <i class="fa-sharp fa-3x fa-solid fa-chart-simple open-modal" @click="openModal"></i>
     </div>
-
-    <div v-else
-        :id="`${objectId}`"
-        ref="highchart"
-        :style="objectStyle"
-        :class="`${object.type} ${mode} canvas-object`"
-        @click="makeActive">
-      </div>
 </template>
 
 
@@ -109,6 +125,10 @@ import createChart from "./highcharts"
     },
     methods: {
       makeActive(e){
+        if(this.mode === 'preview'){
+          return
+        }
+        
         const allCanvasObjects = document.querySelectorAll('.canvas-object')
         allCanvasObjects.forEach(object => {
           object.classList.remove('active')
@@ -132,9 +152,12 @@ import createChart from "./highcharts"
   border: none;
   background-color: transparent;
   padding: 0.1rem;
+}
+
+.canvas-object.chart {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 .canvas-object.edit {
