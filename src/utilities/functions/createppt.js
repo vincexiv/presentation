@@ -1,6 +1,6 @@
 // Returns the contents of the canvas in the form
 // {<canvas-id>: <object-id>: {<conten>}}
-function getContents(canvas, pngChartList){
+function getContents(canvas, renderedCharts){
   const result = {}
 
   canvas.structure.forEach(object => {
@@ -15,14 +15,15 @@ function getContents(canvas, pngChartList){
 
       result[`object-${object.id}`] = {
         type: "chart",
-        content: pngChartList.find(chart => {
+        content: renderedCharts.find(chart => {
           return (chart.canvasId === canvas.id) && (chart.objectId === object.id)
         }).chart
       }
+
     }else if(object.type === 'chart' && !object.content){
       result[`object-${object.id}`] = {
         type: "chart",
-        content: ""
+        content: null
       }      
     }
   })

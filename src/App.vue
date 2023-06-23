@@ -75,7 +75,6 @@ export default {
         }
       })
 
-      console.log(JSON.parse(JSON.stringify(newData)))
       this.data = newData
     },
     saveData: function(){
@@ -105,20 +104,19 @@ export default {
         for(let j = 0; j < this.data[i].structure.length; j++){
           const content = contents[`object-${this.data[i].structure[j].id}`]
           const position = positions[`object-${this.data[i].structure[j].id}`]
-          console.log("what the fuckc ontents: ", JSON.stringify(contents))
-          if(content.type === "text"){
           
-            console.log("the text: ", position)
+          if(content.type === "text"){          
             slide.addText(content.content, position )
-          } else if(content.type === 'chart'){
-            console.log()
+
+          } else if(content.type === 'chart' && content.content){
+            console.log("my chart options: ", content.content)
             // Export the highcart objects content to b64 image first
             const response = await fetch("https://export.highcharts.com/", {
               "headers": {
                 "content-type": "application/json",
               },
               "body": JSON.stringify({
-                          "infile": content.content,
+                          "infile": content.content.options,
                           "b64": true
                         }),
               "method": "POST",
@@ -126,10 +124,12 @@ export default {
             })
 
             let highchartB64 = await response.text()
-            highchartB64 += "data:image/png;base64," 
             
-            slide.addImage({data: highchartB64, options: position})
-            console.log("higchart b64: ", highchartB64)
+            slide.addImage({
+              data: "data:image/png;base64, " + highchartB64,
+              ...position
+            })
+
           }
         }
       }
@@ -137,15 +137,26 @@ export default {
       pres.writeFile({fileName: "what"})
     },
     updateRenderedCharts: function (chart, canvasId, objectId){
-      
-      this.renderedCharts.push(
-        {
-          canvasId: canvasId,
-          objectId: objectId,
-          chart: chart,
-        }
-      )
 
+      const targetRenderedChart = this.renderedCharts.find(chart => {
+        return chart.canvasId === canvasId && chart.objectId === objectId
+      })
+
+      // If there was a chart already, replace that existing chart
+      // with the new one
+      if(targetRenderedChart){
+        this.renderedCharts = this.renderedCharts.map(chart => {
+          if(chart.canvasId === canvasId && chart.objectId === objectId){
+            return targetRenderedChart
+          }else {
+            return chart
+          }
+        })
+      }else {// else just add the new one
+        this.renderedCharts.push({canvasId: canvasId,objectId: objectId, chart: chart})
+      }
+
+      console.log("rendered charts: ", this.renderedCharts)
     },
     updateText(canvasId, objectId, newText){
       const targetCanvas = this.data.find(canvas => canvasId === canvas.id)
