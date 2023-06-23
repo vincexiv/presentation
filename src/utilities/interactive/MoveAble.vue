@@ -2,25 +2,25 @@
     <textarea v-if="object.type == 'text' && !!object.content"
       :id="objectId"
       v-model="text"
-      :placeholder="object.defaultContent"
+      :placeholder="placeholder"
       :style="objectStyle"
-      :class="`${object.type} ${object.typeDetails.category} canvas-object`"
+      :class="`${object.type} ${object.typeDetails.category} ${mode} canvas-object`"
       @click="makeActive"
       @change="updateText(activeCanvas.id, object.id, text)"/>
       
     <textarea v-else-if="object.type == 'text' && !object.content"
       :id="objectId"
       v-model="text"
-      :placeholder="object.defaultContent"
+      :placeholder="placeholder"
       :style="objectStyle"
-      :class="`${object.type} ${object.typeDetails.category} canvas-object`"
+      :class="`${object.type} ${object.typeDetails.category} ${mode} canvas-object`"
       @click="makeActive"
       @change="updateText(activeCanvas.id, object.id, text)"/>
 
     <div v-else-if="object.type == 'chart' && !object.content"
         :id="objectId"
         :style="objectStyle"
-        :class="`${object.type} canvas-object`"
+        :class="`${object.type} ${mode} canvas-object`"
         @click="makeActive">
       <i class="fa-sharp fa-3x fa-solid fa-chart-simple open-modal" @click="openModal"></i>
     </div>
@@ -29,7 +29,7 @@
         :id="`${objectId}`"
         ref="highchart"
         :style="objectStyle"
-        :class="`${object.type} canvas-object`"
+        :class="`${object.type} ${mode} canvas-object`"
         @click="makeActive">
       </div>
 </template>
@@ -48,7 +48,8 @@ import createChart from "./highcharts"
       updateActiveObjectInfo: Function,
       activeCanvas: Object,
       updateRenderedCharts: Function,
-      updateText: Function
+      updateText: Function,
+      mode: String
     },
     updated: function(){
       const objectId = `#object-${this.activeCanvas.id}-${this.object.id}`
@@ -97,6 +98,13 @@ import createChart from "./highcharts"
         }else{
           return this.object.style
         }
+      },
+      placeholder: function(){
+        if(this.mode === "edit"){
+          return this.object.defaultContent
+        }else {
+          return null
+        }
       }
     },
     methods: {
@@ -122,12 +130,19 @@ import createChart from "./highcharts"
 .canvas-object {
   position: absolute;
   border: none;
-  outline: dashed #d4d4d4 0.1rem;
   background-color: transparent;
   padding: 0.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.canvas-object.edit {
+  outline: dashed #d4d4d4 0.1rem;
+}
+
+.canvas-object.preview {
+  outline: none;
 }
 
 .canvas-object.active {

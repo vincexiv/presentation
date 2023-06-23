@@ -4,6 +4,8 @@
     <div class="main-area">
       <CanvasComponent
         :canvasArray="data"
+        :changeMode="changeMode"
+        :mode="mode"
         :updateCanvas="updateCanvas"
         :saveData="saveData"
         :updateText="updateText"
@@ -33,6 +35,7 @@ export default {
   data(){
     return {
       data: [this.newCopy(layoutList[0])],
+      mode: 'edit', // mode can be edit or preview. Will determine how slides will be displayed
       layoutList: layoutList,
       activeLayout: layoutList[layoutList.length-1],
       activeObjectInfo: {
@@ -49,6 +52,9 @@ export default {
     CanvasComponent
   },
   methods: {
+    changeMode: function(newMode){
+      this.mode = newMode
+    },
     updateTextStyle: function(newStyle){
 
       const targetCanvasId = this.activeObjectInfo.canvasId

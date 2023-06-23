@@ -2,6 +2,7 @@
     <div class="canvas-editor-layout">
         <CanvasObjectEditor
             :activeEditOption="activeEditOption"
+            :changeMode="changeMode"
             :updateActiveEditOption="updateActiveEditOption"
             :saveData="saveData"
             :exportToPowerPoint="exportToPowerPoint"
@@ -28,6 +29,7 @@
                             :updateActiveObjectInfo="updateActiveObjectInfo"
                             :updateRenderedCharts="updateRenderedCharts"
                             :updateText="updateText"
+                            :mode="mode"
                             v-bind:object="object"
                             v-bind:target="object.type+object.id"
                         />
@@ -58,7 +60,9 @@
             exportToPowerPoint: Function,
             updateRenderedCharts: Function,
             updateText: Function,
-            updateTextStyle: Function
+            updateTextStyle: Function,
+            changeMode: Function,
+            mode: String
         },
         components: {
             MoveAble,

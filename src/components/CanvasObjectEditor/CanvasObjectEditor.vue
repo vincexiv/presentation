@@ -25,6 +25,8 @@
             </div>
             <div class="details">
                 <div v-if="activeEditOption==='file'" class="file-option-details actions">
+                    <button class="action" @click="changeMode('edit')">Edit</button>
+                    <button class="action" @click="changeMode('preview')">Preview</button>
                     <button class="action" @click="saveData()">Save</button>
                     <button class="action" @click="exportToPowerPoint()">export to powerpoint</button>
                 </div>
@@ -50,7 +52,8 @@ export default ({
             updateActiveEditOption: Function,
             saveData: Function,
             exportToPowerPoint: Function,
-            updateTextStyle: Function
+            updateTextStyle: Function,
+            changeMode: Function
         },
         methods: {
             editOptionClass: function (editOption){
