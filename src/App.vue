@@ -26,7 +26,7 @@ import canvasObjects from './utilities/data/sampleData';
 import layoutList from './utilities/data/layoutlist';
 import getLayouts from './utilities/functions/getlayouts';
 import pptxgen from "pptxgenjs";
-import {getContents, getPositions} from './utilities/functions/createppt';
+import {getContents, getPositions, getPptxCompatibleStyle} from './utilities/functions/createppt';
 
 export default {
   name: 'App',
@@ -64,7 +64,7 @@ export default {
                 if(object.id !== targetObjectId){
                   return object
                 }else {
-                  return {...object, content: {...object.content, style: newStyle} }
+                  return {...object, content: {...object.content, style: {...object.content?.style, ...newStyle}} }
                 }
             })
           }
@@ -102,8 +102,13 @@ export default {
           const content = contents[`object-${this.data[i].structure[j].id}`]
           const position = positions[`object-${this.data[i].structure[j].id}`]
           
-          if(content.type === "text"){          
-            slide.addText(content.content, position )
+          if(content.type === "text"){
+            // Text styles supported by pptxgen are not exactly similar to
+            // CSS. For instance, font-size should be a digit ranging between
+            // 1 - 256 in pptxgen, but we could use "rem", "em", etc in css
+            const textStyles = getPptxCompatibleStyle(content.style)  
+            
+            slide.addText(content.content, {...position, ...textStyles})
 
           } else if(content.type === 'chart' && content.content){
             // Export the highcart objects content to b64 image first
@@ -152,7 +157,7 @@ export default {
         this.renderedCharts.push({canvasId: canvasId,objectId: objectId, chart: chart})
       }
 
-      console.log("rendered charts: ", this.renderedCharts)
+      console.log("rendered charts: ", this.renderedCharts[0].chart.options)
     },
     updateText(canvasId, objectId, newText){
       const targetCanvas = this.data.find(canvas => canvasId === canvas.id)

@@ -134,10 +134,6 @@ import createChart from "./highcharts"
   outline: dashed black 0.1rem;
 }
 
-.canvas-object.text.title {
-  font-size: 2rem;
-}
-
 .canvas-object.chart i.open-modal {
   cursor: pointer;
   position: relative;

@@ -9,7 +9,8 @@ function getContents(canvas, renderedCharts){
     if(object.type === 'text'){
       result[`object-${object.id}`] = {
         type: "text",
-        content: object.content?.text || ""
+        content: object.content?.text || "",
+        style: object.content?.style
       }
     }else if (object.type === 'chart' && object.content){
 
@@ -40,6 +41,16 @@ function replaceHighchartObjectWithB64(b64Image, canvasContents){
   }
 
   return canvasContents
+}
+
+// Gets an object's style written in CSS and converts them to
+// their corresponding pptxjs style so slides maintain the same
+// look when exported to powerpoint
+function getPptxCompatibleStyle(cssStyles){
+  console.log("css stles")
+  console.log(JSON.stringify(cssStyles))
+
+  return cssStyles
 }
 
 
@@ -83,4 +94,4 @@ function getPositions(canvas){
   return result;
 }
 
-export {getPositions, getContents, replaceHighchartObjectWithB64};
+export {getPositions, getContents, replaceHighchartObjectWithB64, getPptxCompatibleStyle};
