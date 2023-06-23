@@ -76,12 +76,14 @@ export default {
       this.data = newData
     },
     saveData: function(){
-      // Since we have been moving things around, resizing, etc
-      // update the information we have first
-      this.updateCanvasLayouts(getLayouts())
+      // "saveReadyData" represents our slides with everything updated
+      // such that initializing the program with the data will get us
+      // our work as it looked at that point 
+      const saveReadyData = this.getSaveReadyData()
 
-
+      console.log(saveReadyData)
       // WRITE CODE FOR SENDING THE DATA TO THE BACKEND HERE
+      // i.e fetch(<apihost>/<endpoint>, {method: <m>, headers: <h>, body: saveReadyData})
     },
     exportToPowerPoint: async function(){
       // 1. Create a Presentation
@@ -204,16 +206,19 @@ export default {
 
       this.data = newData
     },
-    updateCanvasLayouts: function(newLayouts){
+    getSaveReadyData: function(){
       // Gets updated canvas layouts (since we probably have
       // moved around and resized the objects)
+      const updatedLayouts = getLayouts()
       
-      let newData = []
-      newLayouts.forEach(layout => {
+      let saveReadyData = []
+      updatedLayouts.forEach(layout => {
         const targetId = layout.id
-        const targetCanvas = this.data.find(canvas => {
+        let targetCanvas = this.data.find(canvas => {
           return canvas.id === targetId
         })
+
+        targetCanvas = this.newCopy(targetCanvas)
 
         layout.structure.forEach(s => {
           const targetObjectId = s.id
@@ -221,10 +226,10 @@ export default {
           targetObject.style = s.style
         })
 
-        newData.push(targetCanvas)
+        saveReadyData.push(targetCanvas)
       })
 
-      this.data = newData
+      return saveReadyData
     },
     updateActiveObjectInfo: function(newInfo){
       this.activeObjectInfo = {...this.activeObjectInfo, ...newInfo}
