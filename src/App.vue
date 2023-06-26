@@ -40,6 +40,7 @@ export default {
       activeObjectInfo: {
         canvasId: null,
         objectId: null,
+        type: "",
         objectContent: {}
       },
       idCount: canvasObjects.length, // will be used to ensure ids of new slides dont clash

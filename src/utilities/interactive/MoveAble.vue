@@ -134,7 +134,7 @@ import createChart from "./highcharts"
           e.target.classList.add('active')
         }
         
-        this.updateActiveObjectInfo({ objectId: this.object.id, canvasId: this.activeCanvas.id})
+        this.updateActiveObjectInfo({ objectId: this.object.id, type: this.object.type, canvasId: this.activeCanvas.id})
       }
     }
   }
