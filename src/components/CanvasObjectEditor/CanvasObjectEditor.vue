@@ -22,12 +22,15 @@
                     @click="updateActiveEditOption('chart')">
                     Chart
                 </div>
+                <div class="option mode" 
+                    :class="editOptionClass('mode')"
+                    @click="updateActiveEditOption('mode')">
+                    {{ `Mode: ${mode}` }}
+                </div>
             </div>
             <div class="details">
                 <div v-if="activeEditOption==='file'"
                     class="file-option-details actions">
-                    <button class="action" @click="changeMode('edit')">Edit</button>
-                    <button class="action" @click="changeMode('preview')">Preview</button>
                     <button class="action" @click="saveData()">Save</button>
                     <button class="action" @click="exportToPowerPoint()">export to powerpoint</button>
                 </div>
@@ -44,6 +47,11 @@
                     :class="muteState('chart')">
                     <button v-if="muteState('chart') !== 'muted'" class="action" @click="action('chart', removeChart)">Remove Chart</button>
                     <div v-else class="action">Remove Chart</div>
+                </div>
+                <div v-else-if="activeEditOption==='mode'"
+                    class="file-option-details actions">
+                    <button class="action" @click="changeMode('edit')">Edit</button>
+                    <button class="action" @click="changeMode('preview')">Preview</button>
                 </div>
             </div>
         </div>
@@ -62,7 +70,8 @@ export default ({
             updateTextStyle: Function,
             changeMode: Function,
             activeObjectInfo: Object,
-            removeActiveObjectContent: Function
+            removeActiveObjectContent: Function,
+            mode: String
         },
         methods: {
             editOptionClass: function (editOption){

@@ -2,6 +2,7 @@
     <div class="canvas-editor-layout">
         <CanvasObjectEditor
             :activeEditOption="activeEditOption"
+            :mode="mode"
             :changeMode="changeMode"
             :updateActiveEditOption="updateActiveEditOption"
             :saveData="saveData"
