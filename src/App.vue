@@ -142,7 +142,7 @@ export default {
         }
       }
 
-      pres.writeFile({fileName: "what"})
+      pres.writeFile({fileName: "file"})
     },
     updateText(canvasId, objectId, newText){
       const targetCanvas = this.data.find(canvas => canvasId === canvas.id)
