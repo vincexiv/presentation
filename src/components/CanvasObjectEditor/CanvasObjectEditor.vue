@@ -34,14 +34,16 @@
                 <div v-else-if="activeEditOption==='text'"
                     class="file-option-details actions"
                     :class="muteState('text')">
-                    <label for="text-color" class="action">Color
-                        <input type="color" ref="colorValue" @change="updateStyle"/>
+                    <label v-if="muteState('text') !== 'muted'" for="text-color" class="action">Color
+                        <input type="color" ref="colorValue" @change="action('text', updateStyle)"/>
                     </label>
+                    <div v-else class="action">Color</div>
                 </div>
                 <div v-else-if="activeEditOption==='chart'"
                     class="file-option-details actions"
                     :class="muteState('chart')">
-                    <button class="action" @click="saveData()">Remove Chart</button>
+                    <button v-if="muteState('chart') !== 'muted'" class="action" @click="action('chart', removeChart)">Remove Chart</button>
+                    <div v-else class="action">Remove Chart</div>
                 </div>
             </div>
         </div>
@@ -69,9 +71,20 @@ export default ({
                     return ''
                 }
             },
+            isNotMuted: function(option){
+                return option === this.activeObjectInfo.type
+            },
+            action: function(option, actionMethod){
+                if(this.isNotMuted(option)){
+                    actionMethod()
+                }
+            },
             updateStyle: function(){
                 const newColor= this.$refs.colorValue.value
                 this.updateTextStyle({ color: newColor })
+            },
+            removeChart: function(){
+                console.log("removing chart")
             },
             muteState: function(action){
                 if(this.activeObjectInfo.type !== action){
