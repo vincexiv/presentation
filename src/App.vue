@@ -9,6 +9,7 @@
         :updateCanvas="updateCanvas"
         :saveData="saveData"
         :updateText="updateText"
+        :activeObjectInfo="activeObjectInfo"
         :updateActiveObjectInfo="updateActiveObjectInfo"
         :exportToPowerPoint="exportToPowerPoint"
         :layoutList="newCopy(layoutList)"
@@ -221,6 +222,7 @@ export default {
     },
     updateActiveObjectInfo: function(newInfo){
       this.activeObjectInfo = {...this.activeObjectInfo, ...newInfo}
+      console.log(JSON.parse(JSON.stringify(this.activeObjectInfo)))
     }
   }
 }

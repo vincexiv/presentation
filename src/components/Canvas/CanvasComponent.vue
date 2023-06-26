@@ -6,7 +6,8 @@
             :updateActiveEditOption="updateActiveEditOption"
             :saveData="saveData"
             :exportToPowerPoint="exportToPowerPoint"
-            :updateTextStyle="updateTextStyle" />
+            :updateTextStyle="updateTextStyle"
+            :activeObjectInfo="activeObjectInfo" />
 
         <div class="canvas-and-layout">
             <CanvasLayoutList
@@ -54,6 +55,7 @@
             layoutList: Array,
             activeLayout: Object,
             updateCanvas: Function,
+            activeObjectInfo: Object,
             updateActiveObjectInfo: Function,
             saveData: Function,
             exportToPowerPoint: Function,

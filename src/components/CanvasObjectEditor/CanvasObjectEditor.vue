@@ -13,29 +13,34 @@
                     Canvas
                 </div>
                 <div class="option" 
-                    :class="editOptionClass('text')"
+                    :class="`${editOptionClass('text')} ${muteState('text')}`"
                     @click="updateActiveEditOption('text')">
                     Text
                 </div>
                 <div class="option" 
-                    :class="editOptionClass('chart')"
+                    :class="`${editOptionClass('chart')} ${muteState('chart')}`"
                     @click="updateActiveEditOption('chart')">
                     Chart
                 </div>
             </div>
             <div class="details">
-                <div v-if="activeEditOption==='file'" class="file-option-details actions">
+                <div v-if="activeEditOption==='file'"
+                    class="file-option-details actions">
                     <button class="action" @click="changeMode('edit')">Edit</button>
                     <button class="action" @click="changeMode('preview')">Preview</button>
                     <button class="action" @click="saveData()">Save</button>
                     <button class="action" @click="exportToPowerPoint()">export to powerpoint</button>
                 </div>
-                <div v-else-if="activeEditOption==='text'" class="file-option-details actions">
+                <div v-else-if="activeEditOption==='text'"
+                    class="file-option-details actions"
+                    :class="muteState('text')">
                     <label for="text-color" class="action">Color
                         <input type="color" ref="colorValue" @change="updateStyle"/>
                     </label>
                 </div>
-                <div v-else-if="activeEditOption==='chart'" class="file-option-details actions">
+                <div v-else-if="activeEditOption==='chart'"
+                    class="file-option-details actions"
+                    :class="muteState('chart')">
                     <button class="action" @click="saveData()">Remove Chart</button>
                 </div>
             </div>
@@ -53,7 +58,8 @@ export default ({
             saveData: Function,
             exportToPowerPoint: Function,
             updateTextStyle: Function,
-            changeMode: Function
+            changeMode: Function,
+            activeObjectInfo: Object
         },
         methods: {
             editOptionClass: function (editOption){
@@ -66,6 +72,13 @@ export default ({
             updateStyle: function(){
                 const newColor= this.$refs.colorValue.value
                 this.updateTextStyle({ color: newColor })
+            },
+            muteState: function(action){
+                if(this.activeObjectInfo.type !== action){
+                    return 'muted'
+                }else{
+                    return 'not-muted'
+                }
             }
         }
     })
@@ -112,6 +125,10 @@ export default ({
     justify-content: center;
     background-color: transparent;
     cursor: pointer;
+}
+
+.muted {
+    opacity: 0.4;
 }
 
 .option.active {
