@@ -65,12 +65,12 @@ export default {
           return canvas
         }else{
           const updatedCanvas = {
-              ...canvas,
+              ...this.newCopy(canvas),
               structure: canvas.structure.map(object => {
                 if(object.id !== targetObjectId){
                   return object
                 }else {
-                  return {...object, content: {...object.content, style: {...object.content?.style, ...newStyle}} }
+                  return {...this.newCopy(object), content: {...this.newCopy(object).content, style: {...this.newCopy(object).content?.style, ...newStyle}} }
                 }
             })
           }
@@ -124,7 +124,7 @@ export default {
                 "content-type": "application/json",
               },
               "body": JSON.stringify({
-                          "infile": content.content.options,
+                          "infile": content.content,
                           "b64": true
                         }),
               "method": "POST",
@@ -201,12 +201,12 @@ export default {
           return canvas
         }else{
           const updatedCanvas = {
-              ...canvas,
+              ...this.newCopy(canvas),
               structure: canvas.structure.map(object => {
                 if(object.id !== targetObjectId){
                   return object
                 }else {
-                  return {...object, content: newContent }
+                  return {...this.newCopy(object), content: newContent }
                 }
             })
           }
