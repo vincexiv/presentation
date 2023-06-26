@@ -14,7 +14,10 @@ const sampleData = [
                 style: { top: "5%", left: "5%", width: "90%", height: "20%"}, // position and size where this text will be on the canvas
                 content: {
                         text: "My awesome title",
-                        style: {} // the style of particular content. e.g the the text can be bold, red, etc.
+                        style: {
+                            fontSize: "2rem",
+                            verticalAlign: "middle"
+                        }
                     }
             },
             {
