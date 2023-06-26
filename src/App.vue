@@ -83,11 +83,10 @@ export default {
       // "saveReadyData" represents our slides with everything updated
       // such that initializing the program with the data will get us
       // our work as it looked at that point 
-      const saveReadyData = this.getSaveReadyData()
+      this.data = this.getSaveReadyData()
 
-      console.log(saveReadyData)
       // WRITE CODE FOR SENDING THE DATA TO THE BACKEND HERE
-      // i.e fetch(<apihost>/<endpoint>, {method: <m>, headers: <h>, body: saveReadyData})
+      // i.e fetch(<apihost>/<endpoint>, {method: <m>, headers: <h>, body: JSON.stringify(this.data)})
     },
     exportToPowerPoint: async function(){
       // 1. Create a Presentation
