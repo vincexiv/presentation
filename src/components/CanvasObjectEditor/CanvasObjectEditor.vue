@@ -61,7 +61,8 @@ export default ({
             exportToPowerPoint: Function,
             updateTextStyle: Function,
             changeMode: Function,
-            activeObjectInfo: Object
+            activeObjectInfo: Object,
+            removeActiveObjectContent: Function
         },
         methods: {
             editOptionClass: function (editOption){
@@ -84,7 +85,9 @@ export default ({
                 this.updateTextStyle({ color: newColor })
             },
             removeChart: function(){
-                console.log("removing chart")
+                if(this.activeObjectInfo.type === 'chart'){
+                    this.removeActiveObjectContent()
+                }
             },
             muteState: function(action){
                 if(this.activeObjectInfo.type !== action){

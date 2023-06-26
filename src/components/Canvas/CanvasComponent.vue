@@ -7,7 +7,8 @@
             :saveData="saveData"
             :exportToPowerPoint="exportToPowerPoint"
             :updateTextStyle="updateTextStyle"
-            :activeObjectInfo="activeObjectInfo" />
+            :activeObjectInfo="activeObjectInfo" 
+            :removeActiveObjectContent="removeActiveObjectContent"/>
 
         <div class="canvas-and-layout">
             <CanvasLayoutList
@@ -62,7 +63,8 @@
             updateText: Function,
             updateTextStyle: Function,
             changeMode: Function,
-            mode: String
+            mode: String,
+            removeActiveObjectContent: Function
         },
         components: {
             MoveAble,

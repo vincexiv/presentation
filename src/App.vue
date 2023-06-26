@@ -15,6 +15,7 @@
         :layoutList="newCopy(layoutList)"
         :activeLayout="activeLayout"
         :updateTextStyle="updateTextStyle"
+        :removeActiveObjectContent="removeActiveObjectContent"
         @update-active-layout="(layout)=>updateActiveLayout(layout)"
         @add-slide="addSlide()"/>
     </div>
@@ -154,6 +155,34 @@ export default {
         const oldContent = targetObject.content
         targetObject.content = {...oldContent, text: newText}
       }
+    },
+    removeActiveObjectContent: function(){
+      const targetCanvasId = this.activeObjectInfo.canvasId
+      const targetObjectId = this.activeObjectInfo.objectId
+
+      let newData = this.data.map(canvas => {
+        if(canvas.id !== targetCanvasId){
+          return canvas
+        }else{
+          const updatedCanvas = {
+              ...this.newCopy(canvas),
+              structure: canvas.structure.map(object => {
+                if(object.id !== targetObjectId){
+                  return object
+                }else {
+                  console.log(this.newCopy(object))
+                  const newCopyObject = this.newCopy(object)
+                  delete newCopyObject['content']
+                  return newCopyObject
+                }
+            })
+          }
+
+          return updatedCanvas
+        }
+      })
+
+      this.data = newData      
     },
     updateActiveLayout: function(layout){
       this.activeLayout = this.newCopy(layout)
