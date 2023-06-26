@@ -13,7 +13,6 @@
         :exportToPowerPoint="exportToPowerPoint"
         :layoutList="newCopy(layoutList)"
         :activeLayout="activeLayout"
-        :updateRenderedCharts="updateRenderedCharts"
         :updateTextStyle="updateTextStyle"
         @update-active-layout="(layout)=>updateActiveLayout(layout)"
         @add-slide="addSlide()"/>
@@ -44,7 +43,6 @@ export default {
         objectContent: {}
       },
       idCount: canvasObjects.length, // will be used to ensure ids of new slides dont clash
-      renderedCharts: []
     }
   },
   components: {
@@ -143,28 +141,6 @@ export default {
       }
 
       pres.writeFile({fileName: "what"})
-    },
-    updateRenderedCharts: function (chart, canvasId, objectId){
-
-      const targetRenderedChart = this.renderedCharts.find(chart => {
-        return chart.canvasId === canvasId && chart.objectId === objectId
-      })
-
-      // If there was a chart already, replace that existing chart
-      // with the new one
-      if(targetRenderedChart){
-        this.renderedCharts = this.renderedCharts.map(chart => {
-          if(chart.canvasId === canvasId && chart.objectId === objectId){
-            return targetRenderedChart
-          }else {
-            return chart
-          }
-        })
-      }else {// else just add the new one
-        this.renderedCharts.push({canvasId: canvasId,objectId: objectId, chart: chart})
-      }
-
-      console.log("rendered charts: ", this.renderedCharts[0].chart.options)
     },
     updateText(canvasId, objectId, newText){
       const targetCanvas = this.data.find(canvas => canvasId === canvas.id)

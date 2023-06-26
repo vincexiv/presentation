@@ -63,7 +63,6 @@ import createChart from "./highcharts"
       openModal: Function,
       updateActiveObjectInfo: Function,
       activeCanvas: Object,
-      updateRenderedCharts: Function,
       updateText: Function,
       mode: String
     },
@@ -73,8 +72,6 @@ import createChart from "./highcharts"
       if(this.object.type === 'chart' && !!this.$refs.highchart){
         const chart = createChart(this.$refs.highchart.id, this.object.content)
         makeResizableAndDraggable(objectId, chart)
-
-        this.updateRenderedCharts(chart, this.activeCanvas.id, this.object.id)
       }else {
         makeResizableAndDraggable(objectId)
       }
@@ -84,10 +81,7 @@ import createChart from "./highcharts"
       
       if(this.object.type === 'chart' && !!this.$refs.highchart){
         const chart = createChart(this.$refs.highchart.id, this.object.content)
-
-        makeResizableAndDraggable(objectId, chart)
-        
-        this.updateRenderedCharts(chart, this.activeCanvas.id, this.object.id)
+        makeResizableAndDraggable(objectId, chart)        
       }else {
         makeResizableAndDraggable(objectId)
       }

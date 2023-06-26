@@ -27,7 +27,6 @@
                             :openModal="openModal"
                             :activeCanvas="objectArray"
                             :updateActiveObjectInfo="updateActiveObjectInfo"
-                            :updateRenderedCharts="updateRenderedCharts"
                             :updateText="updateText"
                             :mode="mode"
                             v-bind:object="object"
@@ -58,7 +57,6 @@
             updateActiveObjectInfo: Function,
             saveData: Function,
             exportToPowerPoint: Function,
-            updateRenderedCharts: Function,
             updateText: Function,
             updateTextStyle: Function,
             changeMode: Function,
