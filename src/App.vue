@@ -170,7 +170,6 @@ export default {
                 if(object.id !== targetObjectId){
                   return object
                 }else {
-                  console.log(this.newCopy(object))
                   const newCopyObject = this.newCopy(object)
                   delete newCopyObject['content']
                   return newCopyObject
@@ -251,7 +250,6 @@ export default {
     },
     updateActiveObjectInfo: function(newInfo){
       this.activeObjectInfo = {...this.activeObjectInfo, ...newInfo}
-      console.log(JSON.parse(JSON.stringify(this.activeObjectInfo)))
     }
   }
 }
