@@ -9,7 +9,10 @@ const layoutList = [
                 defaultContent: "Click to add title", 
                 style: {top: "20%", left: "5%", width: "90%", height: "20%" },
                 content: {
-                    style: {fontSize: "2rem"}
+                    style: {
+                        fontSize: "2rem",
+                        verticalAlign: "middle"
+                    }
                 }
             },
             { 
@@ -31,7 +34,10 @@ const layoutList = [
                 defaultContent: "Click to add title", 
                 style: {top: "5%", left: "5%", width: "90%", height: "20%" },
                 content: {
-                    style: {fontSize: "2rem"}
+                    style: {
+                        fontSize: "2rem",
+                        verticalAlign: "middle"
+                    }
                 }
             },
             { 
@@ -53,7 +59,10 @@ const layoutList = [
                 defaultContent: "Click to add title", 
                 style: {top: "5%", left: "5%", width: "90%", height: "20%" },
                 content: {
-                    style: {fontSize: "2rem"}
+                    style: {
+                        fontSize: "2rem",
+                        verticalAlign: "middle"
+                    }
                 }
             },
             { 
@@ -82,7 +91,10 @@ const layoutList = [
                 defaultContent: "Click to add title", 
                 style: {top: "5%", left: "5%", width: "90%", height: "20%" },
                 content: {
-                    style: {fontSize: "2rem"}
+                    style: {
+                        fontSize: "2rem",
+                        verticalAlign: "middle"
+                    }
                 }
             },
             { 
@@ -110,7 +122,10 @@ const layoutList = [
                 defaultContent: "Click to add title", 
                 style: {top: "5%", left: "5%", width: "90%", height: "20%" },
                 content: {
-                    style: {fontSize: "2rem"}
+                    style: {
+                        fontSize: "2rem",
+                        verticalAlign: "middle"
+                    }
                 }
             },
             { 
