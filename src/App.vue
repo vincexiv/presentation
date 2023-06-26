@@ -99,7 +99,7 @@ export default {
         // this.data == canvas/slide. The positions and contents
         // here are the position and contents in that canvas/slide
         let positions = getPositions(this.data[i])
-        let contents = getContents(this.data[i], this.renderedCharts)
+        let contents = getContents(this.data[i])
 
         for(let j = 0; j < this.data[i].structure.length; j++){
           const content = contents[`object-${this.data[i].structure[j].id}`]

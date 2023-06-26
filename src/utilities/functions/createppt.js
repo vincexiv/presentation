@@ -13,7 +13,6 @@ function getContents(canvas){
         style: object.content?.style
       }
     }else if (object.type === 'chart' && object.content){
-      console.log("chart content: ", JSON.parse(JSON.stringify(object.content)))
       result[`object-${object.id}`] = {
         type: "chart",
         content:  JSON.parse(JSON.stringify(object.content))
@@ -55,7 +54,6 @@ function getPptxCompatibleStyle(cssStyles){
     valign: getVerticalAlignment(cssStyles)
   }
 
-  console.log(style)
   return style
 }
 
