@@ -146,6 +146,10 @@ export default ({
     height: 50%;
 }
 
+.actions:not(.muted) .action{
+    cursor: pointer;
+}
+
 .action {
     width: max-content;
     background-color: transparent;
@@ -156,7 +160,6 @@ export default ({
     background-color: #f7f7f7;
     padding: 0.2rem 0.7rem 0.2rem 0.7rem;
     border-radius: 0.5em;
-    cursor: pointer;
     color: rgba(0, 119, 190, 1);
 }
 
