@@ -19,7 +19,7 @@
 
             <div class="layout-list-and-add-slide">
                 <div class="canvas-list">
-                    <div :id="`canvas-${objectArray.id}`" class="canvas" v-for="objectArray in canvasArray" :key="objectArray.id">
+                    <div :id="`canvas-${objectArray.id}`" class="canvas" :class="activeState(objectArray)" v-for="objectArray in canvasArray" :key="objectArray.id">
                         <ChartModal 
                             :class="modalState"
                             :closeModal="closeModal"
@@ -81,9 +81,16 @@
                 }else{
                     return ''
                 }
-            }
+            },
         },
         methods: {
+            activeState: function(objectArray){
+                if(this.activeObjectInfo.canvasId === objectArray.id){
+                    return 'active'
+                }else {
+                    return ''
+                }
+            },
             addSlide: function(){
                 this.$emit('add-slide')
             },
@@ -144,6 +151,10 @@
         background-color: white;
         position: relative;
         outline: 0.1rem solid #d4d4d4;
+    }
+
+    .canvas.active {
+        outline: 0.1rem solid #9e9e9e;
     }
 
     .display-none {
