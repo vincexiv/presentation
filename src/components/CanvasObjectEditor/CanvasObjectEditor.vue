@@ -10,7 +10,7 @@
                 <div class="option" 
                     :class="editOptionClass('canvas')"
                     @click="updateActiveEditOption('canvas')">
-                    Canvas
+                    Slide
                 </div>
                 <div class="option" 
                     :class="`${editOptionClass('text')} ${muteState('text')}`"
