@@ -5,6 +5,9 @@ import { monthlyAverageTemperature } from "./highchartCharts";
 const sampleData = [
     {
         id: 1,
+        style: {
+            backgroundColor: "yellow"
+        },
         structure: [
             {
                 id: "text-1",

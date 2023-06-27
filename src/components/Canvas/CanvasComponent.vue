@@ -20,7 +20,7 @@
 
             <div class="layout-list-and-add-slide">
                 <div class="canvas-list">
-                    <div :id="`canvas-${objectArray.id}`" class="canvas" :class="activeState(objectArray)" v-for="objectArray in canvasArray" :key="objectArray.id">
+                    <div :id="`canvas-${objectArray.id}`" :style="objectArray.style" class="canvas" :class="activeState(objectArray)" v-for="objectArray in canvasArray" :key="objectArray.id">
                         <ChartModal 
                             :class="modalState"
                             :closeModal="closeModal"
