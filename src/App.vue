@@ -181,7 +181,14 @@ export default {
         }
       })
 
+      if(this.activeObjectInfo.type === 'chart'){
+        this.unrenderChart(this.activeObjectInfo.canvasId, this.activeObjectInfo.objectId)
+      }
       this.data = newData      
+    },
+    unrenderChart(canvasId, objectId){
+      const chart = document.querySelector(`#object-${canvasId}-${objectId}`)
+      chart.innerHTML = ''
     },
     updateActiveLayout: function(layout){
       this.activeLayout = this.newCopy(layout)
