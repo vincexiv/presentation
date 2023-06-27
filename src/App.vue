@@ -61,7 +61,6 @@ export default {
       this.unrenderChart(this.activeObjectInfo.canvasId, this.activeObjectInfo.objectId)
       const newData = this.data.filter(slide => slide.id !== this.activeObjectInfo.canvasId)
       this.data = newData
-      console.log(newData)
     },
     updateTextStyle: function(newStyle){
 
