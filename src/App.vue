@@ -16,6 +16,7 @@
         :activeLayout="activeLayout"
         :updateTextStyle="updateTextStyle"
         :removeActiveObjectContent="removeActiveObjectContent"
+        :removeSlide="removeSlide"
         @update-active-layout="(layout)=>updateActiveLayout(layout)"
         @add-slide="addSlide()"/>
     </div>
@@ -55,6 +56,12 @@ export default {
   methods: {
     changeMode: function(newMode){
       this.mode = newMode
+    },
+    removeSlide: function(){
+      this.unrenderChart(this.activeObjectInfo.canvasId, this.activeObjectInfo.objectId)
+      const newData = this.data.filter(slide => slide.id !== this.activeObjectInfo.canvasId)
+      this.data = newData
+      console.log(newData)
     },
     updateTextStyle: function(newStyle){
 

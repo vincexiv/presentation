@@ -8,8 +8,8 @@
                     File
                 </div>
                 <div class="option" 
-                    :class="editOptionClass('canvas')"
-                    @click="updateActiveEditOption('canvas')">
+                    :class="editOptionClass('slide')"
+                    @click="updateActiveEditOption('slide')">
                     Slide
                 </div>
                 <div class="option" 
@@ -48,6 +48,12 @@
                     <button v-if="muteState('chart') !== 'muted'" class="action" @click="action('chart', removeChart)">Remove Chart</button>
                     <div v-else class="action">Remove Chart</div>
                 </div>
+                <div v-else-if="activeEditOption==='slide'"
+                    class="file-option-details actions"
+                    :class="muteState('slide')">
+                    <button v-if="muteState('slide') !== 'muted'" class="action" @click="action('slide', removeSlide)">Remove Slide</button>
+                    <div v-else class="action">Remove Slide</div>
+                </div>
                 <div v-else-if="activeEditOption==='mode'"
                     class="file-option-details actions">
                     <button class="action" @click="changeMode('edit')">Edit</button>
@@ -71,7 +77,8 @@ export default ({
             changeMode: Function,
             activeObjectInfo: Object,
             removeActiveObjectContent: Function,
-            mode: String
+            mode: String,
+            removeSlide: Function
         },
         methods: {
             editOptionClass: function (editOption){
@@ -82,7 +89,11 @@ export default ({
                 }
             },
             isNotMuted: function(option){
-                return option === this.activeObjectInfo.type
+                if(option === 'slide'){
+                    return true
+                }else{
+                    return option === this.activeObjectInfo.type
+                }
             },
             action: function(option, actionMethod){
                 if(this.isNotMuted(option)){
@@ -99,7 +110,9 @@ export default ({
                 }
             },
             muteState: function(action){
-                if(this.activeObjectInfo.type !== action){
+                if(action === 'slide'){
+                    return 'not-muted'
+                }else if(this.activeObjectInfo.type !== action){
                     return 'muted'
                 }else{
                     return 'not-muted'
