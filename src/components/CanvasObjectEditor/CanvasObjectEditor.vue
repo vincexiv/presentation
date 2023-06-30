@@ -22,6 +22,11 @@
                     @click="updateActiveEditOption('chart')">
                     Chart
                 </div>
+                <div class="option" 
+                    :class="`${editOptionClass('layout')} ${muteState('layout')}`"
+                    @click="updateActiveEditOption('layout')">
+                    Layout
+                </div>
                 <div class="option mode" 
                     :class="editOptionClass('mode')"
                     @click="updateActiveEditOption('mode')">
@@ -47,6 +52,13 @@
                     :class="muteState('chart')">
                     <button v-if="muteState('chart') !== 'muted'" class="action" @click="action('chart', removeChart)">Remove Chart</button>
                     <div v-else class="action">Remove Chart</div>
+                </div>
+                <div v-else-if="activeEditOption==='layout'"
+                    class="file-option-details actions"
+                    :class="muteState('layout')">
+                    <button v-if="muteState('layout') !== 'muted'" class="action" @click="action('layout', showUnshowLayout)">
+                        {{ showLayout? "Hide Layout" : "Show Layout" }}
+                    </button>
                 </div>
                 <div v-else-if="activeEditOption==='slide'"
                     class="file-option-details actions"
@@ -78,7 +90,9 @@ export default ({
             activeObjectInfo: Object,
             removeActiveObjectContent: Function,
             mode: String,
-            removeSlide: Function
+            removeSlide: Function,
+            toggleShowLayout: Function,
+            showLayout: Boolean
         },
         methods: {
             editOptionClass: function (editOption){
@@ -89,7 +103,7 @@ export default ({
                 }
             },
             isNotMuted: function(option){
-                if(option === 'slide'){
+                if(option === 'slide' || option === 'layout'){
                     return true
                 }else{
                     return option === this.activeObjectInfo.type
@@ -99,6 +113,9 @@ export default ({
                 if(this.isNotMuted(option)){
                     actionMethod()
                 }
+            },
+            showUnshowLayout: function(){
+                this.toggleShowLayout()
             },
             updateStyle: function(){
                 const newColor= this.$refs.colorValue.value
@@ -110,7 +127,7 @@ export default ({
                 }
             },
             muteState: function(action){
-                if(action === 'slide'){
+                if(action === 'slide' || action === 'layout'){
                     return 'not-muted'
                 }else if(this.activeObjectInfo.type !== action){
                     return 'muted'

@@ -10,13 +10,15 @@
             :updateTextStyle="updateTextStyle"
             :activeObjectInfo="activeObjectInfo" 
             :removeActiveObjectContent="removeActiveObjectContent"
-            :removeSlide="removeSlide"/>
+            :removeSlide="removeSlide"
+            :toggleShowLayout="toggleShowLayout"
+            :showLayout="showLayout"/>
 
         <div class="canvas-and-layout">
             <CanvasLayoutList
                 :updateActiveLayout="updateActiveLayout"
                 :activeLayout="activeLayout"
-                :options="options"/>
+                :showLayout="showLayout"/>
 
             <div class="layout-list-and-add-slide">
                 <div class="canvas-list">
@@ -110,11 +112,15 @@
             },
             updateActiveEditOption(activeOption){
                 this.activeEditOption = activeOption
+            },
+            toggleShowLayout(){
+                console.log("toggling show layout")
+                this.showLayout = !this.showLayout
             }
         },
         data(){
             return {
-                options: ["layouts", "charts"],
+                showLayout: true,
                 modalOpen: false,
                 activeEditOption: "file"
             }
