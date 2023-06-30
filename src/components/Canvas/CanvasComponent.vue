@@ -120,7 +120,7 @@
         },
         data(){
             return {
-                showLayout: true,
+                showLayout: false,
                 modalOpen: false,
                 activeEditOption: "file"
             }
