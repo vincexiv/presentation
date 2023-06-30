@@ -194,7 +194,11 @@ export default {
     },
     unrenderChart(canvasId, objectId){
       const chart = document.querySelector(`#object-${canvasId}-${objectId}`)
-      chart.innerHTML = ''
+      const icon = chart.querySelector('.open-modal')
+
+      if(!icon){
+        chart.innerHTML = ''
+      }
     },
     updateActiveLayout: function(layout){
       this.activeLayout = this.newCopy(layout)
