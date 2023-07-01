@@ -52,11 +52,11 @@
 
 
 <script>
-import makeResizableAndDraggable from './interact'
-import createChart from "./highcharts"
+import createChart from "../../utilities/interactive/highcharts"
+import makeResizableAndDraggable from "../../utilities/interactive/interact"
   
   export default {
-    name: "MoveAble",
+    name: "CanvasObject",
     props: {
       object: Object,
       target: String,

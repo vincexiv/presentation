@@ -27,7 +27,7 @@
                             :class="modalState"
                             :closeModal="closeModal"
                             :updateCanvas="updateCanvas"/>
-                        <MoveAble
+                        <CanvasObject
                             v-for="object in objectArray.structure"
                             :key="object.id"
                             :openModal="openModal"
@@ -49,12 +49,12 @@
 <script>
     import CanvasLayoutList from "../CanvasLayoutList/CanvasLayoutList.vue";
     import CanvasObjectEditor from "../CanvasObjectEditor/CanvasObjectEditor.vue";
-    import MoveAble from "../../utilities/interactive/MoveAble.vue";
     import AddSlide from "../AddSlide/AddSlide.vue";
     import ChartModal from "../ChartModal/ChartModal.vue";
+    import CanvasObject from "../CanvasObject/CanvasObject.vue"
 
     export default {
-        name: 'CanvasObject',
+        name: 'CanvasComponent',
         props: {
             canvasArray: Array,
             layoutList: Array,
@@ -72,7 +72,7 @@
             removeSlide: Function
         },
         components: {
-            MoveAble,
+            CanvasObject,
             CanvasLayoutList,
             CanvasObjectEditor,
             AddSlide,
