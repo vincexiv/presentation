@@ -25,7 +25,7 @@
                 <div class="option" 
                     :class="`${editOptionClass('layout')} ${muteState('layout')}`"
                     @click="updateActiveEditOption('layout')">
-                    Layout
+                    Layouts
                 </div>
                 <div class="option mode" 
                     :class="editOptionClass('mode')"
@@ -63,7 +63,7 @@
                     class="file-option-details actions"
                     :class="muteState('layout')">
                     <button v-if="muteState('layout') !== 'muted'" class="action" @click="action('layout', showUnshowLayout)">
-                        {{ showLayout? "Hide Layout" : "Show Layout" }}
+                        {{ showLayout? "Hide Layouts" : "Show Layouts" }}
                     </button>
                 </div>
                 <div v-else-if="activeEditOption==='slide'"

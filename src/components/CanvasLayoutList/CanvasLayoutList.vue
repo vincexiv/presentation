@@ -91,17 +91,17 @@ export default {
     position: relative;
     width: 11rem;
     height: 7rem;
-    outline: solid #d4d4d4 0.15rem;
+    outline: solid #d4d4d4 0.1rem;
     cursor: pointer;
     background-color: white;
 }
 
 .layout-list-object.active {
-    outline: solid #8f8e8e 0.15rem;
+    outline: 0.13rem solid #9e9e9e;
 }
 
 .layout-list-object:hover {
-    outline: solid #8f8e8e 0.15rem;
+    outline: solid #8f8e8e 0.13rem;
 }
 
 .layout-list-container .sticky {
