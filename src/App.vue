@@ -97,7 +97,10 @@ export default {
       // WRITE CODE FOR SENDING THE DATA TO THE BACKEND HERE
       // i.e fetch(<apihost>/<endpoint>, {method: <m>, headers: <h>, body: JSON.stringify(this.data)})
     },
-    exportToPowerPoint: async function(){
+    exportToPowerPoint: async function(fileName='file'){
+      // Find more information on exporting the presentation to powerpoint 
+      // here https://gitbrent.github.io/PptxGenJS/docs/usage-saving/
+
       // 1. Create a Presentation
       let pres = new pptxgen();
  
@@ -148,7 +151,7 @@ export default {
         }
       }
 
-      pres.writeFile({fileName: "file"})
+      pres.writeFile({fileName: fileName})
     },
     updateText(canvasId, objectId, newText){
       const targetCanvas = this.data.find(canvas => canvasId === canvas.id)
