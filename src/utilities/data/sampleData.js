@@ -4,42 +4,38 @@ import { monthlyAverageTemperature } from "./highchartCharts";
 // canvas. In this example, there is only one object in the canvas, but it could be more
 const sampleData = [
     {
-        id: 1,
-        style: {
-            backgroundColor: "yellow"
-        },
-        structure: [
-            {
-                id: "text-1",
-                type: "text",
-                typeDetails: { category: "title" }, //category can be title or content
-                defaultContent: "Click to add title",
-                style: { top: "5%", left: "5%", width: "90%", height: "20%"}, // position and size where this text will be on the canvas
+        id: 3,
+        objects: [
+            { 
+                id: 1, 
+                typeDetails: { category: "title" },
+                style: {top: "5%", left: "5%", width: "90%", height: "20%" },
                 content: {
-                        text: "My awesome title",
-                        style: {
-                            fontSize: "2rem",
-                            verticalAlign: "middle"
-                        }
+                    type: "text", 
+                    placeholder: "Click to add title", 
+                    style: {
+                        fontSize: "2rem",
+                        verticalAlign: "middle"
                     }
+                }
             },
-            {
-                id: "text-2",
-                type: "text",
-                typeDetails: { category: "content" }, //category can be title or content
-                defaultContent: "Click to add text",
-                style: { top: "30%", left: "5%", width: "24%", height: "65%" },
+            { 
+                id: 2, 
+                style: {top: "30%", left: "5%", width: "44%", height: "65%" },
                 content: {
-                        text: "My awesome paragraph",
-                        style: {}
-                    }
+                    type: "chart", 
+                    placeholder: "Click to add chart",
+                    value: monthlyAverageTemperature
+                }
             },
-            {
-                id: "chart-1",
-                type: "chart",
-                defaultContent: "Click to add text",
-                style: { top: "30%", left: "31%", width: "64%", height: "65%" },
-                content: monthlyAverageTemperature
+            { 
+                id: 3, 
+                typeDetails: { category: "content" },
+                style: {top: "30%", left: "51%", width: "44%", height: "65%" },
+                content: {
+                    type: "text", 
+                    placeholder: "Click to add text", 
+                }
             }
         ]
     }
