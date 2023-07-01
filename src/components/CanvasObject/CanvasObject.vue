@@ -1,37 +1,21 @@
 <template>
-    <textarea v-if="object.content.type == 'text' && !!object.content.value && mode == 'edit'"
+    <textarea v-if="object.content.type == 'text' && !!object.content.value"
       :id="objectId"
       v-model="text"
       :placeholder="placeholder"
       :style="objectStyle"
       :class="`${object.content.type} ${object.typeDetails.category} ${mode} canvas-object`"
-      @click="makeActive"
-      @change="updateText(activeCanvas.id, object.id, text)"/>
-
-    <div v-else-if="object.content.type == 'text' && !!object.content.value && mode == 'preview'"
-      :id="objectId"
-      :placeholder="placeholder"
-      :style="objectStyle"
-      :class="`${object.content.type} ${object.typeDetails.category} ${mode} canvas-object`">
-      {{ text }}
-    </div>
+      @click="(e)=>performAction(mode, makeActive, [e])"
+      @change="performAction(mode, updateText, [activeCanvas.id, object.id, text])"/>
       
-    <textarea v-else-if="object.content.type == 'text' && !object.content.value && mode == 'edit'"
+    <textarea v-else-if="object.content.type == 'text' && !object.content.value"
       :id="objectId"
       v-model="text"
       :placeholder="placeholder"
       :style="objectStyle"
       :class="`${object.content.type} ${object.typeDetails.category} ${mode} canvas-object`"
-      @click="makeActive"
-      @change="updateText(activeCanvas.id, object.id, text)"/>
-
-    <div v-else-if="object.content.type == 'text' && !object.content.value && mode == 'preview'"
-      :id="objectId"
-      :placeholder="placeholder"
-      :style="objectStyle"
-      :class="`${object.content.type} ${object.typeDetails.category} ${mode} canvas-object`">
-      {{ text }}
-    </div>
+      @click="(e)=>performAction(mode, makeActive, [e])"
+      @change="performAction(mode, updateText, [activeCanvas.id, object.id, text])"/>
 
     <div v-else-if="object.content.type == 'chart' && !!object.content.value"
         :id="`${objectId}`"
@@ -140,6 +124,11 @@ import makeResizableAndDraggable from "../../utilities/interactive/interact"
             canvasId: this.activeCanvas.id,
             content: this.object.content
           })
+      },
+      performAction(mode, actionMethod, argumentArray=[]){
+        if(mode === 'edit'){
+          actionMethod(...argumentArray)
+        }
       }
     }
   }
