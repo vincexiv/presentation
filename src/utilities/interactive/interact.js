@@ -1,5 +1,8 @@
 import interact from 'interactjs'
 
+// Find documentation for the interactjs library here
+// https://interactjs.io/
+
 function makeResizableAndDraggable(cssSelector, chart){
     interact(cssSelector)
       .resizable({

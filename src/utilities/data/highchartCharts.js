@@ -1,5 +1,8 @@
 import Highcharts from 'highcharts'
 
+// These are sample "options" used to create highcharts.
+// I obtained these from; https://www.highcharts.com/demo
+
 const employment = {
     title: {
         text: 'U.S Solar Employment Growth by Job Category, 2010-2020',
