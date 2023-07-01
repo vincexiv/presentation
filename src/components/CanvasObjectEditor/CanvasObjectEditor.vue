@@ -50,8 +50,14 @@
                 <div v-else-if="activeEditOption==='chart'"
                     class="file-option-details actions"
                     :class="muteState('chart')">
-                    <button v-if="muteState('chart') !== 'muted'" class="action" @click="action('chart', removeChart)">Remove Chart</button>
-                    <div v-else class="action">Remove Chart</div>
+                    <div class="action-container">
+                        <button v-if="muteState('chart') !== 'muted'" class="action" @click="action('chart', removeChart)">Remove</button>
+                        <div v-else class="action">Remove</div>
+                    </div>
+                    <div class="action-container">
+                        <button v-if="muteState('chart') !== 'muted'" class="action" @click="action('chart', replaceChart)">Replace</button>
+                        <div v-else class="action">Replace</div>
+                    </div>
                 </div>
                 <div v-else-if="activeEditOption==='layout'"
                     class="file-option-details actions"
@@ -92,7 +98,8 @@ export default ({
             mode: String,
             removeSlide: Function,
             toggleShowLayout: Function,
-            showLayout: Boolean
+            showLayout: Boolean,
+            openModal: Function
         },
         methods: {
             editOptionClass: function (editOption){
@@ -124,6 +131,12 @@ export default ({
             removeChart: function(){
                 if(this.activeObjectInfo.type === 'chart'){
                     this.removeActiveObjectContent()
+                }
+            },
+            replaceChart: function(){
+                if(this.activeObjectInfo.type === 'chart'){
+                    this.removeActiveObjectContent()
+                    this.openModal()
                 }
             },
             muteState: function(action){
@@ -195,6 +208,10 @@ export default ({
     display: flex;
     gap: 1rem;
     align-items: center;
+}
+
+.actions .action-container {
+    background-color: transparent;
 }
 
 .details {

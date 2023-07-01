@@ -113,9 +113,6 @@ export default {
         let positions = getPositions(this.data[i])
         let contents = getContents(this.data[i])
 
-        console.log("positions: ", positions)
-        console.log("contents: ", contents)
-
         for(let j = 0; j < this.data[i].objects.length; j++){
           const content = contents[`object-${this.data[i].objects[j].id}`]
           const position = positions[`object-${this.data[i].objects[j].id}`]

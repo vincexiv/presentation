@@ -12,7 +12,8 @@
             :removeActiveObjectContent="removeActiveObjectContent"
             :removeSlide="removeSlide"
             :toggleShowLayout="toggleShowLayout"
-            :showLayout="showLayout"/>
+            :showLayout="showLayout"
+            :openModal="openModal"/>
 
         <div class="canvas-and-layout">
             <CanvasLayoutList
@@ -108,7 +109,7 @@
                 this.modalOpen = false
             },
             openModal: function(){
-                return this.modalOpen = true
+                this.modalOpen = true
             },
             updateActiveEditOption(activeOption){
                 this.activeEditOption = activeOption
