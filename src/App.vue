@@ -129,14 +129,14 @@ export default {
             
             slide.addText(content.value, {...position, ...textStyles})
 
-          } else if(content.type === 'chart' && content.content){
+          } else if(content.type === 'chart' && content.value){
             // Export the highcart objects content to b64 image first
             const response = await fetch("https://export.highcharts.com/", {
               "headers": {
                 "content-type": "application/json",
               },
               "body": JSON.stringify({
-                          "infile": content.content,
+                          "infile": content.value,
                           "b64": true
                         }),
               "method": "POST",
