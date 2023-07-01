@@ -3,28 +3,28 @@
 function getContents(canvas){
   const result = {}
 
-  canvas.structure.forEach(object => {
+  canvas.objects.forEach(object => {
     result[`object-${object.id}`] = {}
 
-    if(object.type === 'text'){
+    if(object.content.type === 'text'){
       result[`object-${object.id}`] = {
         type: "text",
-        content: object.content?.text || "",
+        value: object.content?.text || "",
         style: object.content?.style
       }
-    }else if (object.type === 'chart' && object.content){
+    }else if (object.content.type === 'chart' && object.content.value){
       result[`object-${object.id}`] = {
         type: "chart",
-        content:  JSON.parse(JSON.stringify(object.content))
+        value:  JSON.parse(JSON.stringify(object.content.value))
         // content: renderedCharts.find(chart => {
         //   return (chart.canvasId === canvas.id) && (chart.objectId === object.id)
         // }).chart
       }
 
-    }else if(object.type === 'chart' && !object.content){
+    }else if(object.content.type === 'chart' && !object.content.value){
       result[`object-${object.id}`] = {
         type: "chart",
-        content: null
+        value: null
       }      
     }
   })
@@ -98,7 +98,7 @@ function getPositions(canvas){
     top: cT,
     left: cL} = domCanvas.getBoundingClientRect()
 
-  canvas.structure.forEach(object => {
+  canvas.objects.forEach(object => {
     // We know each object in the dom has an id in 
     // the form; 'object-<canvas-id>-<object-id'
     const domObject = document.querySelector(`#object-${canvas.id}-${object.id}`)

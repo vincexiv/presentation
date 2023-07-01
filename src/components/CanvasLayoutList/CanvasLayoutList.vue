@@ -7,16 +7,16 @@
                 @click="updateLayout(layout)"
                 :id="`layout-${layout.id}`">
 
-                <div v-for="layoutStructure in layout.structure" :key="layoutStructure.id">
-                    <div v-if="layoutStructure.type == 'chart'"
-                        :class="layoutStructure.type"
-                        :style="layoutStructure.style"
+                <div v-for="layoutObject in layout.objects" :key="layoutObject.id">
+                    <div v-if="layoutObject.content?.type == 'chart'"
+                        :class="layoutObject.content?.type"
+                        :style="layoutObject.style"
                         class="layout-object">
                         <i class="fa-sharp fa-3x fa-solid fa-chart-simple"></i>
                     </div>
-                    <div v-else-if="layoutStructure.type == 'text'"
-                        :class="layoutStructure.type"
-                        :style="layoutStructure.style"
+                    <div v-else-if="layoutObject.content?.type == 'text'"
+                        :class="layoutObject.content?.type"
+                        :style="layoutObject.style"
                         class="layout-object">
                     </div>
                 </div>

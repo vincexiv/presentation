@@ -28,15 +28,15 @@
                             :closeModal="closeModal"
                             :addChartToSlide="addChartToSlide"/>
                         <CanvasObject
-                            v-for="object in objectArray.structure"
+                            v-for="object in objectArray.objects"
                             :key="object.id"
                             :openModal="openModal"
                             :activeCanvas="objectArray"
                             :updateActiveObjectInfo="updateActiveObjectInfo"
                             :updateText="updateText"
                             :mode="mode"
-                            v-bind:object="object"
-                            v-bind:target="object.type+object.id"
+                            :object="object"
+                            :target="`${object.content.type}${object.id}`"
                         />
                     </div>
                 </div>

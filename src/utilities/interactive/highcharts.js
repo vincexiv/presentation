@@ -1,6 +1,7 @@
 import Highcharts from "highcharts"
 
 function createChart(cssSelector, options){
+  console.log(options)
     options = {...options, exporting: {
         allowHTML: true
       }}

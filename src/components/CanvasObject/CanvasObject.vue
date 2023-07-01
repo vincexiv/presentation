@@ -1,50 +1,50 @@
 <template>
-    <textarea v-if="object.type == 'text' && !!object.content && mode == 'edit'"
+    <textarea v-if="object.content.type == 'text' && !!object.content.value && mode == 'edit'"
       :id="objectId"
       v-model="text"
       :placeholder="placeholder"
       :style="objectStyle"
-      :class="`${object.type} ${object.typeDetails.category} ${mode} canvas-object`"
+      :class="`${object.content.type} ${object.typeDetails.category} ${mode} canvas-object`"
       @click="makeActive"
       @change="updateText(activeCanvas.id, object.id, text)"/>
 
-    <div v-else-if="object.type == 'text' && !!object.content && mode == 'preview'"
+    <div v-else-if="object.content.type == 'text' && !!object.content.value && mode == 'preview'"
       :id="objectId"
       :placeholder="placeholder"
       :style="objectStyle"
-      :class="`${object.type} ${object.typeDetails.category} ${mode} canvas-object`">
+      :class="`${object.content.type} ${object.typeDetails.category} ${mode} canvas-object`">
       {{ text }}
     </div>
       
-    <textarea v-else-if="object.type == 'text' && !object.content && mode == 'edit'"
+    <textarea v-else-if="object.content.type == 'text' && !object.content.value && mode == 'edit'"
       :id="objectId"
       v-model="text"
       :placeholder="placeholder"
       :style="objectStyle"
-      :class="`${object.type} ${object.typeDetails.category} ${mode} canvas-object`"
+      :class="`${object.content.type} ${object.typeDetails.category} ${mode} canvas-object`"
       @click="makeActive"
       @change="updateText(activeCanvas.id, object.id, text)"/>
 
-    <div v-else-if="object.type == 'text' && !object.content && mode == 'preview'"
+    <div v-else-if="object.content.type == 'text' && !object.content.value && mode == 'preview'"
       :id="objectId"
       :placeholder="placeholder"
       :style="objectStyle"
-      :class="`${object.type} ${object.typeDetails.category} ${mode} canvas-object`">
+      :class="`${object.content.type} ${object.typeDetails.category} ${mode} canvas-object`">
       {{ text }}
     </div>
 
-    <div v-else-if="object.type == 'chart' && !!object.content"
+    <div v-else-if="object.content.type == 'chart' && !!object.content.value"
         :id="`${objectId}`"
         ref="highchart"
         :style="objectStyle"
-        :class="`${object.type} ${mode} canvas-object`"
+        :class="`${object.content.type} ${mode} canvas-object`"
         @click="makeActive">
     </div>
 
-    <div v-else-if="object.type == 'chart' && !object.content && mode == 'edit'"
+    <div v-else-if="object.content.type == 'chart' && !object.content.value && mode == 'edit'"
         :id="objectId"
         :style="objectStyle"
-        :class="`${object.type} ${mode} canvas-object`"
+        :class="`${object.content.type} ${mode} canvas-object`"
         @click="makeActive">
       <i class="fa-sharp fa-3x fa-solid fa-chart-simple open-modal" @click="openModal"></i>
     </div>
@@ -69,8 +69,8 @@ import makeResizableAndDraggable from "../../utilities/interactive/interact"
     updated: function(){
       const objectId = `#object-${this.activeCanvas.id}-${this.object.id}`
       
-      if(this.object.type === 'chart' && !!this.$refs.highchart){
-        const chart = createChart(this.$refs.highchart.id, this.object.content)
+      if(this.object.content.type === 'chart' && !!this.$refs.highchart){
+        const chart = createChart(this.$refs.highchart.id, this.object.content.value)
         makeResizableAndDraggable(objectId, chart)
       }else {
         makeResizableAndDraggable(objectId)
@@ -79,8 +79,8 @@ import makeResizableAndDraggable from "../../utilities/interactive/interact"
     mounted: function(){
       const objectId = `#object-${this.activeCanvas.id}-${this.object.id}`
       
-      if(this.object.type === 'chart' && !!this.$refs.highchart){
-        const chart = createChart(this.$refs.highchart.id, this.object.content)
+      if(this.object.content.type === 'chart' && !!this.$refs.highchart){
+        const chart = createChart(this.$refs.highchart.id, this.object.content.value)
         makeResizableAndDraggable(objectId, chart)        
       }else {
         makeResizableAndDraggable(objectId)
@@ -88,7 +88,7 @@ import makeResizableAndDraggable from "../../utilities/interactive/interact"
     },
     data(){
       return {
-        text: this.object.content?.text
+        text: this.object.content.type === 'text'? this.object.content.value : ''
       }
     },
     computed: {
@@ -111,7 +111,7 @@ import makeResizableAndDraggable from "../../utilities/interactive/interact"
       },
       placeholder: function(){
         if(this.mode === "edit"){
-          return this.object.defaultContent
+          return this.object.content.placeholder
         }else {
           return null
         }
@@ -134,7 +134,12 @@ import makeResizableAndDraggable from "../../utilities/interactive/interact"
           e.target.classList.add('active')
         }
         
-        this.updateActiveObjectInfo({ objectId: this.object.id, type: this.object.type, canvasId: this.activeCanvas.id})
+        this.updateActiveObjectInfo({ 
+            objectId: this.object.id,
+            type: this.object.content.type,
+            canvasId: this.activeCanvas.id,
+            content: this.object.content
+          })
       }
     }
   }

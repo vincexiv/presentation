@@ -73,7 +73,7 @@ export default {
         }else{
           const updatedCanvas = {
               ...this.newCopy(canvas),
-              structure: canvas.structure.map(object => {
+              objects: canvas.objects.map(object => {
                 if(object.id !== targetObjectId){
                   return object
                 }else {
@@ -113,9 +113,12 @@ export default {
         let positions = getPositions(this.data[i])
         let contents = getContents(this.data[i])
 
-        for(let j = 0; j < this.data[i].structure.length; j++){
-          const content = contents[`object-${this.data[i].structure[j].id}`]
-          const position = positions[`object-${this.data[i].structure[j].id}`]
+        console.log("positions: ", positions)
+        console.log("contents: ", contents)
+
+        for(let j = 0; j < this.data[i].objects.length; j++){
+          const content = contents[`object-${this.data[i].objects[j].id}`]
+          const position = positions[`object-${this.data[i].objects[j].id}`]
           
           if(content.type === "text"){
             // Text styles supported by pptxgen are not exactly similar to
@@ -124,7 +127,7 @@ export default {
             // find more here; https://gitbrent.github.io/PptxGenJS/docs/api-text/
             const textStyles = getPptxCompatibleStyle(content.style)  
             
-            slide.addText(content.content, {...position, ...textStyles})
+            slide.addText(content.value, {...position, ...textStyles})
 
           } else if(content.type === 'chart' && content.content){
             // Export the highcart objects content to b64 image first
@@ -155,7 +158,10 @@ export default {
     },
     updateText(canvasId, objectId, newText){
       const targetCanvas = this.data.find(canvas => canvasId === canvas.id)
-      const targetObject = targetCanvas.structure.find(object => objectId === object.id)
+      const targetObject = targetCanvas.objects.find(object => objectId === object.id)
+
+      // Update active object info
+      this.updateActiveObjectInfo({content: {type: 'text', value: newText}})
       
       // update the text content
       if(targetObject?.content){
@@ -175,12 +181,12 @@ export default {
         }else{
           const updatedCanvas = {
               ...this.newCopy(canvas),
-              structure: canvas.structure.map(object => {
+              objects: canvas.objects.map(object => {
                 if(object.id !== targetObjectId){
                   return object
                 }else {
                   const newCopyObject = this.newCopy(object)
-                  delete newCopyObject['content']
+                  delete newCopyObject['content']['value']
                   return newCopyObject
                 }
             })
@@ -216,10 +222,12 @@ export default {
       this.data.push(newSlide)
     },
     addChartToSlide: function(newContent){
- 
+
       const targetCanvasId = this.activeObjectInfo.canvasId
       const targetObjectId = this.activeObjectInfo.objectId
 
+      // Add the highchart options object to activeObjectInfo
+      this.updateActiveObjectInfo({content: {type: 'chart', value: newContent}})
 
       let newData = this.data.map(canvas => {
         if(canvas.id !== targetCanvasId){
@@ -227,11 +235,14 @@ export default {
         }else{
           const updatedCanvas = {
               ...this.newCopy(canvas),
-              structure: canvas.structure.map(object => {
+              objects: canvas.objects.map(object => {
                 if(object.id !== targetObjectId){
                   return object
                 }else {
-                  return {...this.newCopy(object), content: newContent }
+                  return {
+                    ...this.newCopy(object),
+                    content: {type: 'chart', value: newContent}
+                  }
                 }
             })
           }
@@ -257,9 +268,9 @@ export default {
 
         targetCanvas = this.newCopy(targetCanvas)
 
-        layout.structure.forEach(s => {
+        layout.objects.forEach(s => {
           const targetObjectId = s.id
-          const targetObject = targetCanvas.structure.find(object => object.id === targetObjectId)
+          const targetObject = targetCanvas.objects.find(object => object.id === targetObjectId)
           targetObject.style = s.style
         })
 
