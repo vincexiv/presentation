@@ -36,7 +36,7 @@ export default({
     name: "ChartModal",
     props: {
         closeModal: Function,
-        updateCanvas: Function
+        addChartToSlide: Function
     },
     components: {
         Vue2Highcharts
@@ -53,7 +53,7 @@ export default({
         },
         updateCanvasChart: function(){
             if(this.activeChart){
-                this.updateCanvas(this.activeChart)
+                this.addChartToSlide(this.activeChart)
                 this.closeModal()
             }
         },

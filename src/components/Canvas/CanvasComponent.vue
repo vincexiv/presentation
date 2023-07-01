@@ -26,7 +26,7 @@
                         <ChartModal 
                             :class="modalState"
                             :closeModal="closeModal"
-                            :updateCanvas="updateCanvas"/>
+                            :addChartToSlide="addChartToSlide"/>
                         <CanvasObject
                             v-for="object in objectArray.structure"
                             :key="object.id"
@@ -59,7 +59,7 @@
             canvasArray: Array,
             layoutList: Array,
             activeLayout: Object,
-            updateCanvas: Function,
+            addChartToSlide: Function,
             activeObjectInfo: Object,
             updateActiveObjectInfo: Function,
             saveData: Function,

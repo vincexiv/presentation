@@ -6,7 +6,7 @@
         :canvasArray="data"
         :changeMode="changeMode"
         :mode="mode"
-        :updateCanvas="updateCanvas"
+        :addChartToSlide="addChartToSlide"
         :saveData="saveData"
         :updateText="updateText"
         :activeObjectInfo="activeObjectInfo"
@@ -215,7 +215,7 @@ export default {
       const newSlide = {...this.activeLayout, id: newId}
       this.data.push(newSlide)
     },
-    updateCanvas: function(newContent){
+    addChartToSlide: function(newContent){
  
       const targetCanvasId = this.activeObjectInfo.canvasId
       const targetObjectId = this.activeObjectInfo.objectId
