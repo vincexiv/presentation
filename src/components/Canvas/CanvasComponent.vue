@@ -19,7 +19,8 @@
             <CanvasLayoutList
                 :updateActiveLayout="updateActiveLayout"
                 :activeLayout="activeLayout"
-                :showLayout="showLayout"/>
+                :showLayout="showLayout"
+                :addSlide="addSlide"/>
 
             <div class="layout-list-and-add-slide">
                 <div class="canvas-list">

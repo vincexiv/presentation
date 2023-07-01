@@ -5,6 +5,7 @@
                 :key="layout.id"
                 class="layout-list-object"
                 @click="updateLayout(layout)"
+                @dblclick="addSlide"
                 :id="`layout-${layout.id}`">
 
                 <div v-for="layoutObject in layout.objects" :key="layoutObject.id">
@@ -35,7 +36,8 @@ export default {
         updateActiveLayout: Function,
         activeLayout: Object,
         options: Array,
-        showLayout: Boolean
+        showLayout: Boolean,
+        addSlide: Function
     },
     data(){
         return {
