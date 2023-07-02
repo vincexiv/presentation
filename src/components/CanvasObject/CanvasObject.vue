@@ -131,7 +131,7 @@ import { convertFontSize } from "@/utilities/functions/createppt"
       },
       convertSizeToViewWidths(val){
         console.log("val: ", val)
-        return `${convertFontSize(val) * 0.08}vw`
+        return `${convertFontSize(val) * 0.072}vw`
       },
       performAction(mode, actionMethod, argumentArray=[]){
         if(mode === 'edit'){
