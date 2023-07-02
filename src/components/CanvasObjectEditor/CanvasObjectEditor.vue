@@ -200,6 +200,7 @@ export default ({
                 }
             },
             muteState: function(action){
+                // We want to always make the slide and layout options look active
                 if(action === 'slide' || action === 'layout'){
                     return 'not-muted'
                 }else if(this.activeObjectInfo.type !== action){

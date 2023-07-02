@@ -24,11 +24,18 @@
 
             <div class="layout-list-and-add-slide">
                 <div class="canvas-list">
-                    <div :id="`canvas-${objectArray.id}`" :style="objectArray.style" class="canvas" :class="`${activeState(objectArray)} ${objectArray.layout}`" v-for="objectArray in canvasArray" :key="objectArray.id">
+                    <div :id="`canvas-${objectArray.id}`"
+                        :style="objectArray.style" class="canvas"
+                        :class="`${activeState(objectArray)} ${objectArray.layout}`"
+                        v-for="objectArray in canvasArray"
+                        :key="objectArray.id">
+
                         <ChartModal 
                             :class="modalState"
                             :closeModal="closeModal"
-                            :addChartToSlide="addChartToSlide"/>
+                            :addChartToSlide="addChartToSlide"
+                        />
+
                         <CanvasObject
                             v-for="object in objectArray.objects"
                             :key="object.id"
