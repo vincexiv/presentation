@@ -66,15 +66,19 @@ function getPptxCompatibleStyle(cssStyles){
 function convertFontSize(fontSize){
   if(fontSize){
     if(fontSize.match(/rem/g).length){// if the font size is in rem. e.g 2rem
-      return parseFloat(fontSize.replace("rem", "")) * 12
+      return parseFloat(convertRemToPixels(parseFloat(fontSize.replace("rem", ""))))
     }else if(fontSize.match(/px/g).length){// if the font size is in px. e.g 12px
       return parseFloat(fontSize.replace("px", ""))
     }else {
       throw "Unexpected font measurement units. Expected 'rem' or 'px'"
     }
   }else {
-    return 12
+    return convertRemToPixels(1)
   }
+}
+
+function convertRemToPixels(rem) {    
+  return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
 }
 
 function convertColor(cssColor){
