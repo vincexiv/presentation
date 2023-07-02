@@ -1,6 +1,7 @@
 <template>
     <div class="canvas-object-editor-container">
         <div class="object-editor">
+
             <div class="switchers">
                 <div class="option" 
                     :class="editOptionClass('file')"
@@ -33,12 +34,15 @@
                     {{ `Mode: ${mode}` }}
                 </div>
             </div>
+
+
             <div class="details">
                 <div v-if="activeEditOption==='file'"
                     class="file-option-details actions">
                     <button class="action" @click="saveData()">Save</button>
                     <button class="action" @click="exportToPowerPoint()">export to powerpoint</button>
                 </div>
+
                 <div v-else-if="activeEditOption==='text'"
                     class="file-option-details actions"
                     :class="muteState('text')">
@@ -52,7 +56,12 @@
                         <button v-if="muteState('text') !== 'muted'" class="action" @click="action('text', updateBold)">Bold</button>
                         <div v-else class="action">Bold</div>
                     </div>
+                    <div class="action-container">
+                        <button v-if="muteState('text') !== 'muted'" class="action" @click="action('text', updateItalic)">Italic</button>
+                        <div v-else class="action">Italic</div>
+                    </div>
                 </div>
+
                 <div v-else-if="activeEditOption==='chart'"
                     class="file-option-details actions"
                     :class="muteState('chart')">
@@ -65,6 +74,7 @@
                         <div v-else class="action">Replace</div>
                     </div>
                 </div>
+
                 <div v-else-if="activeEditOption==='layout'"
                     class="file-option-details actions"
                     :class="muteState('layout')">
@@ -72,12 +82,14 @@
                         {{ showLayout? "Hide" : "Show" }}
                     </button>
                 </div>
+
                 <div v-else-if="activeEditOption==='slide'"
                     class="file-option-details actions"
                     :class="muteState('slide')">
                     <button v-if="muteState('slide') !== 'muted'" class="action" @click="action('slide', removeSlide)">Remove</button>
                     <div v-else class="action">Remove</div>
                 </div>
+
                 <div v-else-if="activeEditOption==='mode'"
                     class="file-option-details actions">
                     <button class="action" @click="changeMode('edit')">Edit</button>
@@ -122,6 +134,31 @@ export default ({
                     return false
                 }
             },
+            isItalic: function(){
+                if(this.activeObjectInfo.type === 'text'){
+                    return this.activeObjectInfo.content?.style?.fontStyle === 'italic'
+                }else {
+                    return false
+                }
+            },
+            updateColor: function(){
+                const newColor= this.$refs.colorValue.value
+                this.updateTextStyle({ color: newColor })
+            },
+            updateBold: function(){
+                if(this.isBold()){
+                    this.updateTextStyle({ fontWeight: 'normal' })
+                }else{
+                    this.updateTextStyle({ fontWeight: 'bold' })
+                }
+            },
+            updateItalic: function(){
+                if(this.isItalic()){
+                    this.updateTextStyle({ fontStyle: 'normal' })
+                }else{
+                    this.updateTextStyle({ fontStyle: 'italic' })
+                }
+            },
             isNotMuted: function(option){
                 if(option === 'slide' || option === 'layout'){
                     return true
@@ -136,17 +173,6 @@ export default ({
             },
             showUnshowLayout: function(){
                 this.toggleShowLayout()
-            },
-            updateColor: function(){
-                const newColor= this.$refs.colorValue.value
-                this.updateTextStyle({ color: newColor })
-            },
-            updateBold: function(){
-                if(this.isBold()){
-                    this.updateTextStyle({ fontWeight: 'normal' })
-                }else{
-                    this.updateTextStyle({ fontWeight: 'bold' })
-                }
             },
             removeChart: function(){
                 if(this.activeObjectInfo.type === 'chart'){

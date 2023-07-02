@@ -52,7 +52,8 @@ function getPptxCompatibleStyle(cssStyles){
     fill: convertColor(cssStyles?.backgroundColor), // Also expect hexadecimal values
     fontSize: convertFontSize(cssStyles?.fontSize),
     valign: cssStyles?.verticalAlign || 'top',
-    bold: cssStyles?.fontWeight === 'bold'
+    bold: cssStyles?.fontWeight === 'bold',
+    italic: cssStyles?.fontStyle === 'italic'
   }
 
   return style
