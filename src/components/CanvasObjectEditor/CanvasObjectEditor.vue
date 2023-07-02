@@ -42,10 +42,16 @@
                 <div v-else-if="activeEditOption==='text'"
                     class="file-option-details actions"
                     :class="muteState('text')">
-                    <label for="text-color" v-if="muteState('text') !== 'muted'" class="action">Color
-                        <input name="text-color" type="color" ref="colorValue" @change="action('text', updateStyle)"/>
-                    </label>
-                    <div v-else class="action">Color</div>
+                    <div class="action-container">
+                        <label for="text-color" v-if="muteState('text') !== 'muted'" class="action">Color
+                            <input name="text-color" type="color" ref="colorValue" @change="action('text', updateColor)"/>
+                        </label>
+                        <div v-else class="action">Color</div>
+                    </div>
+                    <div class="action-container">
+                        <button v-if="muteState('text') !== 'muted'" class="action" @click="action('text', updateBold)">Bold</button>
+                        <div v-else class="action">Bold</div>
+                    </div>
                 </div>
                 <div v-else-if="activeEditOption==='chart'"
                     class="file-option-details actions"
@@ -109,6 +115,13 @@ export default ({
                     return ''
                 }
             },
+            isBold: function(){
+                if(this.activeObjectInfo.type === 'text'){
+                    return this.activeObjectInfo.content?.style?.fontWeight === 'bold'
+                }else {
+                    return false
+                }
+            },
             isNotMuted: function(option){
                 if(option === 'slide' || option === 'layout'){
                     return true
@@ -124,9 +137,16 @@ export default ({
             showUnshowLayout: function(){
                 this.toggleShowLayout()
             },
-            updateStyle: function(){
+            updateColor: function(){
                 const newColor= this.$refs.colorValue.value
                 this.updateTextStyle({ color: newColor })
+            },
+            updateBold: function(){
+                if(this.isBold()){
+                    this.updateTextStyle({ fontWeight: 'normal' })
+                }else{
+                    this.updateTextStyle({ fontWeight: 'bold' })
+                }
             },
             removeChart: function(){
                 if(this.activeObjectInfo.type === 'chart'){

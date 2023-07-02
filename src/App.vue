@@ -44,7 +44,7 @@ export default {
         canvasId: null,
         objectId: null,
         type: "",
-        objectContent: {}
+        content: {}
       },
       idCount: canvasObjects.length, // will be used to ensure ids of new slides dont clash
     }
@@ -77,7 +77,24 @@ export default {
                 if(object.id !== targetObjectId){
                   return object
                 }else {
-                  return {...this.newCopy(object), content: {...this.newCopy(object).content, style: {...this.newCopy(object).content?.style, ...newStyle}} }
+                  // We are updating the style of the content.
+                  // The style field is inside the slide object, which is 
+                  // inside the slide. Check utilities/sampleData.js to find out more
+                  const newContent = {
+                      ...this.newCopy(object).content,
+                      style: {
+                        ...this.newCopy(object).content?.style,
+                        ...newStyle
+                      }
+                    }
+
+                  // Remember to update active object info with this new information
+                  this.updateActiveObjectInfo({content: newContent})
+
+                  return {
+                    ...this.newCopy(object),
+                    content: newContent
+                  }
                 }
             })
           }
@@ -158,7 +175,7 @@ export default {
       const targetObject = targetCanvas.objects.find(object => objectId === object.id)
 
       // Update active object info
-      this.updateActiveObjectInfo({content: {type: 'text', value: newText}})
+      this.updateActiveObjectInfo({value: newText}, 'content')
       
       // update the text content
       if(targetObject?.content){
@@ -224,7 +241,7 @@ export default {
       const targetObjectId = this.activeObjectInfo.objectId
 
       // Add the highchart options object to activeObjectInfo
-      this.updateActiveObjectInfo({content: {type: 'chart', value: newContent}})
+      this.updateActiveObjectInfo({value: newContent}, 'content')
 
       let newData = this.data.map(canvas => {
         if(canvas.id !== targetCanvasId){
@@ -276,8 +293,18 @@ export default {
 
       return saveReadyData
     },
-    updateActiveObjectInfo: function(newInfo){
-      this.activeObjectInfo = {...this.activeObjectInfo, ...newInfo}
+    updateActiveObjectInfo: function(newInfo, key){
+      if(!key){
+        this.activeObjectInfo = {...this.activeObjectInfo, ...newInfo}
+      }else if(typeof(this.activeObjectInfo[key]) === 'object') {
+        // We can reach here when updating the style for instance.
+        // We know the activeObjectInfo will be in the form (... corresponds to other fields)
+        // {type: <type>, content: {type: <type>, style: <style>, ...} ...}
+        this.activeObjectInfo = {
+          ...this.activeObjectInfo,
+          [key]: {...this.activeObjectInfo[key], ...newInfo}
+        }
+      }
     }
   }
 }
