@@ -42,8 +42,8 @@
                 <div v-else-if="activeEditOption==='text'"
                     class="file-option-details actions"
                     :class="muteState('text')">
-                    <label v-if="muteState('text') !== 'muted'" for="text-color" class="action">Color
-                        <input type="color" ref="colorValue" @change="action('text', updateStyle)"/>
+                    <label for="text-color" v-if="muteState('text') !== 'muted'" class="action">Color
+                        <input name="text-color" type="color" ref="colorValue" @change="action('text', updateStyle)"/>
                     </label>
                     <div v-else class="action">Color</div>
                 </div>
