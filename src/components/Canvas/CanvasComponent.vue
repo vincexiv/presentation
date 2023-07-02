@@ -3,6 +3,8 @@
         <CanvasObjectEditor
             :activeEditOption="activeEditOption"
             :mode="mode"
+            :slideObjectCreationState="slideObjectCreationState"
+            :updateNewObjectCreationState="updateNewObjectCreationState"
             :changeMode="changeMode"
             :updateActiveEditOption="updateActiveEditOption"
             :saveData="saveData"
@@ -28,7 +30,8 @@
                         :style="objectArray.style" class="canvas"
                         :class="`${activeState(objectArray)} ${objectArray.layout}`"
                         v-for="objectArray in canvasArray"
-                        :key="objectArray.id">
+                        :key="objectArray.id"
+                        @click="(e)=>handleCanvasClick(e, objectArray.id, `canvas-${objectArray.id}`)">
 
                         <ChartModal 
                             :class="modalState"
@@ -78,7 +81,8 @@
             changeMode: Function,
             mode: String,
             removeActiveObjectContent: Function,
-            removeSlide: Function
+            removeSlide: Function,
+            addNewObjectToSlide: Function
         },
         components: {
             CanvasObject,
@@ -107,9 +111,38 @@
             addSlide: function(){
                 this.$emit('add-slide')
             },
-            // removeSlide: function(slide){
-            //     this.$emit('remove-slide', slide)
-            // },
+            handleCanvasClick: function(e, slideId, canvasId){
+                //The slideId is the raw id of the object used to create the slide on the dom
+                //canvasId here corresponds to the id of the canvas when represented on the dom
+
+
+                // if a person clicked the canvas itself and not just
+                // an object inside it
+                if(e.target.id === canvasId && this.slideObjectCreationState.active){
+                    const slideRect = document.getElementById(canvasId).getBoundingClientRect()
+
+                    const {top: t, left: l, width: w, height: h} = slideRect
+
+                    const newObject = {
+                        type: this.slideObjectCreationState.value?.type,
+                        style: {
+                            top: `${(e.clientY - t)/h * 100}%`,
+                            left: `${(e.clientX - l)/w * 100}%`,
+                            width: `10%`,
+                            height: `10%`
+                        },
+                        content: {
+                            type: this.slideObjectCreationState.value?.type,
+                            placeholder: `Click to add ${this.slideObjectCreationState.value?.type}`,
+                        }
+                    }
+                    
+                    this.addNewObjectToSlide(slideId, newObject)
+                }
+            },
+            updateNewObjectCreationState: function(newInfo){
+                this.slideObjectCreationState = {...this.slideObjectCreationState, ...newInfo}
+            },
             updateActiveLayout: function(layout){
                 this.$emit('update-active-layout', layout)
             },
@@ -123,7 +156,6 @@
                 this.activeEditOption = activeOption
             },
             toggleShowLayout(){
-                console.log("toggling show layout")
                 this.showLayout = !this.showLayout
             }
         },
@@ -131,7 +163,8 @@
             return {
                 showLayout: false,
                 modalOpen: false,
-                activeEditOption: "file"
+                activeEditOption: "file",
+                slideObjectCreationState: {active: false, value: {}}
             }
         }
     }   

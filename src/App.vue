@@ -17,6 +17,7 @@
         :updateTextStyle="updateTextStyle"
         :removeActiveObjectContent="removeActiveObjectContent"
         :removeSlide="removeSlide"
+        :addNewObjectToSlide="addNewObjectToSlide"
         @update-active-layout="(layout)=>updateActiveLayout(layout)"
         @add-slide="addSlide()"/>
     </div>
@@ -34,6 +35,8 @@ import {getContents, getPositions, getPptxCompatibleStyle} from './utilities/fun
 
 export default {
   name: 'App',
+
+
   data(){
     return {
       data: [this.newCopy(layoutList[0])],
@@ -49,19 +52,67 @@ export default {
       idCount: canvasObjects.length, // will be used to ensure ids of new slides dont clash
     }
   },
+
+
   components: {
     NavBar,
     CanvasComponent
   },
+
+
   methods: {
     changeMode: function(newMode){
       this.mode = newMode
     },
+
     removeSlide: function(){
       this.unrenderChart(this.activeObjectInfo.canvasId, this.activeObjectInfo.objectId)
       const newData = this.data.filter(slide => slide.id !== this.activeObjectInfo.canvasId)
       this.data = newData
     },
+
+    addNewObjectToSlide: function(slideId, newObject){
+
+      const activeSlide = this.data.find(slide => slide.id === slideId)
+      console.log("active slide: ", this.newCopy(activeSlide))
+
+      if(activeSlide){
+        newObject = {...newObject, id: this.getBiggestId(activeSlide) + 1}
+        const modifiedObjectArray = activeSlide.objects
+        modifiedObjectArray.push(newObject)
+  
+        const newSlide = {
+          ...activeSlide,
+          objects: modifiedObjectArray
+        }
+  
+        console.log("new object: ", this.newCopy(newObject))
+  
+        const what = this.data.map(slide => {
+          if(slide.id !== activeSlide.id){
+            return slide
+          }else {
+            return newSlide
+          }
+        })
+        console.log(this.newCopy(what))
+      }
+
+    },
+
+    getBiggestId: function(activeSlide){
+      //I am assuming that the ids are integers in this function
+
+      return activeSlide.objects.reduce((prev, curr) => {
+          if(curr.id >= prev){
+            return curr.id
+          }else {
+            return prev
+          }
+        }, 0)
+      
+    },
+
     updateTextStyle: function(newStyle){
 
       const targetCanvasId = this.activeObjectInfo.canvasId
@@ -105,6 +156,7 @@ export default {
 
       this.data = newData
     },
+
     saveData: function(){
       // "saveReadyData" represents our slides with everything updated
       // such that initializing the program with the data will get us
@@ -114,6 +166,7 @@ export default {
       // WRITE CODE FOR SENDING THE DATA TO THE BACKEND HERE
       // i.e fetch(<apihost>/<endpoint>, {method: <m>, headers: <h>, body: JSON.stringify(this.data)})
     },
+
     exportToPowerPoint: async function(fileName='file'){
       // Find more information on exporting the presentation to powerpoint 
       // here https://gitbrent.github.io/PptxGenJS/docs/usage-saving/
@@ -170,6 +223,7 @@ export default {
 
       pres.writeFile({fileName: fileName})
     },
+
     updateText(canvasId, objectId, newText){
       const targetCanvas = this.data.find(canvas => canvasId === canvas.id)
       const targetObject = targetCanvas.objects.find(object => objectId === object.id)
@@ -185,6 +239,7 @@ export default {
         targetObject.content = {...oldContent, text: newText}
       }
     },
+
     removeActiveObjectContent: function(){
       const targetCanvasId = this.activeObjectInfo.canvasId
       const targetObjectId = this.activeObjectInfo.objectId
@@ -215,6 +270,7 @@ export default {
       }
       this.data = newData      
     },
+
     unrenderChart(canvasId, objectId){
       const chart = document.querySelector(`#object-${canvasId}-${objectId}`)
       const icon = chart.querySelector('.open-modal')
@@ -223,18 +279,22 @@ export default {
         chart.innerHTML = ''
       }
     },
+
     updateActiveLayout: function(layout){
       this.activeLayout = this.newCopy(layout)
     },
+
     newCopy: function(object){
       return JSON.parse(JSON.stringify(object))
     },
+
     addSlide(){
       this.idCount += 1
       const newId = this.idCount
       const newSlide = {...this.activeLayout, id: newId}
       this.data.push(newSlide)
     },
+
     addChartToSlide: function(newContent){
 
       const targetCanvasId = this.activeObjectInfo.canvasId
@@ -268,6 +328,7 @@ export default {
 
       this.data = newData
     },
+
     getSaveReadyData: function(){
       // Gets updated canvas layouts (since we probably have
       // moved around and resized the objects)
@@ -293,6 +354,7 @@ export default {
 
       return saveReadyData
     },
+
     updateActiveObjectInfo: function(newInfo, key){
       if(!key){
         this.activeObjectInfo = {...this.activeObjectInfo, ...newInfo}

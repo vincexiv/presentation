@@ -4,7 +4,7 @@
       v-model="text"
       :placeholder="placeholder"
       :style="objectStyle"
-      :class="`${object.content.type} ${object.typeDetails.category} ${mode} canvas-object`"
+      :class="`${object.content.type} ${object.typeDetails?.category} ${mode} canvas-object`"
       @click="(e)=>performAction(mode, makeActive, [e])"
       @change="performAction(mode, updateText, [activeCanvas.id, object.id, text])"/>
       
@@ -13,7 +13,7 @@
       v-model="text"
       :placeholder="placeholder"
       :style="objectStyle"
-      :class="`${object.content.type} ${object.typeDetails.category} ${mode} canvas-object`"
+      :class="`${object.content.type} ${object.typeDetails?.category} ${mode} canvas-object`"
       @click="(e)=>performAction(mode, makeActive, [e])"
       @change="performAction(mode, updateText, [activeCanvas.id, object.id, text])"/>
 
@@ -130,7 +130,6 @@ import { convertFontSize } from "@/utilities/functions/createppt"
           })
       },
       convertSizeToViewWidths(val){
-        console.log("val: ", val)
         return `${convertFontSize(val) * 0.072}vw`
       },
       performAction(mode, actionMethod, argumentArray=[]){

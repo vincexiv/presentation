@@ -48,6 +48,14 @@
                     :class="muteState('text')">
 
                     <div class="action-container">
+                        <button v-if="muteState('text') !== 'muted'"
+                            class="action"
+                            :class="slideObjectCreationState.active? 'active': ''"
+                            @click="(e)=>action('text', toggleObjectCreationState, e)">New</button>
+                        <div v-else class="action">New</div>
+                    </div>
+
+                    <div class="action-container">
                         <div v-if="muteState('text') !== 'muted'" class="action">
                             <label for="text-color">Color: </label>
                             <input class="color"
@@ -155,7 +163,9 @@ export default ({
             removeSlide: Function,
             toggleShowLayout: Function,
             showLayout: Boolean,
-            openModal: Function
+            openModal: Function,
+            slideObjectCreationState: Object,
+            updateNewObjectCreationState: Function
         },
         computed: {
             textSize: function(){
@@ -171,6 +181,18 @@ export default ({
                     return 'active'
                 }else {
                     return ''
+                }
+            },
+            toggleObjectCreationState: function(option){
+                if(this.slideObjectCreationState.active){
+                    this.updateNewObjectCreationState({active: false, value: null})
+                }else {
+                    const newObject = {
+                        type: option,
+                        value: `Click to add ${option}`
+                    }
+    
+                    this.updateNewObjectCreationState({active: true, value: newObject})
                 }
             },
             isBold: function(){
@@ -216,9 +238,9 @@ export default ({
                     return option === this.activeObjectInfo.type
                 }
             },
-            action: function(option, actionMethod){
+            action: function(option, actionMethod, e){
                 if(this.isNotMuted(option)){
-                    actionMethod()
+                    actionMethod(option, e)
                 }
             },
             showUnshowLayout: function(){
