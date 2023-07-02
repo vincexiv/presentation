@@ -128,8 +128,8 @@
                         style: {
                             top: `${(e.clientY - t)/h * 100}%`,
                             left: `${(e.clientX - l)/w * 100}%`,
-                            width: `10%`,
-                            height: `10%`
+                            width: `36%`,
+                            height: `64%`
                         },
                         content: {
                             type: this.slideObjectCreationState.value?.type,
