@@ -74,7 +74,6 @@ export default {
     addNewObjectToSlide: function(slideId, newObject){
 
       const activeSlide = this.data.find(slide => slide.id === slideId)
-      console.log("active slide: ", this.newCopy(activeSlide))
 
       if(activeSlide){
         newObject = {...newObject, id: this.getBiggestId(activeSlide) + 1}
@@ -85,19 +84,15 @@ export default {
           ...activeSlide,
           objects: modifiedObjectArray
         }
-  
-        console.log("new object: ", this.newCopy(newObject))
-  
-        const what = this.data.map(slide => {
+    
+        this.data = this.data.map(slide => {
           if(slide.id !== activeSlide.id){
             return slide
           }else {
             return newSlide
           }
         })
-        console.log(this.newCopy(what))
       }
-
     },
 
     getBiggestId: function(activeSlide){
