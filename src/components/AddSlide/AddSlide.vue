@@ -30,7 +30,8 @@ export default ({
     align-items: center;
     gap: 0.5rem;
     justify-content: center;
-    width: max(50vw, 50rem);
+    width: 56vw;
+
 }
 
 .add-slide .title {
@@ -48,6 +49,6 @@ export default ({
 }
 
 .horizontal-rule {
-    width: calc(max(25vw, 25rem) - 7rem);
+    width: calc(28vw - 7rem);
 }
 </style>

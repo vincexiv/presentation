@@ -24,7 +24,7 @@
 
             <div class="layout-list-and-add-slide">
                 <div class="canvas-list">
-                    <div :id="`canvas-${objectArray.id}`" :style="objectArray.style" class="canvas" :class="activeState(objectArray)" v-for="objectArray in canvasArray" :key="objectArray.id">
+                    <div :id="`canvas-${objectArray.id}`" :style="objectArray.style" class="canvas" :class="`${activeState(objectArray)} ${objectArray.layout}`" v-for="objectArray in canvasArray" :key="objectArray.id">
                         <ChartModal 
                             :class="modalState"
                             :closeModal="closeModal"
@@ -149,6 +149,9 @@
     }
     .layout-list-and-add-slide {
         margin-bottom: max(15vw, 15rem);
+        display: flex;
+        flex-direction: column;
+        /* width: 100rem; */
     }
     .canvas-list {
         display: flex;
@@ -156,11 +159,14 @@
         gap: 1rem;
     }
     .canvas {
-        width: max(50vw, 50rem);
-        height: max(30vw, 30rem);
         background-color: white;
         position: relative;
         outline: 0.1rem solid #d4d4d4;
+    }
+
+    .canvas.LAYOUT_16x9{
+        width: 56vw;
+        height: 31.5vw;
     }
 
     .canvas.active {

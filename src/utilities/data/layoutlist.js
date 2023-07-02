@@ -1,6 +1,7 @@
 const layoutList = [
     {
         id: 0,
+        layout: 'LAYOUT_16x9', //Find more about pptxjs supported layouts here; https://gitbrent.github.io/PptxGenJS/docs/usage-pres-options/
         objects: [
             { 
                 id: 1, 
@@ -28,6 +29,7 @@ const layoutList = [
     },
     {
         id: 1,
+        layout: 'LAYOUT_16x9',
         objects: [
             { 
                 id: 1, 
@@ -55,6 +57,7 @@ const layoutList = [
     },
     {
         id: 2,
+        layout: 'LAYOUT_16x9',
         objects: [
             { 
                 id: 1, 
@@ -91,6 +94,7 @@ const layoutList = [
     },
     {
         id: 3,
+        layout: 'LAYOUT_16x9',
         objects: [
             { 
                 id: 1, 
@@ -126,6 +130,7 @@ const layoutList = [
     },
     {
         id: 4,
+        layout: 'LAYOUT_16x9',
         objects: [
             { 
                 id: 1, 
