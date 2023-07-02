@@ -12,7 +12,7 @@ const layoutList = [
                     placeholder: "Click to add title",
                     style: {
                         fontSize: "2rem",
-                        verticalAlign: "middle"
+                        // verticalAlign: "middle"
                     }
                 }
             },
@@ -40,7 +40,7 @@ const layoutList = [
                     placeholder: "Click to add title",
                     style: {
                         fontSize: "2rem",
-                        verticalAlign: "middle"
+                        // verticalAlign: "middle"
                     }
                 }
             },
@@ -68,7 +68,7 @@ const layoutList = [
                     placeholder: "Click to add title", 
                     style: {
                         fontSize: "2rem",
-                        verticalAlign: "middle"
+                        // verticalAlign: "middle"
                     }
                 }
             },
@@ -105,7 +105,7 @@ const layoutList = [
                     placeholder: "Click to add title", 
                     style: {
                         fontSize: "2rem",
-                        verticalAlign: "middle"
+                        // verticalAlign: "middle"
                     }
                 }
             },
@@ -141,7 +141,7 @@ const layoutList = [
                     placeholder: "Click to add title", 
                     style: {
                         fontSize: "2rem",
-                        verticalAlign: "middle"
+                        // verticalAlign: "middle"
                     }
                 }
             },
