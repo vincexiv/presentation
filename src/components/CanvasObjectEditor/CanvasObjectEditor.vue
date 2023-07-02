@@ -288,8 +288,8 @@ export default ({
 }
 
 .action.active {
-    background-color: red;
     color: #f7f7f7;
+    background-color: rgba(220, 53, 69, 1);
 }
 
 .action.bold {
