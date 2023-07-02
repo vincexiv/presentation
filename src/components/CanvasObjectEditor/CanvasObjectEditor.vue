@@ -63,14 +63,14 @@
                     class="file-option-details actions"
                     :class="muteState('layout')">
                     <button v-if="muteState('layout') !== 'muted'" class="action" @click="action('layout', showUnshowLayout)">
-                        {{ showLayout? "Hide Layouts" : "Show Layouts" }}
+                        {{ showLayout? "Hide" : "Show" }}
                     </button>
                 </div>
                 <div v-else-if="activeEditOption==='slide'"
                     class="file-option-details actions"
                     :class="muteState('slide')">
-                    <button v-if="muteState('slide') !== 'muted'" class="action" @click="action('slide', removeSlide)">Remove Slide</button>
-                    <div v-else class="action">Remove Slide</div>
+                    <button v-if="muteState('slide') !== 'muted'" class="action" @click="action('slide', removeSlide)">Remove</button>
+                    <div v-else class="action">Remove</div>
                 </div>
                 <div v-else-if="activeEditOption==='mode'"
                     class="file-option-details actions">
