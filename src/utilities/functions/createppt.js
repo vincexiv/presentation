@@ -65,9 +65,9 @@ function getPptxCompatibleStyle(cssStyles){
 // find more here; https://gitbrent.github.io/PptxGenJS/docs/api-text/
 function convertFontSize(fontSize){
   if(fontSize){
-    if(fontSize.match(/rem/g).length){// if the font size is in rem. e.g 2rem
+    if(fontSize.match(/rem/g)?.length){// if the font size is in rem. e.g 2rem
       return parseFloat(convertRemToPixels(parseFloat(fontSize.replace("rem", ""))))
-    }else if(fontSize.match(/px/g).length){// if the font size is in px. e.g 12px
+    }else if(fontSize.match(/px/g)?.length){// if the font size is in px. e.g 12px
       return parseFloat(fontSize.replace("px", ""))
     }else {
       throw "Unexpected font measurement units. Expected 'rem' or 'px'"
@@ -130,4 +130,4 @@ function getPositions(canvas){
   return result;
 }
 
-export {getPositions, getContents, replaceHighchartObjectWithB64, getPptxCompatibleStyle};
+export {getPositions, getContents, replaceHighchartObjectWithB64, getPptxCompatibleStyle, convertFontSize};

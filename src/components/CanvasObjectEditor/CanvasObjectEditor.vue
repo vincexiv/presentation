@@ -53,6 +53,19 @@
                         <div v-else class="action">Color</div>
                     </div>
                     <div class="action-container">
+                        <div v-if="muteState('text') !== 'muted'" class="action">
+                            <label for="text-size" >Size: </label>
+                            <input name="text-size"
+                                type="number"
+                                ref="sizeValue"
+                                min="1"
+                                max="256"
+                                :value="textSize"
+                                @change="(e)=>action('text', updateFontSize, e)"/>
+                        </div>
+                        <div v-else class="action">Size</div>
+                    </div>
+                    <div class="action-container">
                         <button v-if="muteState('text') !== 'muted'"
                             class="action bold"
                             :class="isBold()? 'active': ''"
@@ -115,6 +128,7 @@
 </template>
 
 <script>
+import {convertFontSize } from "../../utilities/functions/createppt"
 
 export default ({
         name: "CanvasObjectEditor",
@@ -132,6 +146,11 @@ export default ({
             toggleShowLayout: Function,
             showLayout: Boolean,
             openModal: Function
+        },
+        computed: {
+            textSize: function(){
+                return convertFontSize(this.activeObjectInfo.content?.style?.fontSize)
+            }
         },
         methods: {
             editOptionClass: function (editOption){
@@ -172,6 +191,10 @@ export default ({
                 }else{
                     this.updateTextStyle({ fontStyle: 'italic' })
                 }
+            },
+            updateFontSize: function(){
+                const newFontSize = this.$refs.sizeValue.value
+                this.updateTextStyle({ fontSize: `${newFontSize}px` })
             },
             isNotMuted: function(option){
                 if(option === 'slide' || option === 'layout'){
@@ -317,12 +340,12 @@ button {
     outline: none;
     border: none;
 }
-
 .action input {
-    width: 1rem;
+    width: 2.5rem;
     height: 1rem;
     /* outline: none; */
     border: none;
     margin-left: 0.5rem;
 }
+
 </style>
