@@ -54,6 +54,7 @@
                                 name="text-color"
                                 type="color"
                                 ref="colorValue"
+                                :value="textColor"
                                 @change="(e)=>action('text', updateColor, e)"/>
                         </div>
                         <div v-else class="action">Color</div>
@@ -159,6 +160,9 @@ export default ({
         computed: {
             textSize: function(){
                 return convertFontSize(this.activeObjectInfo.content?.style?.fontSize)
+            },
+            textColor: function(){
+                return this.activeObjectInfo.content?.style?.color || "#000"
             }
         },
         methods: {
