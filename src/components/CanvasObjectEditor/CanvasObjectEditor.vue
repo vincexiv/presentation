@@ -48,16 +48,22 @@
                     :class="muteState('text')">
                     <div class="action-container">
                         <label for="text-color" v-if="muteState('text') !== 'muted'" class="action">Color
-                            <input name="text-color" type="color" ref="colorValue" @change="action('text', updateColor)"/>
+                            <input name="text-color" type="color" ref="colorValue" @change="(e)=>action('text', updateColor, e)"/>
                         </label>
                         <div v-else class="action">Color</div>
                     </div>
                     <div class="action-container">
-                        <button v-if="muteState('text') !== 'muted'" class="action bold" @click="action('text', updateBold)">Bold</button>
+                        <button v-if="muteState('text') !== 'muted'"
+                            class="action bold"
+                            :class="isBold()? 'active': ''"
+                            @click="(e)=>action('text', updateBold, e)">Bold</button>
                         <div v-else class="action bold"></div>
                     </div>
                     <div class="action-container">
-                        <button v-if="muteState('text') !== 'muted'" class="action italic" @click="action('text', updateItalic)">Italic</button>
+                        <button v-if="muteState('text') !== 'muted'"
+                            class="action italic"
+                            :class="isItalic()? 'active': ''"
+                            @click="(e)=>action('text', updateItalic, e)">Italic</button>
                         <div v-else class="action italic">Italic</div>
                     </div>
                 </div>
@@ -66,11 +72,11 @@
                     class="file-option-details actions"
                     :class="muteState('chart')">
                     <div class="action-container">
-                        <button v-if="muteState('chart') !== 'muted'" class="action" @click="action('chart', removeChart)">Remove</button>
+                        <button v-if="muteState('chart') !== 'muted'" class="action" @click="(e)=>action('chart', removeChart, e)">Remove</button>
                         <div v-else class="action">Remove</div>
                     </div>
                     <div class="action-container">
-                        <button v-if="muteState('chart') !== 'muted'" class="action" @click="action('chart', replaceChart)">Replace</button>
+                        <button v-if="muteState('chart') !== 'muted'" class="action" @click="(e)=>action('chart', replaceChart, e)">Replace</button>
                         <div v-else class="action">Replace</div>
                     </div>
                 </div>
@@ -78,7 +84,7 @@
                 <div v-else-if="activeEditOption==='layout'"
                     class="file-option-details actions"
                     :class="muteState('layout')">
-                    <button v-if="muteState('layout') !== 'muted'" class="action" @click="action('layout', showUnshowLayout)">
+                    <button v-if="muteState('layout') !== 'muted'" class="action" @click="(e)=>action('layout', showUnshowLayout, e)">
                         {{ showLayout? "Hide" : "Show" }}
                     </button>
                 </div>
@@ -86,7 +92,7 @@
                 <div v-else-if="activeEditOption==='slide'"
                     class="file-option-details actions"
                     :class="muteState('slide')">
-                    <button v-if="muteState('slide') !== 'muted'" class="action" @click="action('slide', removeSlide)">Remove</button>
+                    <button v-if="muteState('slide') !== 'muted'" class="action" @click="(e)=>action('slide', removeSlide, e)">Remove</button>
                     <div v-else class="action">Remove</div>
                 </div>
 
@@ -279,6 +285,11 @@ export default ({
     padding: 0.2rem 0.7rem 0.2rem 0.7rem;
     border-radius: 0.5em;
     color: rgba(0, 119, 190, 1);
+}
+
+.action.active {
+    background-color: red;
+    color: #f7f7f7;
 }
 
 .action.bold {
