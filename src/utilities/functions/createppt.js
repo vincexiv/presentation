@@ -51,7 +51,8 @@ function getPptxCompatibleStyle(cssStyles){
     color: convertColor(cssStyles?.color),// We expect all colors to be hexadecimal. i.e. like #fff
     fill: convertColor(cssStyles?.backgroundColor), // Also expect hexadecimal values
     fontSize: convertFontSize(cssStyles?.fontSize),
-    valign: cssStyles?.verticalAlign || 'top'
+    valign: cssStyles?.verticalAlign || 'top',
+    bold: cssStyles?.fontWeight === 'bold'
   }
 
   return style
