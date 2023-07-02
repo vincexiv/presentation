@@ -1,4 +1,4 @@
-# another-nothing
+# Rate my service
 
 ## Project setup
 ```
