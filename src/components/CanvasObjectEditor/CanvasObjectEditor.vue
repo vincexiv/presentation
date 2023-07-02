@@ -46,12 +46,19 @@
                 <div v-else-if="activeEditOption==='text'"
                     class="file-option-details actions"
                     :class="muteState('text')">
+
                     <div class="action-container">
-                        <label for="text-color" v-if="muteState('text') !== 'muted'" class="action">Color
-                            <input name="text-color" type="color" ref="colorValue" @change="(e)=>action('text', updateColor, e)"/>
-                        </label>
+                        <div v-if="muteState('text') !== 'muted'" class="action">
+                            <label for="text-color">Color: </label>
+                            <input class="color"
+                                name="text-color"
+                                type="color"
+                                ref="colorValue"
+                                @change="(e)=>action('text', updateColor, e)"/>
+                        </div>
                         <div v-else class="action">Color</div>
                     </div>
+
                     <div class="action-container">
                         <div v-if="muteState('text') !== 'muted'" class="action">
                             <label for="text-size" >Size: </label>
@@ -65,13 +72,15 @@
                         </div>
                         <div v-else class="action">Size</div>
                     </div>
+
                     <div class="action-container">
                         <button v-if="muteState('text') !== 'muted'"
                             class="action bold"
                             :class="isBold()? 'active': ''"
                             @click="(e)=>action('text', updateBold, e)">Bold</button>
-                        <div v-else class="action bold"></div>
+                        <div v-else class="action bold">Bold</div>
                     </div>
+
                     <div class="action-container">
                         <button v-if="muteState('text') !== 'muted'"
                             class="action italic"
@@ -341,11 +350,15 @@ button {
     border: none;
 }
 .action input {
-    width: 2.5rem;
+    width: 3rem;
     height: 1rem;
-    /* outline: none; */
+    outline: none;
     border: none;
     margin-left: 0.5rem;
+}
+
+input.color {
+    width: 2rem;
 }
 
 </style>
