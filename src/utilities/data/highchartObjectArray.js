@@ -1,14 +1,4 @@
-import {employment, monthlyAverageTemperature, tourDeFrance} from './highchartCharts'
-
-// The data expected here is in the following format
-// [
-//     id: <id>,
-//     title: <title>
-//     charts: [
-//         {<highchart object options>},
-//         {<highchart object options>}
-//     ]
-// ]
+import {employment, monthlyAverageTemperature} from './highchartCharts'
 
 const highchartObjectArray = [
     {
@@ -17,7 +7,6 @@ const highchartObjectArray = [
         charts: [ 
             {...employment, id: 1}, 
             {...monthlyAverageTemperature, id: 2},
-            {...tourDeFrance, id: 3}
         ]
     },
     {
@@ -25,7 +14,6 @@ const highchartObjectArray = [
         title: "Chart Group 2",
         charts: [ 
             {...employment, id: 1}, 
-            {...tourDeFrance, id: 2},
             {...monthlyAverageTemperature, id: 3}
         ]
     },
@@ -33,7 +21,6 @@ const highchartObjectArray = [
         id: 3,
         title: "Chart Group 3",
         charts: [ 
-            {...tourDeFrance, id: 1},
             {...employment, id: 2}, 
             {...monthlyAverageTemperature, id: 3}
         ]
