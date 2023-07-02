@@ -98,8 +98,16 @@
 
                 <div v-else-if="activeEditOption==='mode'"
                     class="file-option-details actions">
-                    <button class="action" @click="changeMode('edit')">Edit</button>
-                    <button class="action" @click="changeMode('preview')">Preview</button>
+                    <button class="action"
+                        :class="mode === 'edit'? 'active': ''"
+                        @click="changeMode('edit')">
+                        Edit
+                    </button>
+                    <button class="action"
+                        :class="mode === 'preview'? 'active': ''"
+                        @click="changeMode('preview')">
+                        Preview
+                    </button>
                 </div>
             </div>
         </div>
