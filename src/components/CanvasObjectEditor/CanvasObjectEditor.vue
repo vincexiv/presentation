@@ -53,12 +53,12 @@
                         <div v-else class="action">Color</div>
                     </div>
                     <div class="action-container">
-                        <button v-if="muteState('text') !== 'muted'" class="action" @click="action('text', updateBold)">Bold</button>
-                        <div v-else class="action">Bold</div>
+                        <button v-if="muteState('text') !== 'muted'" class="action bold" @click="action('text', updateBold)">Bold</button>
+                        <div v-else class="action bold"></div>
                     </div>
                     <div class="action-container">
-                        <button v-if="muteState('text') !== 'muted'" class="action" @click="action('text', updateItalic)">Italic</button>
-                        <div v-else class="action">Italic</div>
+                        <button v-if="muteState('text') !== 'muted'" class="action italic" @click="action('text', updateItalic)">Italic</button>
+                        <div v-else class="action italic">Italic</div>
                     </div>
                 </div>
 
@@ -279,6 +279,14 @@ export default ({
     padding: 0.2rem 0.7rem 0.2rem 0.7rem;
     border-radius: 0.5em;
     color: rgba(0, 119, 190, 1);
+}
+
+.action.bold {
+    font-weight: bold;
+}
+
+.action.italic {
+    font-style: italic;
 }
 
 .action:hover {
