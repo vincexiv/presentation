@@ -13,7 +13,7 @@ function getLayouts(){
 
         const currentCanvasData = {
             id: parseInt(slide.id.split("-")[1]),
-            structure: []
+            objects: []
         }
 
         const objects = slide.querySelectorAll('.canvas-object')
@@ -28,7 +28,7 @@ function getLayouts(){
                     transform: object['style'].transform
                 }
             }
-            currentCanvasData.structure.push(objectData)
+            currentCanvasData.objects.push(objectData)
         })
 
         layouts.push(currentCanvasData)
