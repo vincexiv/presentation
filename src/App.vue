@@ -32,6 +32,7 @@ import layoutList from './utilities/data/layoutlist';
 import getLayouts from './utilities/functions/getlayouts';
 import pptxgen from "pptxgenjs";
 import {getContents, getPositions, getPptxCompatibleStyle} from './utilities/functions/createppt';
+// import sampleData from './utilities/data/sampleData';
 
 export default {
   name: 'App',
@@ -40,6 +41,7 @@ export default {
   data(){
     return {
       data: [this.newCopy(layoutList[0])],
+      // data: sampleData,
       mode: 'edit', // mode can be edit or preview. Will determine how slides will be displayed
       layoutList: layoutList,
       activeLayout: layoutList[layoutList.length-1],
