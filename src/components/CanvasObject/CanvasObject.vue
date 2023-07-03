@@ -165,6 +165,7 @@ import { convertFontSize } from "@/utilities/functions/createppt"
 
 .canvas-object.active {
   outline: dashed black 0.1rem;
+  z-index: 1;
 }
 
 .canvas-object.chart i.open-modal {

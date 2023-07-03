@@ -20,7 +20,7 @@ export default {
     /* background-color: #d4d4d4; */
     background-color: white;
     color: black;
-    z-index: 1;
+    z-index: 2;
 }
 
 #navbar h1 {
