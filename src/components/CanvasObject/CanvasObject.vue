@@ -56,9 +56,9 @@ import { convertFontSize } from "@/utilities/functions/createppt"
       
       if(this.object.content.type === 'chart' && !!this.$refs.highchart){
         const chart = createChart(this.$refs.highchart.id, this.object.content.value)
-        makeResizableAndDraggable(objectId, chart)
+        makeResizableAndDraggable(objectId, chart, `canvas-${this.activeCanvas.id}`)
       }else {
-        makeResizableAndDraggable(objectId)
+        makeResizableAndDraggable(objectId, null, `canvas-${this.activeCanvas.id}`)
       }
     },
     mounted: function(){
@@ -66,9 +66,9 @@ import { convertFontSize } from "@/utilities/functions/createppt"
       
       if(this.object.content.type === 'chart' && !!this.$refs.highchart){
         const chart = createChart(this.$refs.highchart.id, this.object.content.value)
-        makeResizableAndDraggable(objectId, chart)        
+        makeResizableAndDraggable(objectId, chart, `canvas-${this.activeCanvas.id}`)        
       }else {
-        makeResizableAndDraggable(objectId)
+        makeResizableAndDraggable(objectId, null, `canvas-${this.activeCanvas.id}`)
       }
     },
     data(){
