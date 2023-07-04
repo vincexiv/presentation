@@ -168,7 +168,7 @@ import makeResizableAndDraggable from "../../utilities/interactive/interact"
   outline: none;
 }
 
-.canvas-object.active {
+.canvas-object.active.edit {
   outline: dashed black 0.1rem;
   z-index: 1;
 }
