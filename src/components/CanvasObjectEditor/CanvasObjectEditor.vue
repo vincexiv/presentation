@@ -150,6 +150,7 @@ import {convertFontSize } from "../../utilities/functions/createppt"
 
 export default ({
         name: "CanvasObjectEditor",
+
         props: {
             activeEditOption: String,
             updateActiveEditOption: Function,
@@ -167,6 +168,7 @@ export default ({
             slideObjectCreationState: Object,
             updateNewObjectCreationState: Function
         },
+
         computed: {
             textSize: function(){
                 return convertFontSize(this.activeObjectInfo.content?.style?.fontSize)
@@ -175,6 +177,7 @@ export default ({
                 return this.activeObjectInfo.content?.style?.color || "#000"
             }
         },
+
         methods: {
             editOptionClass: function (editOption){
                 if(this.activeEditOption == editOption){
@@ -183,6 +186,7 @@ export default ({
                     return ''
                 }
             },
+
             toggleObjectCreationState: function(option){
                 if(this.slideObjectCreationState.active){
                     this.updateNewObjectCreationState({active: false, value: null})
@@ -195,6 +199,7 @@ export default ({
                     this.updateNewObjectCreationState({active: true, value: newObject})
                 }
             },
+
             isBold: function(){
                 if(this.activeObjectInfo.type === 'text'){
                     return this.activeObjectInfo.content?.style?.fontWeight === 'bold'
@@ -202,6 +207,7 @@ export default ({
                     return false
                 }
             },
+
             isItalic: function(){
                 if(this.activeObjectInfo.type === 'text'){
                     return this.activeObjectInfo.content?.style?.fontStyle === 'italic'
@@ -209,10 +215,12 @@ export default ({
                     return false
                 }
             },
+
             updateColor: function(){
                 const newColor= this.$refs.colorValue.value
                 this.updateTextStyle({ color: newColor })
             },
+
             updateBold: function(){
                 if(this.isBold()){
                     this.updateTextStyle({ fontWeight: 'normal' })
@@ -220,6 +228,7 @@ export default ({
                     this.updateTextStyle({ fontWeight: 'bold' })
                 }
             },
+
             updateItalic: function(){
                 if(this.isItalic()){
                     this.updateTextStyle({ fontStyle: 'normal' })
@@ -227,10 +236,12 @@ export default ({
                     this.updateTextStyle({ fontStyle: 'italic' })
                 }
             },
+
             updateFontSize: function(){
                 const newFontSize = this.$refs.sizeValue.value
                 this.updateTextStyle({ fontSize: `${newFontSize}px` })
             },
+
             isNotMuted: function(option){
                 if(option === 'slide' || option === 'layout'){
                     return true
@@ -238,25 +249,30 @@ export default ({
                     return option === this.activeObjectInfo.type
                 }
             },
+
             action: function(option, actionMethod, e){
                 if(this.isNotMuted(option)){
                     actionMethod(option, e)
                 }
             },
+
             showUnshowLayout: function(){
                 this.toggleShowLayout()
             },
+
             removeChart: function(){
                 if(this.activeObjectInfo.type === 'chart'){
                     this.removeActiveObjectContent()
                 }
             },
+
             replaceChart: function(){
                 if(this.activeObjectInfo.type === 'chart'){
                     this.removeActiveObjectContent()
                     this.openModal()
                 }
             },
+            
             muteState: function(action){
                 // We want to always make the slide and layout options look active
                 if(action === 'slide' || action === 'layout'){

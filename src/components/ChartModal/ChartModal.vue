@@ -34,29 +34,35 @@ import Vue2Highcharts from 'vue2-highcharts'
 
 export default({
     name: "ChartModal",
+
     props: {
         closeModal: Function,
         addChartToSlide: Function
     },
+
     components: {
         Vue2Highcharts
     },
+
     data(){
         return {
             highchartObjectArray: this.disableMouseTracking(highchartObjectArray),
             activeChart: null,
         }
     },
+
     methods: {
         getChartId: function(chartArray, object){
             return `highchart-object-${chartArray.id}-${object.id}`
         },
+
         updateCanvasChart: function(){
             if(this.activeChart){
                 this.addChartToSlide(this.activeChart)
                 this.closeModal()
             }
         },
+
         handleModalClick: function(e){
             const classList = Array.from(e.target.classList)
 
@@ -65,6 +71,7 @@ export default({
                 this.closeModal()
             }
         },
+
         makeActive: function(e, chartArray, chartObject){
             e.preventDefault()
             const targetChartId = this.getChartId(chartArray, chartObject)
@@ -86,6 +93,7 @@ export default({
             const targetChart = this.$refs.chartModal.querySelector(`#${targetChartId}`)
             targetChart.classList.add('active')
         },
+        
         disableMouseTracking: function(highchartObjectArray){
             // return the chart options (object) as is but
             // disable mouse tracking on it

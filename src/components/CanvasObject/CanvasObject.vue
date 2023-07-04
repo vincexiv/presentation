@@ -51,6 +51,7 @@ import { convertFontSize } from "@/utilities/functions/createppt"
       updateText: Function,
       mode: String
     },
+
     updated: function(){
       const objectId = `#object-${this.activeCanvas.id}-${this.object.id}`
       
@@ -61,6 +62,7 @@ import { convertFontSize } from "@/utilities/functions/createppt"
         makeResizableAndDraggable(objectId, null, `canvas-${this.activeCanvas.id}`)
       }
     },
+
     mounted: function(){
       const objectId = `#object-${this.activeCanvas.id}-${this.object.id}`
       
@@ -71,11 +73,13 @@ import { convertFontSize } from "@/utilities/functions/createppt"
         makeResizableAndDraggable(objectId, null, `canvas-${this.activeCanvas.id}`)
       }
     },
+
     data(){
       return {
         text: this.object.content.type === 'text'? this.object.content.value : ''
       }
     },
+
     computed: {
       objectId: function(){
         return `object-${this.activeCanvas.id}-${this.object.id}`
@@ -105,6 +109,7 @@ import { convertFontSize } from "@/utilities/functions/createppt"
         }
       }
     },
+
     methods: {
       makeActive(e){
         if(this.mode === 'preview'){
@@ -129,9 +134,11 @@ import { convertFontSize } from "@/utilities/functions/createppt"
             content: this.object.content
           })
       },
+
       convertSizeToViewWidths(val){
         return `${convertFontSize(val) * 0.072}vw`
       },
+      
       performAction(mode, actionMethod, argumentArray=[]){
         if(mode === 'edit'){
           actionMethod(...argumentArray)

@@ -32,6 +32,7 @@ import layoutList from "../../utilities/data/layoutlist"
 
 export default {
     name: "CanvasLayoutList",
+
     props: {
         updateActiveLayout: Function,
         activeLayout: Object,
@@ -39,14 +40,17 @@ export default {
         showLayout: Boolean,
         addSlide: Function
     },
+
     data(){
         return {
             layoutList: layoutList
         }
     },
+
     mounted: function(){
         this.updateLayout(this.activeLayout)
     },
+
     methods: {
         getStyle: function(structure){
             return {
@@ -58,6 +62,7 @@ export default {
                 backgroundColor: "yellow"
             }
         },
+        
         updateLayout(layout){
             const layoutId = layout.id
 
@@ -72,6 +77,7 @@ export default {
             this.updateActiveLayout(layout)
         }
     },
+
     computed: {
         layoutActiveClass: function(layout){
             if(this.activeLayout.id == layout.id){
