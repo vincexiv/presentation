@@ -33,7 +33,8 @@
                 :canvasArray="canvasArray"
                 :convertSizeToViewWidths="convertSizeToViewWidths"
                 :showObject="showObject"
-                :updateActiveObjectInfo="updateActiveObjectInfo"/>
+                :updateActiveObjectInfo="updateActiveObjectInfo"
+                :deleteSlideObject="deleteSlideObject"/>
 
             <div class="layout-list-and-add-slide">
                 <div class="canvas-list">
@@ -98,7 +99,8 @@
             mode: String,
             removeActiveObjectContent: Function,
             removeSlide: Function,
-            addNewObjectToSlide: Function
+            addNewObjectToSlide: Function,
+            deleteSlideObject: Function
         },
         components: {
             CanvasObject,

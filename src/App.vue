@@ -17,6 +17,7 @@
         :updateTextStyle="updateTextStyle"
         :removeActiveObjectContent="removeActiveObjectContent"
         :removeSlide="removeSlide"
+        :deleteSlideObject="deleteSlideObject"
         :addNewObjectToSlide="addNewObjectToSlide"
         @update-active-layout="(layout)=>updateActiveLayout(layout)"
         @add-slide="addSlide()"/>
@@ -351,6 +352,25 @@ export default {
       })
 
       return saveReadyData
+    },
+
+    deleteSlideObject: function(targetCanvasId, targetObjectId){
+      let newData = this.data.map(canvas => {
+        if(canvas.id !== targetCanvasId){
+          return canvas
+        }else{
+          const updatedCanvas = {
+              ...this.newCopy(canvas),
+              objects: canvas.objects.filter(object => {
+                return object.id !== targetObjectId
+            })
+          }
+
+          return updatedCanvas
+        }
+      })
+
+      this.data = newData
     },
 
     updateActiveObjectInfo: function(newInfo, key, option = 'update'){

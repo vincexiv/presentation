@@ -4,6 +4,7 @@
             <div v-for="object, i in activeCanvas?.objects || []"
                 :key="`object-list-item-${object.id}`"
                 class="object-list-item">
+
                 <div class="item"
                 @click="makeActive(object, activeCanvas)"
                 :class="(object.id == activeObjectInfo.objectId) && (activeCanvas.id === activeObjectInfo.canvasId)? 'active': ''">
@@ -18,7 +19,12 @@
                         {{ `${i+1}: ${object.content?.value?.title?.text || object.content.type}`}}
                     </p>
                 </div>
-                <button class="delete-btn" :style="objectListButtonFont">Delete</button>
+
+                <button class="delete-btn"
+                    @click="deleteSlideObject(activeCanvas.id, object.id)"
+                    :style="objectListButtonFont">
+                    Delete
+                </button>
             </div>
         </div>
     </div>
@@ -33,7 +39,8 @@ export default({
         canvasArray: Array,
         convertSizeToViewWidths: Function,
         showObject: Boolean,
-        updateActiveObjectInfo: Function
+        updateActiveObjectInfo: Function,
+        deleteSlideObject: Function
     },
     
     computed: {
