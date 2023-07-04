@@ -63,6 +63,11 @@ export default {
     CanvasComponent
   },
 
+  mounted: function() {
+    // Make the first slide active by default
+    this.activeObjectInfo = {...this.activeObjectInfo, canvasId: this.data?.[0]?.id}
+  },
+
 
   methods: {
     changeMode: function(newMode){
