@@ -128,22 +128,7 @@ import { convertFontSize } from "@/utilities/functions/createppt"
     },
 
     methods: {
-      makeActive(){
-        // if(this.mode === 'preview'){
-        //   return
-        // }
-        
-        // const allCanvasObjects = document.querySelectorAll('.canvas-object')
-        // allCanvasObjects.forEach(object => {
-        //   object.classList.remove('active')
-        // })
-
-        // if(this.$refs?.highchart){
-        //   this.$refs.highchart.classList.add('active')
-        // }else {
-        //   e.target.classList.add('active')
-        // }
-        
+      makeActive(){      
         this.updateActiveObjectInfo({ 
             objectId: this.object.id,
             type: this.object.content.type,

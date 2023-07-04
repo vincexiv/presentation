@@ -3,19 +3,7 @@ import interact from 'interactjs'
 // Find documentation for the interactjs library here
 // https://interactjs.io/
 
-function makeResizableAndDraggable(cssSelector, chart, canvasId){
-
-  const canvas = document.getElementById(canvasId)
-  const {
-    width: canvasWidthPixels //Current canvas width in pixels
-  } = canvas.getBoundingClientRect()
-
-  // WE ARE ASSUMING THE WIDTH OF THE CANVAS/SLIDE AS DISPLAYED
-  // ON THE BROWSER WILL BE SET TO 50vw
-  const canvasWidthVW = 56
-  const PixelsToVW = canvasWidthVW/canvasWidthPixels
-  console.log(PixelsToVW)
-
+function makeResizableAndDraggable(cssSelector, chart){
 
   interact(cssSelector)
     .resizable({
