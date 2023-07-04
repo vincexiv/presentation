@@ -27,7 +27,8 @@
             <div class="layout-list-and-add-slide">
                 <div class="canvas-list">
                     <div :id="`canvas-${objectArray.id}`"
-                        :style="objectArray.style" class="canvas"
+                        :style="objectArray.style"
+                        class="canvas"
                         :class="`${activeState(objectArray)} ${objectArray.layout}`"
                         v-for="objectArray in canvasArray"
                         :key="objectArray.id"
@@ -108,17 +109,23 @@
                     return ''
                 }
             },
+
             addSlide: function(){
                 this.$emit('add-slide')
             },
+
             handleCanvasClick: function(e, slideId, canvasId){
                 //The slideId is the raw id of the object used to create the slide on the dom
                 //canvasId here corresponds to the id of the canvas when represented on the dom
 
 
-                // if a person clicked the canvas itself and not just
-                // an object inside it
-                if(e.target.id === canvasId && this.slideObjectCreationState.active){
+                // if a person clicked the canvas itself and not just an object inside it
+                // clickedCanvasEmptySpace is a Boolean
+                const clickedCanvasEmptySpace = e.target.id === canvasId
+                
+                // Person clicked an empty space in the slide and they are currently
+                // in the process of creating a new object in the canvas
+                if(clickedCanvasEmptySpace && this.slideObjectCreationState.active){
                     const slideRect = document.getElementById(canvasId).getBoundingClientRect()
 
                     const {top: t, left: l, width: w, height: h} = slideRect
@@ -138,23 +145,31 @@
                     }
                     
                     this.addNewObjectToSlide(slideId, newObject)
+                }else if(clickedCanvasEmptySpace){
+                    this.updateActiveObjectInfo({canvasId: slideId}, null, 'reset')
                 }
             },
+
             updateNewObjectCreationState: function(newInfo){
                 this.slideObjectCreationState = {...this.slideObjectCreationState, ...newInfo}
             },
+
             updateActiveLayout: function(layout){
                 this.$emit('update-active-layout', layout)
             },
+
             closeModal: function(){
                 this.modalOpen = false
             },
+
             openModal: function(){
                 this.modalOpen = true
             },
+
             updateActiveEditOption(activeOption){
                 this.activeEditOption = activeOption
             },
+
             toggleShowLayout(){
                 this.showLayout = !this.showLayout
             }

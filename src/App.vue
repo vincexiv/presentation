@@ -352,16 +352,47 @@ export default {
       return saveReadyData
     },
 
-    updateActiveObjectInfo: function(newInfo, key){
-      if(!key){
+    updateActiveObjectInfo: function(newInfo, key, option = 'update'){
+      // option can be "reset" or "update"
+
+      if(!key && option === 'update'){
+        // We could get here if a person only calls this method in the form 
+        // updateActiveObjectInfo({canvasId: 1, objectId: 2}) (i.e without extras)
         this.activeObjectInfo = {...this.activeObjectInfo, ...newInfo}
-      }else if(typeof(this.activeObjectInfo[key]) === 'object') {
-        // We can reach here when updating the style for instance.
-        // We know the activeObjectInfo will be in the form (... corresponds to other fields)
-        // {type: <type>, content: {type: <type>, style: <style>, ...} ...}
-        this.activeObjectInfo = {
-          ...this.activeObjectInfo,
-          [key]: {...this.activeObjectInfo[key], ...newInfo}
+
+      }else if(option === 'update'){
+        // We could get here when calling this method in the form
+        // updateActiveObjectInfo({value: "this is amazing"}, 'content')
+        // We know that {value: <value> } is inside the content, which is inside
+        // the activeObjectInfo. So we are telling this method to not only look for the
+        // high level keys, but go inside their content and update the content
+        if(typeof(this.activeObjectInfo[key]) === 'object') {
+          this.activeObjectInfo = {
+            ...this.activeObjectInfo,
+            [key]: {...this.activeObjectInfo[key], ...newInfo}
+          }
+        }
+      }else if (option === 'reset'){
+        // We get here when we don't want to use existing activeObjectInfo but only want to use the
+        // details provided when calling this method
+        
+        let newActiveObjectInfo =  {
+          canvasId: null,
+          objectId: null,
+          type: "",
+          content: {}
+        }
+
+        if(!key){ // Reset everything and use only newInfo if key was not provided
+          this.activeObjectInfo = {...newActiveObjectInfo, ...newInfo}
+        }else { 
+          // reset only the key
+          newActiveObjectInfo = {
+            ...newActiveObjectInfo,
+            [key]: this.activeObjectInfo[key]
+          }   
+          
+          this.activeObjectInfo = {...newActiveObjectInfo, ...newInfo}
         }
       }
     }
