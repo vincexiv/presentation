@@ -45,10 +45,10 @@ export default({
     
     computed: {
         objectListItemFont: function(){
-            return {fontSize: this.convertSizeToViewWidths('0.9rem')}
+            return {fontSize: this.convertSizeToViewWidths('0.8rem')}
         },
         objectListButtonFont: function(){
-            return {fontSize: this.convertSizeToViewWidths('0.64rem')}
+            return {fontSize: this.convertSizeToViewWidths('0.8rem')}
         },
         activeCanvas: function () {
             return this.canvasArray
