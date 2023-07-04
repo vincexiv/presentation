@@ -46,6 +46,7 @@
                             :openModal="openModal"
                             :activeCanvas="objectArray"
                             :updateActiveObjectInfo="updateActiveObjectInfo"
+                            :activeObjectInfo="activeObjectInfo"
                             :updateText="updateText"
                             :mode="mode"
                             :object="object"

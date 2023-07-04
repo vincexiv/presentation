@@ -4,7 +4,11 @@
       v-model="text"
       :placeholder="placeholder"
       :style="objectStyle"
-      :class="`${object.content.type} ${object.typeDetails?.category} ${mode} canvas-object`"
+      :class="`
+        ${object.content.type}
+        ${object.typeDetails?.category}
+        ${mode} canvas-object
+        ${(object.id == activeObjectInfo.objectId) && (activeCanvas.id === activeObjectInfo.canvasId)? 'active': ''}`"
       @click="(e)=>performAction(mode, makeActive, [e])"
       @change="performAction(mode, updateText, [activeCanvas.id, object.id, text])"/>
       
@@ -13,7 +17,11 @@
       v-model="text"
       :placeholder="placeholder"
       :style="objectStyle"
-      :class="`${object.content.type} ${object.typeDetails?.category} ${mode} canvas-object`"
+      :class="`
+        ${object.content.type}
+        ${object.typeDetails?.category}
+        ${mode} canvas-object 
+        ${(object.id == activeObjectInfo.objectId) && (activeCanvas.id === activeObjectInfo.canvasId)? 'active': ''}`"
       @click="(e)=>performAction(mode, makeActive, [e])"
       @change="performAction(mode, updateText, [activeCanvas.id, object.id, text])"/>
 
@@ -21,14 +29,22 @@
         :id="`${objectId}`"
         ref="highchart"
         :style="objectStyle"
-        :class="`${object.content.type} ${mode} canvas-object`"
+        :class="`
+          ${object.content.type}
+          ${object.typeDetails?.category}
+          ${mode} canvas-object
+          ${(object.id == activeObjectInfo.objectId) && (activeCanvas.id === activeObjectInfo.canvasId)? 'active': ''}`"
         @click="makeActive">
     </div>
 
     <div v-else-if="object.content.type == 'chart' && !object.content.value && mode == 'edit'"
         :id="objectId"
         :style="objectStyle"
-        :class="`${object.content.type} ${mode} canvas-object`"
+        :class="`
+          ${object.content.type}
+          ${object.typeDetails?.category}
+          ${mode} canvas-object 
+          ${(object.id == activeObjectInfo.objectId) && (activeCanvas.id === activeObjectInfo.canvasId)? 'active': ''}`"
         @click="makeActive">
       <i class="fa-sharp fa-3x fa-solid fa-chart-simple open-modal" @click="openModal"></i>
     </div>
@@ -49,7 +65,8 @@ import { convertFontSize } from "@/utilities/functions/createppt"
       updateActiveObjectInfo: Function,
       activeCanvas: Object,
       updateText: Function,
-      mode: String
+      mode: String,
+      activeObjectInfo: Object
     },
 
     updated: function(){
@@ -111,21 +128,21 @@ import { convertFontSize } from "@/utilities/functions/createppt"
     },
 
     methods: {
-      makeActive(e){
-        if(this.mode === 'preview'){
-          return
-        }
+      makeActive(){
+        // if(this.mode === 'preview'){
+        //   return
+        // }
         
-        const allCanvasObjects = document.querySelectorAll('.canvas-object')
-        allCanvasObjects.forEach(object => {
-          object.classList.remove('active')
-        })
+        // const allCanvasObjects = document.querySelectorAll('.canvas-object')
+        // allCanvasObjects.forEach(object => {
+        //   object.classList.remove('active')
+        // })
 
-        if(this.$refs?.highchart){
-          this.$refs.highchart.classList.add('active')
-        }else {
-          e.target.classList.add('active')
-        }
+        // if(this.$refs?.highchart){
+        //   this.$refs.highchart.classList.add('active')
+        // }else {
+        //   e.target.classList.add('active')
+        // }
         
         this.updateActiveObjectInfo({ 
             objectId: this.object.id,
