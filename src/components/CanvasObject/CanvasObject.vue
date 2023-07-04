@@ -54,7 +54,6 @@
 <script>
 import createChart from "../../utilities/interactive/highcharts"
 import makeResizableAndDraggable from "../../utilities/interactive/interact"
-import { convertFontSize } from "@/utilities/functions/createppt"
   
   export default {
     name: "CanvasObject",
@@ -66,7 +65,8 @@ import { convertFontSize } from "@/utilities/functions/createppt"
       activeCanvas: Object,
       updateText: Function,
       mode: String,
-      activeObjectInfo: Object
+      activeObjectInfo: Object,
+      convertSizeToViewWidths: Function
     },
 
     updated: function(){
@@ -135,10 +135,6 @@ import { convertFontSize } from "@/utilities/functions/createppt"
             canvasId: this.activeCanvas.id,
             content: this.object.content
           })
-      },
-
-      convertSizeToViewWidths(val){
-        return `${convertFontSize(val) * 0.072}vw`
       },
       
       performAction(mode, actionMethod, argumentArray=[]){

@@ -1,6 +1,7 @@
 <template>
     <div class="canvas-editor-layout">
         <CanvasObjectEditor
+            :canvasArray="canvasArray"
             :activeEditOption="activeEditOption"
             :mode="mode"
             :slideObjectCreationState="slideObjectCreationState"
@@ -22,7 +23,13 @@
                 :updateActiveLayout="updateActiveLayout"
                 :activeLayout="activeLayout"
                 :showLayout="showLayout"
-                :addSlide="addSlide"/>
+                :addSlide="addSlide"
+            />
+
+            <CanvasObjectList 
+                :activeObjectInfo="activeObjectInfo"
+                :canvasArray="canvasArray"
+                :convertSizeToViewWidths="convertSizeToViewWidths"/>
 
             <div class="layout-list-and-add-slide">
                 <div class="canvas-list">
@@ -51,6 +58,7 @@
                             :mode="mode"
                             :object="object"
                             :target="`${object.content.type}${object.id}`"
+                            :convertSizeToViewWidths="convertSizeToViewWidths"
                         />
                     </div>
                 </div>
@@ -66,6 +74,8 @@
     import AddSlide from "../AddSlide/AddSlide.vue";
     import ChartModal from "../ChartModal/ChartModal.vue";
     import CanvasObject from "../CanvasObject/CanvasObject.vue"
+    import CanvasObjectList from "../CanvasObjectList/CanvasObjectList.vue"
+    import { convertFontSize } from "@/utilities/functions/createppt"
 
     export default {
         name: 'CanvasComponent',
@@ -91,7 +101,8 @@
             CanvasLayoutList,
             CanvasObjectEditor,
             AddSlide,
-            ChartModal
+            ChartModal,
+            CanvasObjectList
         },
         computed: {
             modalState: function(){
@@ -109,6 +120,10 @@
                 }else {
                     return ''
                 }
+            },
+
+            convertSizeToViewWidths(val){
+                return `${convertFontSize(val) * 0.072}vw`
             },
 
             addSlide: function(){
@@ -172,12 +187,19 @@
             },
 
             toggleShowLayout(){
+                this.showObject = false
                 this.showLayout = !this.showLayout
+            },
+
+            toggleShowObject(){
+                this.showLayout = false
+                this.showObject = !this.showObject
             }
         },
         data(){
             return {
                 showLayout: false,
+                showObject: false,
                 modalOpen: false,
                 activeEditOption: "file",
                 slideObjectCreationState: {active: false, value: {}}

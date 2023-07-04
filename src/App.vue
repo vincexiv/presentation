@@ -51,7 +51,8 @@ export default {
         type: "",
         content: {}
       },
-      idCount: canvasObjects.length, // will be used to ensure ids of new slides dont clash
+      idCount: canvasObjects.length, // will be used to ensure ids of new slides dont clash,
+      forceRerender: 0
     }
   },
 

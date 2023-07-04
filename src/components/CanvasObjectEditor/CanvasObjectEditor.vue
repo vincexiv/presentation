@@ -14,6 +14,11 @@
                     Slide
                 </div>
                 <div class="option" 
+                    :class="editOptionClass('object')"
+                    @click="updateActiveEditOption('object')">
+                    Objects
+                </div>
+                <div class="option" 
                     :class="`${editOptionClass('text')} ${muteState('text')}`"
                     @click="updateActiveEditOption('text')">
                     Text
@@ -41,6 +46,13 @@
                     class="file-option-details actions">
                     <button class="action" @click="saveData()">Save</button>
                     <button class="action" @click="exportToPowerPoint()">export to powerpoint</button>
+                </div>
+
+                <div v-else-if="activeEditOption==='object'"
+                    class="file-option-details actions">
+                    <button class="action" @click="(e)=>action('object', showUnshowObject, e)">
+                        {{ showObject? "Hide" : "Show" }}
+                    </button>
                 </div>
 
                 <div v-else-if="activeEditOption==='text'"
@@ -153,6 +165,7 @@ export default ({
 
         props: {
             activeEditOption: String,
+            canvasArray: Array,
             updateActiveEditOption: Function,
             saveData: Function,
             exportToPowerPoint: Function,
