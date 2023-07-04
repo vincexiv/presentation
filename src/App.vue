@@ -230,10 +230,10 @@ export default {
       
       // update the text content
       if(targetObject?.content){
-        targetObject.content.text = newText
+        targetObject.content.value = newText
       }else {
         const oldContent = targetObject.content
-        targetObject.content = {...oldContent, text: newText}
+        targetObject.content = {...oldContent, value: newText}
       }
     },
 

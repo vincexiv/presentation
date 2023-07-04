@@ -9,7 +9,7 @@ function getContents(canvas){
     if(object.content.type === 'text'){
       result[`object-${object.id}`] = {
         type: "text",
-        value: object.content?.text || "",
+        value: object.content?.value || "",
         style: object.content?.style
       }
     }else if (object.content.type === 'chart' && object.content.value){
