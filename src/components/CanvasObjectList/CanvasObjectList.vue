@@ -78,14 +78,12 @@ export default({
 }
 .object-list-outer-container {
     width: 20vw;
-    /* height: 31.5vw; */
-    /* outline: solid 0.1rem black; */
 }
 
 .object-list-inner-container {
     width: 100%;
     height: 31.5vw;
-    padding: 2rem;
+    padding: 1rem;
     position: sticky;
     top: 12rem;
     outline: 0.1rem solid #d4d4d4;
@@ -97,23 +95,30 @@ export default({
     justify-content: space-between;
     margin-top: 0.5vw;
     width: 100%;
+    gap: 0.2rem;
 }
 
 .item {
     cursor: pointer;
-    width: 11.5vw;
+    width: calc(14vw - 1.1rem);
     height: 1.5vw;
     display: flex;
     align-items: center;
     justify-content: left;
     background-color: transparent;
     border-radius: 0.5rem;
-    padding: 0.1rem 0.5rem;   
+    padding: 0.1rem 0.5rem;  
+    background-color: rgb(0, 119, 190, 0.2); 
+    color: rgb(0, 0, 0, 0.6);
 }
 
-.item.active {
+.item.active{
     background-color: #0077be;
     color: white;
+}
+
+.item:hover {
+    outline: #0077be solid 0.1rem;
 }
 
 .object-value {
@@ -132,6 +137,9 @@ button {
     border-radius: 0.5rem;
     padding: 0.2rem 0.5rem;
     background-color: transparent;
+    width: calc(6vw - 1.1rem);
+    background-color: rgba(220, 53, 69, 0.3);
+    /* color: white; */
 }
 
 button:hover {
