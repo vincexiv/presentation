@@ -5,6 +5,7 @@
                 :key="`object-list-item-${object.id}`"
                 class="object-list-item">
                 <div class="item"
+                @click="makeActive(object, activeCanvas)"
                 :class="(object.id == activeObjectInfo.objectId) && (activeCanvas.id === activeObjectInfo.canvasId)? 'active': ''">
                     <p v-if="object.content.type === 'text'"
                         :style="objectListItemFont"
@@ -31,7 +32,8 @@ export default({
         activeObjectInfo: Object,
         canvasArray: Array,
         convertSizeToViewWidths: Function,
-        showObject: Boolean
+        showObject: Boolean,
+        updateActiveObjectInfo: Function
     },
     
     computed: {
@@ -48,7 +50,17 @@ export default({
         displayState: function(){
             return this.showObject? '': 'display-none'
         }
+    },
 
+    methods: {
+        makeActive: function(object, activeCanvas){
+            this.updateActiveObjectInfo({ 
+                objectId: object.id,
+                type: object.content.type,
+                canvasId: activeCanvas.id,
+                content: object.content
+            })
+        }
     }
 })
 </script>

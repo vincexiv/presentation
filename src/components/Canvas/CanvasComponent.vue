@@ -32,7 +32,8 @@
                 :activeObjectInfo="activeObjectInfo"
                 :canvasArray="canvasArray"
                 :convertSizeToViewWidths="convertSizeToViewWidths"
-                :showObject="showObject"/>
+                :showObject="showObject"
+                :updateActiveObjectInfo="updateActiveObjectInfo"/>
 
             <div class="layout-list-and-add-slide">
                 <div class="canvas-list">
