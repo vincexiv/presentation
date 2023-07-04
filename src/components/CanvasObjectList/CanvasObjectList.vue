@@ -82,7 +82,7 @@ export default({
 
 .item {
     cursor: pointer;
-    width: 100%;
+    width: 11.5vw;
     height: 1.5vw;
     display: flex;
     align-items: center;
@@ -99,6 +99,10 @@ export default({
 
 .object-value {
     background-color: transparent;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    overflow: hidden;
 }
 
 button {
