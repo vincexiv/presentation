@@ -258,7 +258,7 @@ export default ({
             },
 
             isNotMuted: function(option){
-                if(['slide', 'layouts', 'object', 'mode'].find(o => o === option)){
+                if(['slide', 'layout', 'object', 'mode'].find(o => o === option)){
                     return true
                 }else{
                     return option === this.activeObjectInfo.type
