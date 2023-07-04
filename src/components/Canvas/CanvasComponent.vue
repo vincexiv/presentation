@@ -16,7 +16,9 @@
             :removeSlide="removeSlide"
             :toggleShowLayout="toggleShowLayout"
             :showLayout="showLayout"
-            :openModal="openModal"/>
+            :openModal="openModal"
+            :showObject="showObject"
+            :toggleShowObject="toggleShowObject"/>
 
         <div class="canvas-and-layout">
             <CanvasLayoutList
@@ -29,7 +31,8 @@
             <CanvasObjectList 
                 :activeObjectInfo="activeObjectInfo"
                 :canvasArray="canvasArray"
-                :convertSizeToViewWidths="convertSizeToViewWidths"/>
+                :convertSizeToViewWidths="convertSizeToViewWidths"
+                :showObject="showObject"/>
 
             <div class="layout-list-and-add-slide">
                 <div class="canvas-list">

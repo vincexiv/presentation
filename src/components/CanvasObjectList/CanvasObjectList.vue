@@ -1,5 +1,5 @@
 <template>
-    <div class="object-list-outer-container">
+    <div class="object-list-outer-container" :class="displayState">
         <div class="object-list-inner-container">
             <div v-for="object, i in activeCanvas?.objects || []"
                 :key="`object-list-item-${object.id}`"
@@ -30,7 +30,8 @@ export default({
     props: {
         activeObjectInfo: Object,
         canvasArray: Array,
-        convertSizeToViewWidths: Function
+        convertSizeToViewWidths: Function,
+        showObject: Boolean
     },
     
     computed: {
@@ -43,6 +44,9 @@ export default({
         activeCanvas: function () {
             return this.canvasArray
                         ?.find(canvas => canvas.id === this.activeObjectInfo.canvasId)
+        },
+        displayState: function(){
+            return this.showObject? '': 'display-none'
         }
 
     }
@@ -50,6 +54,9 @@ export default({
 </script>
 
 <style scoped>
+.object-list-outer-container.display-none {
+    display: none;
+}
 .object-list-outer-container {
     width: 20vw;
     /* height: 31.5vw; */

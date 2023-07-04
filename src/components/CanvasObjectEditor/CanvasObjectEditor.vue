@@ -50,7 +50,7 @@
 
                 <div v-else-if="activeEditOption==='object'"
                     class="file-option-details actions">
-                    <button class="action" @click="(e)=>action('object', showUnshowObject, e)">
+                    <button class="action" @click="(e)=>action('object', toggleShowObject, e)">
                         {{ showObject? "Hide" : "Show" }}
                     </button>
                 </div>
@@ -179,7 +179,9 @@ export default ({
             showLayout: Boolean,
             openModal: Function,
             slideObjectCreationState: Object,
-            updateNewObjectCreationState: Function
+            updateNewObjectCreationState: Function,
+            showObject: Boolean,
+            toggleShowObject: Function
         },
 
         computed: {
@@ -256,7 +258,7 @@ export default ({
             },
 
             isNotMuted: function(option){
-                if(option === 'slide' || option === 'layout'){
+                if(['slide', 'layouts', 'object', 'mode'].find(o => o === option)){
                     return true
                 }else{
                     return option === this.activeObjectInfo.type
@@ -288,7 +290,7 @@ export default ({
             
             muteState: function(action){
                 // We want to always make the slide and layout options look active
-                if(action === 'slide' || action === 'layout'){
+                if(this.isNotMuted(action)){
                     return 'not-muted'
                 }else if(this.activeObjectInfo.type !== action){
                     return 'muted'
