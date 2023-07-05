@@ -5,6 +5,7 @@ import { monthlyAverageTemperature } from "./highchartCharts";
 const sampleData = [
     {
         id: 4,
+        style: {},
         layout: 'LAYOUT_16x9',
         objects: [
             { 
@@ -14,6 +15,7 @@ const sampleData = [
                 content: {
                     type: "text", 
                     placeholder: "Click to add title", 
+                    value: "My awesome title",
                     style: {
                         fontSize: "2rem",
                         // verticalAlign: "middle"
@@ -27,6 +29,7 @@ const sampleData = [
                 content: {
                     type: "text", 
                     placeholder: "Click to add text", 
+                    value: "My awesome paragraph",
                 }
             },
             { 
@@ -34,8 +37,8 @@ const sampleData = [
                 style: {top: "30%", left: "51%", width: "44%", height: "65%" },
                 content: {
                     type: "chart", 
-                    placeholder: "Click to add chart", 
-                    value: monthlyAverageTemperature
+                    placeholder: "Click to add chart",
+                    value: monthlyAverageTemperature,
                 }
             }
         ]
