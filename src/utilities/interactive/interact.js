@@ -17,14 +17,14 @@ function makeResizableAndDraggable(cssSelector, chart){
           var y = (parseFloat(target.getAttribute('data-y')) || 0)
   
           // update the element's style
-          target.style.width = event.rect.width + 'px'
-          target.style.height = event.rect.height + 'px'
+          target.style.width = `${event.rect.width / window.innerWidth * 100}vw`
+          target.style.height = `${event.rect.height / window.innerWidth * 100}vw`
   
           // translate when resizing from top or left edges
-          x += event.deltaRect.left
-          y += event.deltaRect.top
+          x += event.deltaRect.left / window.innerWidth * 100
+          y += event.deltaRect.top / window.innerWidth * 100
   
-          target.style.transform = 'translate(' + x + 'px,' + y + 'px)'
+          target.style.transform = 'translate(' + x + 'vw,' + y + 'vw)'
   
           target.setAttribute('data-x', x)
           target.setAttribute('data-y', y)
@@ -55,13 +55,13 @@ function makeResizableAndDraggable(cssSelector, chart){
       listeners: { move: function dragMoveListener (event) {
         var target = event.target,
             // keep the dragged position in the data-x/data-y attributes
-            x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-            y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+            x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx /window.innerWidth * 100,
+            y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy / window.innerWidth * 100;
     
         // translate the element
         target.style.webkitTransform =
         target.style.transform =
-          'translate(' + x + 'px, ' + y + 'px)';
+          'translate(' + x + 'vw, ' + y + 'vw)';
     
         // update the posiion attributes
         target.setAttribute('data-x', x);
