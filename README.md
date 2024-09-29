@@ -1,4 +1,4 @@
-# Rate my service
+# Report Builder
 
 A prototype for report creation functionality that incorporates charts from highcharts. Functionalities included in the prototype so far are;
 - Creating new objects on the slide (can be text or chart)
